@@ -124,10 +124,9 @@ export default function AdminDashboard({
     
     const newProposal = {
       client_id: parseInt(client_id),
-      clientName: client.name,
-      clientSlug: client.slug,
+      client_name: client.name,
       property_ids: property_ids.map(Number),
-      propertyName: props.map(p => p.name).join(", "),
+      property_name: props.map(p => p.name).join(", "),
       message: message
     };
     
@@ -153,7 +152,9 @@ export default function AdminDashboard({
   };
 
   const handleSendProposal = (proposal) => {
-    const text = `Hi ${proposal.clientName},\n\nI've prepared a personalized investment proposal for you featuring: ${proposal.propertyName}.\n\nYou can view and download your full proposal here: ${window.location.origin}/proposals/${proposal.id}\n\nBest,\nYour Agent`;
+    const cName = proposal.client_name || proposal.clientName || 'Valued Client';
+    const pName = proposal.property_name || proposal.propertyName || 'these exclusive properties';
+    const text = `Hi ${cName},\n\nI've prepared a personalized investment proposal for you featuring: ${pName}.\n\nYou can view and download your full proposal here: ${window.location.origin}/proposals/${proposal.id}\n\nBest,\nYour Agent`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -606,9 +607,9 @@ export default function AdminDashboard({
                   <tbody>
                     {proposals.map(p => (
                       <tr key={p.id} className="border-b border-white/5 hover:bg-white/5">
-                        <td className="px-4 py-4 text-white font-medium">{p.clientName}</td>
-                        <td className="px-4 py-4 text-platinum/70">{p.propertyName}</td>
-                        <td className="px-4 py-4 text-platinum/50">{new Date(p.created_at).toLocaleDateString("en-GB")}</td>
+                        <td className="px-4 py-4 text-white font-medium">{p.client_name || p.clientName || '—'}</td>
+                        <td className="px-4 py-4 text-platinum/70">{p.property_name || p.propertyName || '—'}</td>
+                        <td className="px-4 py-4 text-platinum/50">{p.created_at ? new Date(p.created_at).toLocaleDateString("en-GB") : '—'}</td>
                         <td className="px-4 py-4 text-right">
                           <div className="flex items-center justify-end gap-2">
                             <a href={`/proposals/${p.id}`} target="_blank" className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 text-platinum transition-all" title="View Proposal"><ExternalLink className="w-4 h-4" /></a>
