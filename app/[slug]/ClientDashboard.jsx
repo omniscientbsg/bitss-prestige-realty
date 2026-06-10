@@ -171,23 +171,23 @@ export default function ClientDashboard({ client, properties, initialProposals =
         </section>
 
         {/* Budget Bar */}
-        <div className="bg-[#0A0A0F]/90 backdrop-blur-3xl border-b border-white/5 px-6 py-4 flex flex-col sm:flex-row items-center gap-6 sticky top-20 z-30 shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
-          <div className="flex-shrink-0 text-center sm:text-left">
-            <div className="text-[11px] tracking-widest uppercase text-platinum/50 mb-1">{client.budget_label || "Phase 1 Budget"}</div>
-            <div className="font-heading text-2xl font-semibold text-gold">AED {totalBudget.toLocaleString("en-US")}</div>
+        <div className="bg-[#0A0A0F]/95 backdrop-blur-3xl border-b border-white/5 px-4 sm:px-6 py-2.5 flex flex-row items-center gap-3 sticky top-[72px] z-30 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+          <div className="flex-shrink-0">
+            <div className="text-[9px] tracking-widest uppercase text-platinum/40 leading-none">{client.budget_label || "Budget"}</div>
+            <div className="font-heading text-base font-semibold text-gold leading-tight">AED {totalBudget.toLocaleString("en-US")}</div>
           </div>
-          <div className="flex-1 w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+          <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden min-w-0">
             <div className="h-full bg-gradient-to-r from-gold to-[#E8C97A] transition-all duration-500 ease-out" style={{ width: `${budgetPercentage}%` }}></div>
           </div>
-          <div className="flex-shrink-0 text-sm text-platinum/60">
-            <strong className="text-white font-medium">AED {remainingBudget.toLocaleString("en-US")}</strong> remaining
+          <div className="flex-shrink-0 text-xs text-platinum/50 hidden sm:block">
+            <strong className="text-white/80 font-medium">AED {remainingBudget.toLocaleString("en-US")}</strong> left
           </div>
           <button 
             onClick={() => setBundleOpen(true)}
-            className="flex items-center gap-3 bg-gold hover:bg-[#E8C97A] text-[#0A0A0F] px-5 py-2.5 rounded-xl font-medium transition-colors w-full sm:w-auto justify-center"
+            className="flex items-center gap-2 bg-gold hover:bg-[#E8C97A] text-[#0A0A0F] px-3 py-1.5 rounded-lg font-medium transition-colors flex-shrink-0 text-sm"
           >
-            My Portfolio
-            <div className="bg-[#0A0A0F] text-gold text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
+            Portfolio
+            <div className="bg-[#0A0A0F] text-gold text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
               {portfolio.length}
             </div>
           </button>
@@ -237,7 +237,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
               >
                 <div className="h-64 relative bg-dark1 overflow-hidden">
                     {p.image ? (
-                      <img src={p.image} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700 cursor-zoom-in" onClick={(e) => { e.stopPropagation(); setPreviewImage(p.image); }} />
+                      <img src={p.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 cursor-zoom-in" onClick={(e) => { e.stopPropagation(); setPreviewImage(p.image); }} />
                     ) : null}
                     <div className="absolute top-4 right-4 flex gap-2">
                     {p.hot && <span className="bg-red-500/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">HOT</span>}
@@ -597,7 +597,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
                       )}
                     </div>
                   )}
-\n                  {selectedProperty.deep_dive_data.market_title && (
+                  {selectedProperty.deep_dive_data.market_title && (
                     <div className="bg-white/5 rounded-2xl p-8 border border-white/10 mb-8 backdrop-blur-sm relative overflow-hidden">
                       <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
                       <h4 className="font-heading text-2xl text-white mb-3 relative z-10">{selectedProperty.deep_dive_data.market_title}</h4>
