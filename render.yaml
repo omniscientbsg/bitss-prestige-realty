@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: bitss-prestige-realty
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/database
+      sizeGB: 1
