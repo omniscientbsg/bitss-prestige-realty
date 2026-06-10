@@ -76,6 +76,19 @@ export default function ClientDashboard({ client, properties, initialProposals =
     setChatHistory(newHistory);
     setIsTyping(true);
 
+    // Minimum typing duration so the indicator is always visible
+    const minTypingMs = 900;
+    const startTime = Date.now();
+
+    const showReply = (content) => {
+      const elapsed = Date.now() - startTime;
+      const delay = Math.max(0, minTypingMs - elapsed);
+      setTimeout(() => {
+        setIsTyping(false);
+        setChatHistory(prev => [...prev, { role: "assistant", content }]);
+      }, delay);
+    };
+
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -86,15 +99,13 @@ export default function ClientDashboard({ client, properties, initialProposals =
         })
       });
       const data = await res.json();
-      setIsTyping(false);
       if (data.reply) {
-        setChatHistory(prev => [...prev, { role: "assistant", content: data.reply }]);
+        showReply(data.reply);
       } else {
-        setChatHistory(prev => [...prev, { role: "assistant", content: "I'm sorry, I'm having trouble connecting right now." }]);
+        showReply("I'm sorry, I'm having trouble connecting right now.");
       }
     } catch (err) {
-      setIsTyping(false);
-      setChatHistory(prev => [...prev, { role: "assistant", content: "Error connecting to AI server." }]);
+      showReply("I'm unable to connect to the server at the moment. Please try again shortly.");
     }
   };
 

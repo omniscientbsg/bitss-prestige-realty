@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import { join } from "path";
+import { supabase } from "@/lib/supabase";
+
+const BUCKET = "uploads";
 
 export async function POST(request) {
   try {
@@ -15,23 +16,30 @@ export async function POST(request) {
     const buffer = Buffer.from(bytes);
 
     // Create unique filename
-    const filename = Date.now() + "-" + file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
-    
-    // Ensure public/media directory exists
-    const uploadDir = join(process.cwd(), "public", "media");
-    try {
-      await mkdir(uploadDir, { recursive: true });
-    } catch (err) {
-      // Ignore if directory already exists
-    }
-    
-    const path = join(uploadDir, filename);
-    await writeFile(path, buffer);
-    
-    console.log(`File saved to ${path}`);
+    const ext = file.name.split('.').pop();
+    const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
+    const filename = `${Date.now()}-${safeName}`;
 
-    // Return the relative URL
-    return NextResponse.json({ url: `/media/${filename}`, success: true });
+    // Upload to Supabase Storage
+    const { data, error } = await supabase.storage
+      .from(BUCKET)
+      .upload(filename, buffer, {
+        contentType: file.type || "application/octet-stream",
+        upsert: false,
+      });
+
+    if (error) {
+      console.error("Supabase Storage upload error:", error);
+      return NextResponse.json({ error: "Upload to storage failed: " + error.message }, { status: 500 });
+    }
+
+    // Get the public URL
+    const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(filename);
+    const publicUrl = urlData.publicUrl;
+
+    console.log(`File uploaded to Supabase Storage: ${publicUrl}`);
+
+    return NextResponse.json({ url: publicUrl, success: true });
   } catch (error) {
     console.error("Upload error:", error);
     return NextResponse.json({ error: "File upload failed." }, { status: 500 });

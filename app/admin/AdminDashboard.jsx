@@ -343,8 +343,11 @@ export default function AdminDashboard({
                         const opens = (c.activity_logs || []).filter(l => l.action === 'viewed_portal').length;
                         const viewed = (c.activity_logs || []).filter(l => l.action === 'viewed_property').length;
                         const proposalCount = initialProposals.filter(p => p.client_id === c.id).length;
-                        const lastActivity = (c.activity_logs || []).length > 0 
-                          ? new Date(Math.max(...c.activity_logs.map(l => l.time))).toLocaleString('en-GB', {day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})
+                        const lastActivity = (c.activity_logs || []).length > 0
+                          ? (() => {
+                              const ts = Math.max(...c.activity_logs.map(l => new Date(l.created_at || l.time || 0).getTime()).filter(t => !isNaN(t)));
+                              return isNaN(ts) || ts === -Infinity ? '—' : new Date(ts).toLocaleString('en-GB', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'});
+                            })()
                           : '—';
                         return (
                           <tr key={c.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
