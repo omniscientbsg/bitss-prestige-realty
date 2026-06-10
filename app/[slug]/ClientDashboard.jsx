@@ -13,6 +13,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [proposalMessage, setProposalMessage] = useState(`Hi ${client.name.split(' ')[0]},\n\nBased on your selections, here is your customized acquisition proposal.`);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const [filterType, setFilterType] = useState('all');
   const [previewImage, setPreviewImage] = useState(null);
   const [chatHistory, setChatHistory] = useState([
@@ -66,13 +67,14 @@ export default function ClientDashboard({ client, properties, initialProposals =
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
-    if (!chatMessage.trim()) return;
+    if (!chatMessage.trim() || isTyping) return;
 
     const userMsg = chatMessage;
     setChatMessage("");
     
     const newHistory = [...chatHistory, { role: "user", content: userMsg }];
     setChatHistory(newHistory);
+    setIsTyping(true);
 
     try {
       const res = await fetch("/api/chat", {
@@ -84,12 +86,14 @@ export default function ClientDashboard({ client, properties, initialProposals =
         })
       });
       const data = await res.json();
+      setIsTyping(false);
       if (data.reply) {
         setChatHistory(prev => [...prev, { role: "assistant", content: data.reply }]);
       } else {
         setChatHistory(prev => [...prev, { role: "assistant", content: "I'm sorry, I'm having trouble connecting right now." }]);
       }
     } catch (err) {
+      setIsTyping(false);
       setChatHistory(prev => [...prev, { role: "assistant", content: "Error connecting to AI server." }]);
     }
   };
@@ -138,11 +142,19 @@ export default function ClientDashboard({ client, properties, initialProposals =
               {client.portfolio_subheading || `An exclusive, highly curated strategy designed specifically for you — focusing on high-leverage distress deals, premium pre-launches, and maximum rental yields.`}
             </p>
 
-            {client.video_url && (
-              <div className="w-full max-w-4xl mb-16 rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.6)] bg-dark1">
-                <video src={client.video_url} controls autoPlay muted playsInline loop className="w-full aspect-video object-cover"></video>
-              </div>
-            )}
+            {client.video_url && (() => {
+              const rawUrl = client.video_url;
+              const resolvedUrl = rawUrl.startsWith('http') 
+                ? rawUrl 
+                : rawUrl.startsWith('/') 
+                  ? rawUrl 
+                  : '/uploads/' + rawUrl;
+              return (
+                <div className="w-full max-w-4xl mb-16 rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.6)] bg-dark1">
+                  <video src={resolvedUrl} controls autoPlay muted playsInline loop className="w-full aspect-video object-cover"></video>
+                </div>
+              );
+            })()}
 
             <div className="flex flex-wrap justify-center gap-8 sm:gap-16 mb-16">
               <div className="text-center">
@@ -171,7 +183,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
         </section>
 
         {/* Budget Bar */}
-        <div className="bg-[#0A0A0F]/95 backdrop-blur-3xl border-b border-white/5 px-4 sm:px-6 py-2.5 flex flex-row items-center gap-3 sticky top-[72px] z-30 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+        <div className="bg-[#0A0A0F]/95 backdrop-blur-3xl border-b border-white/5 border-t border-t-white/[0.04] px-4 sm:px-6 py-2.5 flex flex-row items-center gap-3 sticky top-[80px] z-30 shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
           <div className="flex-shrink-0">
             <div className="text-[9px] tracking-widest uppercase text-platinum/40 leading-none">{client.budget_label || "Budget"}</div>
             <div className="font-heading text-base font-semibold text-gold leading-tight">AED {totalBudget.toLocaleString("en-US")}</div>
@@ -699,6 +711,15 @@ export default function ClientDashboard({ client, properties, initialProposals =
                 </div>
               </div>
             ))}
+            {isTyping && (
+              <div className="flex justify-start">
+                <div className="bg-dark3 border border-white/5 rounded-2xl rounded-bl-sm px-5 py-4 flex items-center gap-1.5">
+                  <span className="w-2 h-2 bg-gold/70 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                  <span className="w-2 h-2 bg-gold/70 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                  <span className="w-2 h-2 bg-gold/70 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-wrap gap-2 mb-4 px-6 pb-2">
