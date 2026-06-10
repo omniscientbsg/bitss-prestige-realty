@@ -1,22 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 
-export default function PrintTrigger() {
-  const searchParams = useSearchParams();
+export default function PrintTrigger({ shouldPrint }) {
   const [printing, setPrinting] = useState(false);
 
   useEffect(() => {
-    if (searchParams.get("print") === "1") {
+    if (shouldPrint) {
       setPrinting(true);
-      // Small delay to allow images/fonts to render
       const t = setTimeout(() => {
         window.print();
         setPrinting(false);
       }, 1200);
       return () => clearTimeout(t);
     }
-  }, [searchParams]);
+  }, [shouldPrint]);
 
   if (!printing) return null;
 

@@ -1,34 +1,49 @@
 import { db, formatProperty } from "../../../lib/database";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 import PrintTrigger from "./PrintTrigger";
 
 export const dynamic = 'force-dynamic';
 
-export default async function ProposalPage({ params }) {
+export default async function ProposalPage({ params, searchParams }) {
   const resolvedParams = await params;
+  const resolvedSearch = await searchParams;
   const id = resolvedParams.id;
-  const allProposals = await db.getAllProposals();
-  const proposal = allProposals.find(p => p.id == id);
+  const shouldPrint = resolvedSearch?.print === "1";
+
+  let proposal = null;
+  try {
+    const allProposals = await db.getAllProposals();
+    proposal = allProposals.find(p => p.id == id);
+  } catch (e) {
+    console.error("Proposal fetch error:", e);
+  }
   if (!proposal) return notFound();
 
-  const [client, allAgents] = await Promise.all([
-    proposal.client_id ? db.getClientById(proposal.client_id) : null,
-    db.getAllAgents(),
-  ]);
+  let client = null, allAgents = [], agent = null;
+  try {
+    [client, allAgents] = await Promise.all([
+      proposal.client_id ? db.getClientById(proposal.client_id) : Promise.resolve(null),
+      db.getAllAgents(),
+    ]);
+    agent = client?.agent_id ? await db.getAgentById(client.agent_id) : allAgents[0] || null;
+  } catch (e) {
+    console.error("Agent/client fetch error:", e);
+  }
 
-  const propertyIds = Array.isArray(proposal.property_ids) ? proposal.property_ids : [];
-  const rawProps = await Promise.all(propertyIds.map(pid => db.getById(pid)));
-  const properties = rawProps.filter(Boolean).map(formatProperty);
-  const agent = client?.agent_id ? await db.getAgentById(client.agent_id) : allAgents[0] || null;
+  let properties = [];
+  try {
+    const propertyIds = Array.isArray(proposal.property_ids) ? proposal.property_ids : [];
+    const rawProps = await Promise.all(propertyIds.map(pid => db.getById(pid)));
+    properties = rawProps.filter(Boolean).map(formatProperty);
+  } catch (e) {
+    console.error("Properties fetch error:", e);
+  }
   const clientName = client?.name || proposal.client_name || proposal.clientName || "Valued Client";
 
   return (
     <div className="bg-white min-h-screen text-slate-900 font-sans">
       {/* Auto-print trigger for ?print=1 */}
-      <Suspense fallback={null}>
-        <PrintTrigger />
-      </Suspense>
+      <PrintTrigger shouldPrint={shouldPrint} />
 
       {/* Print + page styles */}
       <style dangerouslySetInnerHTML={{__html: `
