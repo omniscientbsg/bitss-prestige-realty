@@ -396,12 +396,12 @@ export default function AdminDashboard({
                     <tbody>
                       {initialProposals.slice(0, 5).map(p => (
                         <tr key={p.id} className="border-b border-white/5 hover:bg-white/5">
-                          <td className="px-4 py-4 text-white font-medium">{p.clientName}</td>
-                          <td className="px-4 py-4 text-platinum/70">{p.propertyName}</td>
+                          <td className="px-4 py-4 text-white font-medium">{p.client_name || p.clientName || '—'}</td>
+                          <td className="px-4 py-4 text-platinum/70">{p.property_name || p.propertyName || '—'}</td>
                           <td className="px-4 py-4">
                             <span className="px-2 py-1 rounded-full text-xs bg-gold/10 text-gold border border-gold/20">Sent</span>
                           </td>
-                          <td className="px-4 py-4 text-platinum/50">{new Date(p.created_at).toLocaleDateString("en-GB")}</td>
+                          <td className="px-4 py-4 text-platinum/50">{p.created_at ? new Date(p.created_at).toLocaleDateString("en-GB") : '—'}</td>
                         </tr>
                       ))}
                     </tbody>
