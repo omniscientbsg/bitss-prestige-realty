@@ -1,0 +1,2503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BITSS Prestige Realty — Dubai Real Estate Portfolio</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js">
+
+
+</script>
+<style>
+/* PASSWORD GATE */
+.pw-gate{position:fixed;inset:0;background:rgba(10,10,15,0.97);z-index:9999;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}
+.pw-card{background:linear-gradient(135deg,var(--dark2) 0%,var(--dark3) 100%);border:1px solid var(--border);border-radius:24px;padding:56px 48px;width:440px;text-align:center;box-shadow:0 40px 80px rgba(0,0,0,0.6)}
+.pw-logo{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--gold);line-height:1;margin-bottom:4px}
+.pw-badge{display:inline-block;padding:4px 16px;border:1px solid var(--border);border-radius:100px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:32px}
+.pw-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:8px}
+.pw-sub{font-size:12px;color:var(--text3);margin-bottom:32px}
+.pw-input-wrap{position:relative;margin-bottom:12px}
+.pw-input{width:100%;padding:16px 48px 16px 20px;background:var(--dark);border:1px solid var(--border2);border-radius:12px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:all 0.3s}
+.pw-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1)}
+.pw-input.shake{animation:shake 0.4s ease}
+.pw-eye{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:0}
+.pw-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 100%);color:var(--dark);border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.5px;transition:all 0.3s;margin-bottom:16px}
+.pw-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,0.3)}
+.pw-btn:active{transform:translateY(0)}
+.pw-err{font-size:12px;color:var(--red);min-height:20px;margin-bottom:8px;opacity:0;transition:opacity 0.2s}
+.pw-err.show{opacity:1}
+.pw-secure{font-size:11px;color:var(--text3)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+
+/* Premium AI Action Buttons */
+.ai-action-btn {
+  background: linear-gradient(135deg, rgba(201,168,76,0.15) 0%, rgba(201,168,76,0.05) 100%);
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.2);
+  backdrop-filter: blur(10px);
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.ai-action-btn:hover {
+  background: linear-gradient(135deg, rgba(201,168,76,0.25) 0%, rgba(201,168,76,0.1) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201,168,76,0.15);
+  border-color: rgba(201,168,76,0.4);
+}
+.ai-action-btn.wa {
+  background: linear-gradient(135deg, rgba(37,211,102,0.15) 0%, rgba(37,211,102,0.05) 100%);
+  color: #25D366;
+  border-color: rgba(37,211,102,0.2);
+}
+.ai-action-btn.wa:hover {
+  background: linear-gradient(135deg, rgba(37,211,102,0.25) 0%, rgba(37,211,102,0.1) 100%);
+  box-shadow: 0 6px 20px rgba(37,211,102,0.15);
+  border-color: rgba(37,211,102,0.4);
+}
+.ai-action-btn.call {
+  background: linear-gradient(135deg, rgba(66,133,244,0.15) 0%, rgba(66,133,244,0.05) 100%);
+  color: #4285F4;
+  border-color: rgba(66,133,244,0.2);
+}
+.ai-action-btn.call:hover {
+  background: linear-gradient(135deg, rgba(66,133,244,0.25) 0%, rgba(66,133,244,0.1) 100%);
+  box-shadow: 0 6px 20px rgba(66,133,244,0.15);
+  border-color: rgba(66,133,244,0.4);
+}
+</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+ --gold:#C9A84C;
+ --gold2:#E8C97A;
+ --dark:#0A0A0F;
+ --dark2:#111118;
+ --dark3:#1A1A25;
+ --dark4:#22222F;
+ --glass:rgba(255,255,255,0.04);
+ --glass2:rgba(255,255,255,0.07);
+ --border:rgba(201,168,76,0.2);
+ --border2:rgba(255,255,255,0.08);
+ --text:#F5F0E8;
+ --text2:#A09880;
+ --text3:#6B6352;
+ --green:#2ECC71;
+ --red:#E74C3C;
+ --blue:#4A9EFF;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;overflow-x:hidden}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;padding:80px 20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,0.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(74,158,255,0.05) 0%,transparent 50%),var(--dark)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 0%,transparent 70%)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:1px solid var(--border);border-radius:100px;padding:8px 20px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:32px}
+.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.hero h1{font-size:clamp(48px,7vw,96px);font-weight:300;line-height:1;letter-spacing:-2px;margin-bottom:8px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:16px;color:var(--text2);margin:24px 0 48px;max-width:500px;line-height:1.7;font-weight:300}
+.hero-stats{display:flex;gap:48px;margin-bottom:64px}
+.hero-stat{text-align:center}
+.hero-stat .n{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--gold)}
+.hero-stat .l{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-top:4px}
+.scroll-cta{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text3);font-size:12px;letter-spacing:2px;text-transform:uppercase;animation:bounce 2s infinite}
+.scroll-arrow{width:1px;height:40px;background:linear-gradient(var(--gold),transparent);margin:0 auto}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* BUDGET BAR */
+.budget-bar{background:var(--dark2);border-bottom:1px solid var(--border2);padding:16px 40px;display:flex;align-items:center;gap:24px;position:sticky;top:0;z-index:100}
+.budget-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3)}
+.budget-total{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold)}
+.budget-track{flex:1;height:4px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden}
+.budget-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:100px;transition:width 0.5s cubic-bezier(0.4,0,0.2,1)}
+.budget-remaining{font-size:13px;color:var(--text2)}
+.budget-remaining strong{color:var(--text);font-weight:500}
+.bundle-btn{background:var(--gold);color:var(--dark);border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.bundle-btn:hover{background:var(--gold2)}
+.bundle-badge{background:var(--dark);color:var(--gold);border-radius:100px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+
+/* SECTIONS */
+.section{padding:80px 40px;max-width:1400px;margin:0 auto}
+.section-header{margin-bottom:56px}
+.section-tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-tag::after{content:'';flex:1;height:1px;background:var(--border);max-width:60px}
+.section-title{font-size:clamp(32px,4vw,52px);font-weight:300;letter-spacing:-1px;line-height:1.1}
+.section-title strong{font-weight:600;font-style:italic}
+
+/* PHASE SELECTOR */
+.phase-selector{display:flex;gap:12px;margin-bottom:48px;flex-wrap:wrap}
+.phase-btn{padding:10px 24px;border-radius:100px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.phase-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);font-weight:500}
+.phase-btn:hover:not(.active){border-color:var(--border);color:var(--text)}
+
+/* PROPERTY GRID */
+.property-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:24px}
+
+/* PROPERTY CARD */
+.prop-card{background:var(--dark3);border:1px solid var(--border2);border-radius:16px;overflow:hidden;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);cursor:pointer;position:relative}
+.prop-card:hover{border-color:var(--border);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.4)}
+.prop-card.selected{border-color:var(--gold);box-shadow:0 0 0 1px rgba(201,168,76,0.3),0 20px 60px rgba(201,168,76,0.1)}
+.prop-card.distress .distress-tag{display:flex}
+.distress-tag{display:none;position:absolute;top:16px;left:16px;background:rgba(231,76,60,0.9);color:white;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:4px;gap:6px;align-items:center;z-index:2}
+.prop-visual{height:200px;position:relative;overflow:hidden}
+.prop-img{width:100%;height:100%;object-fit:cover}
+.prop-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:80px;position:relative}
+.prop-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(10,10,15,0.9));padding:24px 20px 16px}
+.prop-location{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:6px}
+.prop-location::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold)}
+.prop-body{padding:20px}
+.prop-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin-bottom:4px}
+.prop-developer{font-size:12px;color:var(--text3);margin-bottom:16px}
+.prop-usp-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.usp-pill{background:var(--glass);border:1px solid var(--border2);border-radius:6px;padding:4px 10px;font-size:11px;color:var(--text2);white-space:nowrap}
+.usp-pill.hot{background:rgba(201,168,76,0.1);border-color:rgba(201,168,76,0.3);color:var(--gold)}
+.prop-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.metric{background:var(--dark4);border-radius:10px;padding:12px;text-align:center}
+.metric-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600}
+.metric-val.green{color:var(--green)}
+.metric-val.gold{color:var(--gold)}
+.metric-val.blue{color:var(--blue)}
+.metric-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.prop-price-row{display:flex;align-items:center;justify-content:space-between}
+.prop-price{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600}
+.prop-price span{font-size:14px;font-weight:300;color:var(--text2)}
+.card-actions{display:flex;gap:8px;margin-top:16px}
+.btn-primary{flex:1;background:var(--gold);color:var(--dark);border:none;border-radius:8px;padding:10px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.btn-primary:hover{background:var(--gold2)}
+.btn-secondary{padding:10px 14px;background:var(--glass);border:1px solid var(--border2);border-radius:8px;color:var(--text2);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.btn-secondary:hover{border-color:var(--border);color:var(--text)}
+.btn-add{padding:10px 14px;background:transparent;border:1px solid var(--border2);border-radius:8px;color:var(--text2);cursor:pointer;font-size:18px;transition:all 0.2s;line-height:1}
+.btn-add:hover{border-color:var(--gold);color:var(--gold)}
+.btn-add.added{background:rgba(201,168,76,0.15);border-color:var(--gold);color:var(--gold)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:10001;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--dark2);border:1px solid var(--border);border-radius:20px;width:100%;max-width:900px;max-height:90vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;background:var(--glass);border:1px solid var(--border2);color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;z-index:10;transition:all 0.2s}
+.modal-close:hover{background:var(--glass2);color:var(--text)}
+.modal-hero{height:280px;position:relative;overflow:hidden;border-radius:20px 20px 0 0}
+.modal-hero-img{width:100%;height:100%;object-fit:cover}
+
+/* NEXT STEPS MODAL */
+.next-steps-modal{background:var(--dark2);border:1px solid var(--border);border-radius:20px;width:100%;max-width:500px;position:relative;padding:40px;text-align:center}
+.ns-icon{font-size:48px;margin-bottom:16px}
+.ns-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--gold);margin-bottom:8px}
+.ns-sub{font-size:14px;color:var(--text2);margin-bottom:32px;line-height:1.6}
+.ns-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:16px;border-radius:12px;font-size:15px;font-weight:500;cursor:pointer;text-decoration:none;transition:all 0.2s;margin-bottom:16px}
+.ns-btn.wa{background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);color:#2ECC71}
+.ns-btn.wa:hover{background:rgba(37,211,102,0.2)}
+.ns-btn.email{background:var(--glass);border:1px solid var(--border2);color:var(--text)}
+.ns-btn.email:hover{background:var(--glass2);border-color:var(--border)}
+.modal-hero-overlay{position:absolute;inset:0;background:linear-gradient(transparent 30%,var(--dark2))}
+.modal-hero-content{position:absolute;bottom:28px;left:32px;right:32px}
+.modal-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500}
+.modal-body{padding:32px}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+.modal-section-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.modal-section-title::after{content:'';flex:1;height:1px;background:var(--border2)}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.stat-card{background:var(--dark3);border-radius:12px;padding:16px;border:1px solid var(--border2)}
+.stat-card .val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;margin-bottom:4px}
+.stat-card .val.green{color:var(--green)}
+.stat-card .val.gold{color:var(--gold)}
+.stat-card .lbl{font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase}
+.chart-wrap{background:var(--dark3);border-radius:12px;padding:20px;border:1px solid var(--border2)}
+.chart-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.payment-plan{margin-top:24px}
+.pp-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border2)}
+.pp-item:last-child{border-bottom:none}
+.pp-circle{width:36px;height:36px;border-radius:50%;background:var(--glass);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--gold);flex-shrink:0}
+.pp-label{flex:1;font-size:13px;color:var(--text2)}
+.pp-pct{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--text)}
+.pp-amt{font-size:12px;color:var(--text3);text-align:right}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+.why-item{background:var(--dark3);border-radius:10px;padding:16px;border-left:3px solid var(--gold)}
+.why-item .wi-icon{font-size:20px;margin-bottom:8px}
+.why-item .wi-title{font-size:13px;font-weight:500;margin-bottom:4px}
+.why-item .wi-desc{font-size:12px;color:var(--text3);line-height:1.6}
+.modal-footer{padding:24px 32px;border-top:1px solid var(--border2);display:flex;gap:12px;align-items:center;position:sticky;bottom:0;background:var(--dark2);z-index:5}
+.modal-price-big{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;flex:1}
+.modal-price-big span{font-size:16px;color:var(--text3);font-weight:300}
+
+/* BUNDLE PANEL — Split Screen */
+.bundle-panel{position:fixed;inset:0;background:rgba(10,10,15,0.9);z-index:10000;display:flex;opacity:0;pointer-events:none;transition:opacity 0.4s;backdrop-filter:blur(8px)}
+.bundle-panel.open{opacity:1;pointer-events:auto}
+.bundle-left{width:50%;background:var(--dark3);border-right:1px solid var(--border);transform:translateX(-100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column}
+.bundle-right{width:50%;background:var(--dark2);transform:translateX(100%);transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column}
+.bundle-panel.open .bundle-left, .bundle-panel.open .bundle-right{transform:translateX(0)}
+
+/* WHATSAPP FAB */
+.wa-fab{position:fixed;bottom:32px;right:32px;z-index:500;width:60px;height:60px;border-radius:50%;background:#25D366;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,0.4);transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+.wa-fab:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(37,211,102,0.6)}
+.wa-fab svg{width:32px;height:32px;fill:white}
+.wa-fab-tooltip{position:absolute;right:72px;top:50%;transform:translateY(-50%);background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:12px;white-space:nowrap;color:var(--text);pointer-events:none;opacity:0;transition:opacity 0.2s}
+.wa-fab:hover .wa-fab-tooltip{opacity:1}
+
+/* MOBILE RESPONSIVE */
+@media(max-width:768px){
+ .hero h1{font-size:clamp(36px,10vw,60px);letter-spacing:-1px}
+ .hero-stats{gap:24px;flex-wrap:wrap;justify-content:center}
+ .hero-stat .n{font-size:28px}
+ .budget-bar{padding:12px 16px;gap:12px;flex-wrap:wrap}
+ .budget-track{flex-basis:100%;order:3}
+ .section{padding:48px 20px}
+ .property-grid{grid-template-columns:1fr}
+ .why-dubai{grid-template-columns:1fr 1fr}
+ .modal{border-radius:16px 16px 0 0;max-height:95vh;margin:auto 0 0 0;align-self:flex-end;width:100%}
+ .modal-overlay{padding:0;align-items:flex-end}
+ .modal-grid{grid-template-columns:1fr}
+ .modal-hero{height:200px}
+ .modal-title{font-size:26px}
+ .bundle-panel{flex-direction:column; overflow-y:auto;}
+ .bundle-left, .bundle-right{width:100%; transform:translateY(100%); height:auto; border-right:none;}
+ .bundle-panel.open .bundle-left, .bundle-panel.open .bundle-right{transform:translateY(0)}
+ .compare-section{padding:40px 20px}
+ .advisor-strip{flex-direction:column;gap:20px;padding:24px}
+ .why-grid{grid-template-columns:1fr}
+ .stats-grid{grid-template-columns:1fr 1fr}
+ .wa-fab{bottom:20px;right:20px}
+}
+@media(max-width:480px){
+ .hero-stats{gap:16px}
+ .hero-stat .n{font-size:24px}
+ .why-dubai{grid-template-columns:1fr}
+ .modal-footer{flex-direction:column;align-items:stretch}
+ .modal-price-big{font-size:24px}
+}
+
+.bundle-header{padding:28px 40px;border-bottom:1px solid var(--border2);flex-shrink:0}
+.bundle-header h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;margin-bottom:4px}
+.bundle-items{flex:1;overflow-y:auto;padding:40px}
+.bundle-item{background:var(--dark3);border-radius:12px;padding:16px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start;border:1px solid var(--border2)}
+.bi-icon{width:44px;height:44px;border-radius:8px;background:var(--glass);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.bi-content{flex:1}
+.bi-name{font-size:14px;font-weight:500;margin-bottom:2px}
+.bi-location{font-size:11px;color:var(--text3);margin-bottom:8px}
+.bi-metrics{display:flex;gap:16px}
+.bi-metric{font-size:12px;color:var(--text2)}
+.bi-metric strong{color:var(--green)}
+.bi-remove{background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:4px;transition:color 0.2s}
+.bi-remove:hover{color:var(--red)}
+.bundle-analysis{padding:20px;border-top:1px solid var(--border2)}
+.ba-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border2)}
+.ba-row:last-of-type{border-bottom:none}
+.ba-label{font-size:13px;color:var(--text2)}
+.ba-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600}
+.ba-val.green{color:var(--green)}
+.ba-val.gold{color:var(--gold)}
+.ba-total{display:flex;justify-content:space-between;align-items:center;padding:16px;background:var(--glass);border-radius:12px;border:1px solid var(--border);margin-top:12px}
+.ba-total-label{font-size:13px;color:var(--text2)}
+.ba-total-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold)}
+.bundle-close-btn{margin:0 40px 40px 40px;flex-shrink:0;padding:16px;background:var(--gold);color:var(--dark);border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.bundle-close-btn:hover{background:var(--gold2)}
+
+/* BUNDLE CHART */
+.bundle-chart-wrap{margin:16px 0;background:var(--dark3);border-radius:12px;padding:16px;border:1px solid var(--border2)}
+
+/* COMPARE */
+.compare-section{background:var(--dark2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:60px 40px}
+.compare-section .inner{max-width:1400px;margin:0 auto}
+
+/* WHY DUBAI */
+.why-dubai{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.wd-card{background:var(--dark3);border-radius:16px;padding:28px;border:1px solid var(--border2);position:relative;overflow:hidden}
+.wd-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+.wd-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--gold);opacity:0.3;line-height:1;margin-bottom:8px}
+.wd-title{font-size:15px;font-weight:500;margin-bottom:8px}
+.wd-desc{font-size:13px;color:var(--text3);line-height:1.7}
+
+/* ADVISOR CARD */
+.advisor-strip{background:linear-gradient(135deg,var(--dark3),var(--dark2));border:1px solid var(--border);border-radius:20px;padding:40px;display:flex;align-items:center;gap:40px;margin-top:60px}
+.advisor-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--dark);flex-shrink:0}
+.advisor-info h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;margin-bottom:4px}
+.advisor-info p{color:var(--text3);font-size:13px;line-height:1.7}
+.advisor-contact{display:flex;gap:12px;margin-top:16px}
+.contact-chip{background:var(--glass);border:1px solid var(--border2);border-radius:8px;padding:8px 16px;font-size:12px;color:var(--text2)}
+
+/* EMPTY BUNDLE */
+.empty-bundle{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-bundle .icon{font-size:48px;margin-bottom:16px;opacity:0.3}
+.empty-bundle p{font-size:13px;line-height:1.7}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:100px}
+
+/* PHASE LABEL */
+.phase-label{display:inline-flex;align-items:center;gap:6px;background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.3);border-radius:6px;padding:3px 10px;font-size:11px;color:var(--blue);margin-bottom:12px}
+
+/* COMPARE TABLE */
+.compare-table{width:100%;border-collapse:collapse;margin-top:24px}
+.compare-table th{text-align:left;padding:12px 16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border2);font-weight:400}
+.compare-table td{padding:14px 16px;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle}
+.compare-table tr:hover td{background:var(--glass)}
+.compare-table .winner{color:var(--green);font-weight:500}
+.roi-bar-wrap{display:flex;align-items:center;gap:8px}
+.roi-bar{height:6px;border-radius:100px;background:linear-gradient(90deg,var(--green),rgba(46,204,113,0.3))}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp 0.6s ease forwards}
+.fade-up:nth-child(2){animation-delay:0.1s}
+.fade-up:nth-child(3){animation-delay:0.2s}
+.fade-up:nth-child(4){animation-delay:0.3s}
+
+/* NO TAX BADGE */
+.notax{display:inline-flex;align-items:center;gap:4px;background:rgba(46,204,113,0.1);border:1px solid rgba(46,204,113,0.3);border-radius:4px;font-size:10px;color:var(--green);padding:2px 8px;letter-spacing:1px;text-transform:uppercase}
+
+/* TOOLTIP */
+[data-tip]{position:relative}
+[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--dark4);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:11px;white-space:nowrap;color:var(--text);pointer-events:none;z-index:10}
+
+.lightbox-overlay {
+ position: fixed;
+ top: 0; left: 0; right: 0; bottom: 0;
+ background: rgba(0,0,0,0.95);
+ z-index: 9999;
+ display: none;
+ align-items: center;
+ justify-content: center;
+ backdrop-filter: blur(5px);
+}
+.lightbox-overlay.open {
+ display: flex;
+}
+.lightbox-content {
+ max-width: 90%;
+ max-height: 90vh;
+ border-radius: 8px;
+ box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+ object-fit: contain;
+}
+.lightbox-close {
+ position: absolute;
+ top: 20px;
+ right: 20px;
+ width: 44px;
+ height: 44px;
+ background: rgba(255,255,255,0.1);
+ border: none;
+ border-radius: 50%;
+ color: white;
+ font-size: 24px;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ transition: 0.2s;
+}
+.lightbox-close:hover {
+ background: rgba(255,255,255,0.2);
+}
+
+/* AI CHATBOT MODAL */
+.ai-fab { position:fixed; bottom:100px; right:32px; z-index:500; width:60px; height:60px; border-radius:50%; background:#1A1A25; border:1px solid #C9A84C; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 24px rgba(0,0,0,0.6); transition:all 0.3s; font-size:24px; color:white; }
+.ai-fab:hover { transform:scale(1.1); box-shadow:0 8px 32px rgba(201,168,76,0.6); }
+.ai-chat-panel { position:fixed; bottom:32px; right:100px; width:400px; height:600px; max-height:80vh; background:var(--dark2); border:1px solid var(--border); border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,0.6); z-index:501; display:flex; flex-direction:column; transform:scale(0.9); opacity:0; pointer-events:none; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); transform-origin:bottom right; overflow:hidden; }
+.ai-chat-panel.open { transform:scale(1); opacity:1; pointer-events:auto; }
+.ai-header { padding:20px; background:linear-gradient(135deg,var(--dark3),var(--dark4)); border-bottom:1px solid var(--border2); display:flex; justify-content:space-between; align-items:center; }
+.ai-title { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; color:var(--gold); display:flex; align-items:center; gap:8px; }
+.ai-close { background:none; border:none; color:var(--text2); cursor:pointer; font-size:20px; }
+.ai-close:hover { color:var(--text); }
+.ai-body { flex:1; padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:16px; }
+.ai-msg { display:inline-block; padding:12px 16px; border-radius:12px; font-size:13px; line-height:1.5; max-width:85%; }
+.ai-msg.ai { background:var(--dark3); border:1px solid var(--border2); color:var(--text); border-bottom-left-radius:2px; align-self:flex-start; }
+.ai-msg.user { background:rgba(201,168,76,0.15); border:1px solid var(--border); color:var(--gold); border-bottom-right-radius:2px; align-self:flex-end; }
+.ai-input-wrap { padding:16px; border-top:1px solid var(--border2); background:var(--dark3); display:flex; gap:8px; }
+.ai-input { flex:1; background:var(--dark); border:1px solid var(--border2); border-radius:8px; padding:12px 16px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:13px; outline:none; }
+.ai-input:focus { border-color:var(--gold); }
+.ai-send { background:var(--gold); color:var(--dark); border:none; border-radius:8px; padding:0 16px; font-weight:600; cursor:pointer; font-size:13px; font-family:'DM Sans',sans-serif; }
+.ai-send:hover { background:var(--gold2); }
+.ai-proposal-btn { background:transparent; border:1px dashed var(--gold); border-radius:8px; padding:12px; font-size:13px; color:var(--gold); text-align:center; cursor:pointer; margin-top:8px; transition:0.2s; }
+.ai-proposal-btn:hover { background:rgba(201,168,76,0.1); }
+.ai-typing { display:flex; gap:4px; align-items:center; padding:12px 16px; background:var(--dark3); border-radius:12px; border-bottom-left-radius:2px; align-self:flex-start; display:none; }
+.ai-typing span { width:6px; height:6px; background:var(--text3); border-radius:50%; animation:aiBlink 1.4s infinite; }
+.ai-typing span:nth-child(2) { animation-delay:0.2s; }
+.ai-typing span:nth-child(3) { animation-delay:0.4s; }
+@keyframes aiBlink { 0%,100%{opacity:0.3} 50%{opacity:1} }
+@media(max-width:768px) {
+  .ai-chat-panel { position:fixed; inset:0; width:100%; height:100%; max-height:100vh; right:0; bottom:0; border-radius:0; z-index:99999; }
+}
+
+/* NATIVE PRINT STYLES */
+@media print {
+  body * { visibility: hidden; }
+  .bundle-panel, .bundle-panel * { visibility: visible; }
+  .bundle-panel { position: absolute; left: 0; top: 0; width: 100%; background: white !important; color: black !important; padding: 0; overflow: visible; display: block; opacity: 1; pointer-events: none; }
+  .bundle-left, .bundle-right { width: 100%; border: none; transform: none !important; position: relative; background: white !important; color: black !important; }
+  .bundle-left { page-break-after: always; }
+  .bundle-header { border-bottom: 2px solid #ccc; color: black !important; }
+  #bundleAnalysis, #bundleAnalysis *, .bundle-item, .bundle-analysis { background-color: white !important; box-shadow: none !important; background: white !important; border: 1px solid #ccc !important; color: black !important; page-break-inside: avoid; box-shadow: none !important; }
+  .bi-metric, .ba-label, .ba-val, .ba-total-label, .ba-total-val, .bi-name, .bi-location, .bundle-panel *, .bundle-analysis * { color: black !important; }
+  .hero-stat .n, .hero-stat .l, #printHeroTitle { color: black !important; }
+  .bundle-close-btn, .pw-btn, .bi-remove { display: none !important; }
+  canvas { background: white !important; max-width: 500px; margin: 0 auto; display: block; }
+}
+</style>
+<style>
+
+/* 100x PREMIUM UI UPLIFT */
+.ai-fab {
+  background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.05)) !important;
+  border: 1px solid rgba(201,168,76,0.5) !important;
+  box-shadow: 0 0 20px rgba(201,168,76,0.2) !important;
+  backdrop-filter: blur(10px) !important;
+}
+.ai-chat-panel {
+  background: linear-gradient(145deg, rgba(26,26,37,0.95), rgba(15,15,20,0.98)) !important;
+  backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 40px rgba(201,168,76,0.1) !important;
+  border-radius: 20px !important;
+}
+.ai-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+}
+.ai-title {
+  text-shadow: 0 0 10px rgba(201,168,76,0.3) !important;
+}
+.ai-msg {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
+}
+.ai-msg.ai {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid rgba(255,255,255,0.05) !important;
+  border-radius: 16px 16px 16px 4px !important;
+}
+.ai-msg.user {
+  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05)) !important;
+  border: 1px solid rgba(201,168,76,0.2) !important;
+  border-radius: 16px 16px 4px 16px !important;
+  color: var(--text) !important;
+}
+.ai-input-wrap {
+  background: rgba(0,0,0,0.2) !important;
+  border-top: 1px solid rgba(255,255,255,0.05) !important;
+}
+.ai-input {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid rgba(255,255,255,0.05) !important;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.2) !important;
+}
+.ai-input:focus {
+  border-color: rgba(201,168,76,0.5) !important;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.2), 0 0 12px rgba(201,168,76,0.1) !important;
+}
+.ai-send {
+  background: linear-gradient(135deg, var(--gold), #e8c97a) !important;
+  color: #000 !important;
+  box-shadow: 0 4px 12px rgba(201,168,76,0.3) !important;
+  transition: all 0.3s ease !important;
+}
+.ai-send:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(201,168,76,0.4) !important;
+}
+.ns-btn {
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1) !important;
+}
+.ns-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(201,168,76,0.2) !important;
+}
+.ns-btn.wa {
+  background: linear-gradient(135deg, rgba(37,211,102,0.15), rgba(37,211,102,0.05)) !important;
+  border: 1px solid rgba(37,211,102,0.4) !important;
+  color: #25d366 !important;
+}
+.ns-btn.wa:hover {
+  box-shadow: 0 8px 24px rgba(37,211,102,0.2) !important;
+}
+.ns-btn.email {
+  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05)) !important;
+  border: 1px solid rgba(201,168,76,0.3) !important;
+  color: var(--gold) !important;
+}
+
+
+/* ── Quick Reply Chips ─────────────────────────────────────────── */
+.ai-chips-wrap {
+  padding: 10px 16px 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: rgba(0,0,0,0.15);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.ai-chip {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  color: var(--gold);
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.ai-chip:hover {
+  background: rgba(201,168,76,0.18);
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-1px);
+}
+
+/* ── Proposal List in Bundle Panel ────────────────────────────── */
+.proposals-section {
+  padding: 0 24px 12px;
+  display: none;
+}
+.proposals-section.has-proposals { display: block; }
+.proposals-section-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+.proposal-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(201,168,76,0.06);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.proposal-chip-info { flex: 1; min-width: 0; }
+.proposal-chip-name { font-size: 12px; font-weight: 600; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.proposal-chip-date { font-size: 10px; color: var(--text3); margin-top: 2px; }
+.proposal-chip-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.proposal-chip-btn {
+  background: none;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.proposal-chip-btn:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+.proposal-chip-btn.danger:hover { border-color: rgba(231,76,60,0.4); color: #e74c3c; }
+.proposal-chip-btn.send { color: var(--gold); border-color: rgba(201,168,76,0.3); }
+.proposal-chip-btn.send:hover { background: rgba(201,168,76,0.1); }
+
+/* ── Proposal Select Dialog ────────────────────────────────────── */
+.proposal-dialog-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  z-index: 10001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.proposal-dialog-overlay.open { display: flex; }
+.proposal-dialog {
+  background: linear-gradient(145deg, #1a1a25, #0f0f14);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 20px;
+  padding: 32px;
+  width: 420px;
+  max-width: 95vw;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+}
+.proposal-dialog-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.proposal-dialog-sub {
+  font-size: 13px;
+  color: var(--text3);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.proposal-dialog-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.proposal-dialog-item:hover { background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.2); }
+.proposal-dialog-item input[type=checkbox] { accent-color: var(--gold); width: 16px; height: 16px; }
+.proposal-dialog-item-label { font-size: 13px; color: var(--text); flex: 1; }
+.proposal-dialog-item-date { font-size: 11px; color: var(--text3); }
+.proposal-dialog-actions { display: flex; gap: 10px; margin-top: 20px; }
+.proposal-dialog-actions button { flex: 1; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-cancel-dialog { background: rgba(255,255,255,0.04); border: 1px solid var(--border2); color: var(--text2); }
+.btn-send-dialog { background: linear-gradient(135deg, var(--gold), #e8c97a); border: none; color: #000; box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
+.btn-send-dialog:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.4); }
+
+/* ── PDF Loading Overlay ───────────────────────────────────────── */
+.pdf-loading-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  z-index: 99999;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.pdf-loading-overlay.open { display: flex; }
+.pdf-spinner {
+  width: 56px; height: 56px;
+  border: 3px solid rgba(201,168,76,0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.pdf-loading-text { font-size: 16px; color: var(--gold); font-family: 'Cormorant Garamond', serif; }
+.pdf-loading-sub { font-size: 12px; color: var(--text3); }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div class="pw-gate" id="pwGate">
+  <div class="pw-card">
+    <div class="pw-logo">BR</div>
+    <div class="pw-badge">Confidential Investment Memorandum</div>
+    <div class="pw-title">Private Portfolio Access</div>
+    <div class="pw-sub">This document is prepared exclusively for<br>authorised investors. Enter your access code to continue.</div>
+    <div class="pw-input-wrap">
+      <input type="password" class="pw-input" id="pwInput" placeholder="Enter access code" onkeydown="if(event.key==='Enter')checkPw()">
+      <button class="pw-eye" onclick="togglePwEye()" tabindex="-1">👁</button>
+    </div>
+    <div class="pw-err" id="pwErr">Incorrect access code. Please try again.</div>
+    <button class="pw-btn" onclick="checkPw()">Access Portfolio →</button>
+    <div class="pw-secure">🔒 Encrypted · Private · Confidential</div>
+  </div>
+</div>
+
+<!-- HEADER / BRANDING -->
+<header style="position:absolute; top:32px; left:40px; z-index:100; display:flex; align-items:center; gap:12px;">
+  <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--gold);line-height:1;letter-spacing:1px;">BITSS<br><span style="font-size:12px;letter-spacing:4px;color:var(--text);text-transform:uppercase;">Prestige Realty</span></div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+ <div class="hero-bg"></div>
+ <div class="hero-grid"></div>
+ <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%;">
+ <div class="hero-badge"><span></span>Confidential Investment Brief · 2025</div>
+ <h1 id="heroTitle">Client Portfolio<br><em>Dubai Real Estate</em></h1>
+ <p class="hero-sub" id="heroSub">An exclusive, highly curated strategy designed specifically for you — focusing on high-leverage distress deals, premium pre-launches, and maximum rental yields.</p>
+ 
+ <div id="videoContainer" style="display:none; width:100%; max-width:800px; margin-bottom:48px; border-radius:16px; overflow:hidden; border:1px solid var(--border); box-shadow:0 20px 60px rgba(0,0,0,0.6);">
+   <video id="heroVideo" controls autoplay muted playsinline loop style="width:100%; max-width:800px; aspect-ratio:16/9; height:auto; object-fit:contain; display:none; border-radius:12px; margin-top:24px; border:1px solid var(--border2);"></video>
+ </div>
+
+ <div class="hero-stats">
+ <div class="hero-stat"><div class="n" id="h_m1_v">AED 91.8M</div><div class="l" id="h_m1_l">Market Avg. YoY Growth</div></div>
+ <div class="hero-stat"><div class="n" id="h_m2_v">8–12%</div><div class="l" id="h_m2_l">Rental Yield Range</div></div>
+ <div class="hero-stat"><div class="n" id="h_m3_v">0%</div><div class="l" id="h_m3_l">Capital Gains Tax</div></div>
+ <div class="hero-stat"><div class="n" id="heroBudget">5M</div><div class="l" id="h_budget_l">AED Phase 1 Budget</div></div>
+ </div>
+ <div class="scroll-cta">
+ <span>Explore Properties</span>
+ <div class="scroll-arrow"></div>
+ </div>
+ </div>
+</section>
+
+<!-- BUDGET BAR -->
+<div class="budget-bar" id="budgetBar">
+ <div>
+ <div class="budget-label" id="barBudgetLabel">Phase 1 Budget</div>
+ <div class="budget-total" id="budgetTotalLabel">AED 5,000,000</div>
+ </div>
+ <div class="budget-track"><div class="budget-fill" id="budgetFill" style="width:0%"></div></div>
+ <div class="budget-remaining" id="budgetText"><strong>AED 5,000,000</strong> remaining</div>
+ <button class="bundle-btn" onclick="openBundle()">
+ <span>My Portfolio</span>
+ <div class="bundle-badge" id="bundleCount">0</div>
+ </button>
+</div>
+
+<!-- PROPERTIES SECTION -->
+<div class="section">
+ <div class="section-header">
+ <div class="section-tag" id="curatedPicksTag">Curated Picks</div>
+ <h2 class="section-title" id="phaseHeadingTitle">Phase 1 &mdash; <strong id="sectionBudget">AED 5M</strong></h2>
+ <p style="color:var(--text2);font-size:14px;margin-top:12px;line-height:1.7">Mix of ready rentals + off-plan pre-launches. Build income day one, compound capital tomorrow.</p>
+ </div>
+ <div class="phase-selector">
+ <button class="phase-btn active" onclick="filterProps('all',this)">All Properties</button>
+ <button class="phase-btn" onclick="filterProps('ready',this)">Ready to Rent</button>
+ <button class="phase-btn" onclick="filterProps('offplan',this)">Off-Plan / Pre-Launch</button>
+ <button class="phase-btn" onclick="filterProps('distress',this)">Distress Deals 🔥</button>
+ </div>
+ <div class="property-grid" id="propGrid"></div>
+</div>
+
+<!-- WHY DUBAI SECTION -->
+<div class="compare-section">
+ <div class="inner">
+ <div class="section-header">
+ <div class="section-tag">Market Intelligence</div>
+ <h2 class="section-title">Why Dubai <strong>Outperforms</strong></h2>
+ </div>
+ <div class="why-dubai">
+ <div class="wd-card fade-up">
+ <div class="wd-num">01</div>
+ <div class="wd-title">Zero Tax Environment</div>
+ <div class="wd-desc">No capital gains, no income tax on rental yields, no inheritance tax. Maximum net returns every year.</div>
+ </div>
+ <div class="wd-card fade-up">
+ <div class="wd-num">02</div>
+ <div class="wd-title">8–12% Gross Yield</div>
+ <div class="wd-desc">Dubai consistently delivers the highest rental yields among global prime markets — vs 3-4% in London, 2-3% in Singapore.</div>
+ </div>
+ <div class="wd-card fade-up">
+ <div class="wd-num">03</div>
+ <div class="wd-title">60% Expat Rental Demand</div>
+ <div class="wd-desc">Over 3.5M expats create perpetual rental demand. Vacancy rates in prime corridors stay below 4%.</div>
+ </div>
+ <div class="wd-card fade-up">
+ <div class="wd-num">04</div>
+ <div class="wd-title">Off-Plan Leverage</div>
+ <div class="wd-desc">Buy at launch prices. 10–20% down secures the unit. Flip at completion for 30–60% capital gain. No loan required.</div>
+ </div>
+ </div>
+
+ <!-- COMPARE TABLE -->
+ <div style="margin-top:60px">
+ <div class="section-tag" style="margin-bottom:16px">Head to Head</div>
+ <h2 class="section-title" style="margin-bottom:32px">All Picks — <strong>Instant Comparison</strong></h2>
+ <div style="overflow-x:auto">
+ <table class="compare-table" id="compareTable">
+ <thead>
+ <tr>
+ <th>Property</th>
+ <th>Type</th>
+ <th>Location</th>
+ <th>Price (AED)</th>
+ <th>Gross Yield</th>
+ <th>5-Yr Capital Gain</th>
+ <th>Payment Plan</th>
+ <th>Ready to Rent</th>
+ </tr>
+ </thead>
+ <tbody id="compareBody"></tbody>
+ </table>
+ </div>
+ </div>
+ </div>
+</div>
+
+<!-- ADVISOR SECTION -->
+<div class="section">
+ <div class="advisor-strip">
+ <div class="advisor-avatar" id="agentPhoto" style="background-size:cover;background-position:center;color:transparent;">GS</div>
+ <div class="advisor-info">
+ <h3 id="agentName">Gurmukh Singh</h3>
+ <p id="agentDesc">Licensed Dubai Realtor · Specialist in High-Value Investment Portfolios<br>Exclusive off-market access to distress inventory & pre-launch allocations</p>
+ <div class="advisor-contact">
+  <a href="#" class="contact-chip" id="agentPhoneLink" style="text-decoration:none;color:inherit;">📞 Contact</a>
+  <a href="#" target="_blank" id="agentWaLink" class="contact-chip" style="text-decoration:none;color:inherit;background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.3);color:#2ECC71">💬 WhatsApp</a>
+  <div class="contact-chip" id="agentEmail">✉ Email</div>
+  <div class="contact-chip notax">Certified DLD Agent</div>
+  </div>
+ </div>
+ <div style="text-align:right;flex-shrink:0">
+ <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--gold);line-height:1" id="footerBudgetBig">5M</div>
+ <div style="font-size:12px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-top:4px" id="footerBudgetLabel">AED Phase 1 Budget</div>
+ <div style="margin-top:12px;font-size:12px;color:var(--text2)">Phase 1 target <strong style="color:var(--text)" id="footerBudgetSmall">AED 5M</strong></div>
+ </div>
+ </div>
+</div>
+
+<!-- PROPERTY DETAIL MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+ <div class="modal" id="modal">
+ <button class="modal-close" onclick="closeModalDirect()">✕</button>
+ <div class="modal-hero">
+ <div class="modal-hero-img" id="modalHeroImg" style="display:flex;align-items:center;justify-content:center;font-size:120px"></div>
+ <div class="modal-hero-overlay"></div>
+ <div class="modal-hero-content">
+ <div class="modal-tag" id="modalTag"></div>
+ <div class="modal-title" id="modalTitle"></div>
+ </div>
+ </div>
+ <div class="modal-body">
+ <div class="modal-grid">
+ <div>
+ <div class="modal-section-title">Key Metrics</div>
+ <div class="stats-grid" id="modalStats"></div>
+ </div>
+ <div>
+ <div class="modal-section-title">5-Year Value Projection</div>
+ <div class="chart-wrap">
+ <div style="position:relative;height:200px"><canvas id="projChart" role="img" aria-label="5-year property value projection"></canvas></div>
+ </div>
+ </div>
+ </div>
+ <div class="payment-plan" id="modalPaymentPlan"></div>
+ <div style="margin-top:28px">
+ <div class="modal-section-title">Why This Property</div>
+ <div class="why-grid" id="modalWhyGrid"></div></div></div><div id="modalDeepDive" style="padding: 0 32px 32px 32px;"></div>
+ <div class="modal-footer">
+ <div>
+ <div style="font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Investment Price</div>
+ <div class="modal-price-big" id="modalPrice"></div>
+ </div>
+ <div id="modalActionBtns" style="display:flex;gap:12px;"><button class="btn-primary" id="modalAddBtn" style="max-width:220px;padding:14px" onclick="modalAddToBundle()">Add to Portfolio</button></div>
+ </div>
+ </div>
+</div>
+
+
+
+
+<!-- BUNDLE PANEL -->
+<div class="bundle-panel" id="bundlePanel">
+  <div class="bundle-left">
+    <div class="bundle-header">
+      <h2>Portfolio Analysis</h2>
+      <p style="font-size:13px;color:var(--text3);margin-top:4px">Combined ROI and projections</p>
+    </div>
+    <div class="bundle-items" style="position:relative;">
+      <div id="emptyAnalysisState" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--text3); text-align:center; padding:40px;">
+        <div style="font-size:48px; opacity:0.3; margin-bottom:16px;">📊</div>
+        <p>Add properties on the right<br>to generate your portfolio analysis.</p>
+      </div>
+      <div id="bundleAnalysis" style="display:none; position:relative; z-index:2; background:var(--dark2); border-radius:16px; padding:32px; border:1px solid var(--border); box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+        <div class="bundle-chart-wrap" style="margin-top:0; border:none; padding:0; background:transparent;">
+          <div style="position:relative;height:300px"><canvas id="bundleChart" role="img" aria-label="Portfolio allocation pie chart"></canvas></div>
+        </div>
+        <div class="ba-row" style="margin-top:24px;"><span class="ba-label">Total Invested</span><span class="ba-val gold" id="baTotal"></span></div>
+        <div class="ba-row"><span class="ba-label">Blended Gross Yield</span><span class="ba-val green" id="baYield"></span></div>
+        <div class="ba-row"><span class="ba-label">Est. Annual Rental Income</span><span class="ba-val" id="baRental"></span></div>
+        <div class="ba-row"><span class="ba-label">5-Year Capital Gain (Est.)</span><span class="ba-val green" id="baGain"></span></div>
+        <div class="ba-total" style="margin-top:24px; padding:24px;">
+          <div><div class="ba-total-label">5-Yr Total Return</div><div style="font-size:11px;color:var(--text3);margin-top:4px">Rental + Capital</div></div>
+          <div class="ba-total-val" id="baTotalReturn" style="font-size:36px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bundle-right">
+    <div class="bundle-header" style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div>
+        <h2>My Portfolio</h2>
+        <p style="font-size:13px;color:var(--text3);margin-top:4px">Properties added to your allocation</p>
+      </div>
+      <button onclick="closeBundle()" style="background:var(--glass); border:1px solid var(--border2); color:var(--text2); font-size:24px; cursor:pointer; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:0.2s;">&times;</button>
+    </div>
+    <div class="bundle-items" id="bundleItems">
+      <div class="empty-bundle" id="emptyBundle" style="margin-top:40px;">
+        <div class="icon">🏢</div>
+        <p>Your portfolio is currently empty.<br>Browse properties and add them here.</p>
+      </div>
+    </div>
+    <div style="padding:24px 24px 0px; text-align:center; margin-top:16px;" id="proposalsSectionWrap" style="display:none;">
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:2px; color:var(--text3); margin-bottom:10px;">📄 Generated Proposals</div>
+      <div id="proposalChipsList" style="text-align:left; max-height:150px; overflow-y:auto; margin-bottom:10px;"></div>
+      <button onclick="openProposalDialog()" style="width:100%; margin-bottom:12px; background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3); color:var(--gold); border-radius:12px; padding:14px; font-size:14px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.2s;" onmouseover="this.style.background='rgba(201,168,76,0.15)'" onmouseout="this.style.background='rgba(201,168,76,0.1)'">📤 View & Send Proposals</button>
+    </div>
+    <div style="padding:12px 24px 24px; text-align:center;">
+      <button class="pw-btn" style="width:100%;" onclick="requestProposal()">✨ Generate New PDF Proposal</button>
+    </div>
+    <button class="bundle-close-btn" onclick="closeBundle()">Close Portfolio Panel</button>
+  </div>
+</div>
+
+<!-- NEXT STEPS MODAL -->
+<div class="modal-overlay" id="nextStepsOverlay">
+  <div class="next-steps-modal">
+    <button class="modal-close" onclick="closeNextSteps()">✕</button>
+    <div class="ns-icon">📄</div>
+    <div class="ns-title">Portfolio Generated</div>
+    <div class="ns-sub">Your curated portfolio PDF is ready. How would you like to request your formal proposal?</div>
+    <a href="#" id="nsWa" target="_blank" class="ns-btn wa" onclick="trackProposalSent()">
+      <span>💬</span> Send via WhatsApp
+    </a>
+    <a href="#" id="nsEmail" target="_blank" class="ns-btn email" onclick="trackProposalSent()">
+      <span>✉️</span> Send via Email
+    </a>
+  </div>
+</div>
+
+<!-- AI CHATBOT UI -->
+<button class="ai-fab" id="aiFab" onclick="toggleAIChat()" title="AI Assistant">✨</button>
+<div class="ai-chat-panel" id="aiChatPanel">
+  <div class="ai-header" style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+    <div class="ai-title">✨ AI Personal Assistant</div>
+    <div style="display:flex; gap:6px; align-items:center;">
+      <button title="Clear chat" onclick="clearAiChat()" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); color:var(--text3); border-radius:8px; padding:5px 10px; font-size:11px; cursor:pointer; transition:0.2s; font-family:'DM Sans',sans-serif;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text3)'">🗑 Clear</button>
+      <button class="ai-close" onclick="toggleAIChat()">✕</button>
+    </div>
+  </div>
+  <div class="ai-body" id="aiBody">
+    <div class="ai-msg ai" id="aiGreeting">Hello! I'm your AI assistant for BITSS Prestige Realty. I can help you explore properties, understand yields, payment plans, and request a formal proposal. How can I assist?</div>
+    <!-- Quick question chips inside body for better UX -->
+    <div id="aiChipsWrap" style="display:flex; flex-wrap:wrap; gap:6px; padding:4px 0; align-self:flex-start; width:100%;">
+      <button class="ai-chip" onclick="chipAsk('What are the best properties for rental yield?')">📈 Best yield?</button>
+      <button class="ai-chip" onclick="chipAsk('Which property has the lowest entry point?')">💰 Lowest entry?</button>
+      <button class="ai-chip" onclick="chipAsk('Tell me about payment plans available')">📋 Payment plans</button>
+      <button class="ai-chip" onclick="chipAsk('Which properties are distress deals?')">🔥 Distress deals</button>
+      <button class="ai-chip" onclick="chipAsk('I want to send a formal proposal to my agent')">📄 Send proposal</button>
+      <button class="ai-chip" onclick="chipAsk('What are the tax benefits of investing in Dubai?')">🏛️ Tax benefits</button>
+    </div>
+    <div class="ai-typing" id="aiTyping"><span></span><span></span><span></span></div>
+  </div>
+  <div class="ai-input-wrap">
+    <input type="text" class="ai-input" id="aiInput" placeholder="Ask about your portfolio..." onkeydown="if(event.key==='Enter')sendAiMessage()">
+    <button class="ai-send" onclick="sendAiMessage()">Send</button>
+  </div>
+</div>
+
+<script>
+const clientSlug = decodeURIComponent(window.location.pathname.replace(/^\/|\/$/g, '')).replace(/\s+/g, '-').toLowerCase();
+
+let BUDGET = 5000000;
+let bundleChart = null;
+let projChart = null;
+let currentModal = null;
+let bundle = [];
+
+const PROPERTIES = [
+ {
+ id:1, name:'Sobha Hartland II', developer:'Sobha Realty', location:'Mohammed Bin Rashid City', locationShort:'MBR City',
+ type:'offplan', emoji:'🌿', phase:'Phase 1',
+ image:'Research/sobha_hartland.jpg',
+ priceUSD:480000, priceAED:1762000,
+ grossYield:9.2, capitalGain5yr:48, annualRentalUSD:44160,
+ downPayment:10, paymentPlan:[{l:'On Booking',p:10,phase:'Now'},{l:'Construction (12 Mths)',p:50,phase:'During Build'},{l:'On Handover',p:40,phase:'Q3 2026'}],
+ distress:false, hot:true,
+ usps:['Lagoon Views','10% Down','RERA Registered','Handover Q3 2026'],
+ hotUsps:['Pre-Launch Price','Only 10% Now'],
+ why:[
+ {icon:'📈',title:'15% Below Market',desc:'Pre-launch pricing locked before public sales open. Expect 15–20% gain at handover.'},
+ {icon:'🏊',title:'Crystal Lagoon',desc:'Artificial lagoon + beach access drives premium short-term rental demand.'},
+ {icon:'💰',title:'10% Secures It',desc:'AED 176K down payment to control a AED 1.76M asset. Maximum leverage.'},
+ {icon:'📍',title:'MBR City Corridor',desc:"Under 10 minutes from Downtown Dubai. One of city's fastest-appreciating corridors."},
+ ],
+ projValues:[480000,518000,562000,612000,672000,720000],
+ },
+ {
+ id:2, name:'Raw District', developer:'Imtiaz Developments', location:'Sheikh Zayed Road, Downtown Jebel Ali', locationShort:'SZR / Jebel Ali',
+   type:'offplan', emoji:'🏗️', phase:'Phase 1',
+   unitOptions: [
+     { label: 'Studio (380 Sq.Ft)', priceAED: 649000, yield: 10.5 },
+     { label: '1 Bed (610 Sq.Ft)', priceAED: 889000, yield: 9.8 },
+     { label: '2 Bed (1,054 Sq.Ft)', priceAED: 1400000, yield: 9.2 },
+     { label: '3 Bed (1,400 Sq.Ft)', priceAED: 1900000, yield: 8.9 },
+     { label: 'Office (700 Sq.Ft)', priceAED: 1200000, yield: 11.2 },
+     { label: 'Retail (1,000 Sq.Ft)', priceAED: 2500000, yield: 12.5 }
+   ],
+   selectedOption: 0,
+ image: 'Research/render2.jpg',
+ brochure: 'Research/Raw_District_Brochure.pdf',
+ 
+ deepDive: `
+<div style="margin-top:32px; border-top:1px solid var(--border2); padding-top:32px;">
+ <div class="modal-section-title">360° Property Showcase</div>
+ <div style="margin-bottom:32px;">
+ <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+ <h4 style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);margin:0;">Live Site & Exterior Renders</h4>
+ <div style="display:flex; gap:12px; align-items:center;">
+ <span style="font-size:12px; color:var(--text3); border:1px solid var(--border); padding:4px 10px; border-radius:100px;">📅 Handover: Q1 2029</span>
+ <a href="https://maps.app.goo.gl/KB3iK2axbgYHSFf59" target="_blank" style="font-size:12px; color:var(--gold); text-decoration:none; border:1px solid var(--border); padding:4px 10px; border-radius:100px; display:flex; align-items:center; gap:4px;">📍 View Map</a>
+ </div>
+ </div>
+ <div style="display:flex;gap:16px;overflow-x:auto;padding-bottom:16px;scroll-snap-type:x mandatory;">
+ <video src="Research/live-site.mp4" onclick="openLightbox('Research/live-site.mp4', true)" onerror="this.style.display='none'" style="cursor:pointer; height:240px;border-radius:12px;border:1px solid var(--border2);flex-shrink:0;scroll-snap-align:start;"></video>
+ <img src="Research/render1.jpg" onclick="openLightbox('Research/render1.jpg', false)" onerror="this.style.display='none'" style="cursor:pointer; height:240px;border-radius:12px;border:1px solid var(--border2);flex-shrink:0;scroll-snap-align:start;object-fit:cover;">
+ <img src="Research/raw_district_new_render.jpg" onclick="openLightbox('Research/raw_district_new_render.jpg', false)" onerror="this.style.display='none'" style="cursor:pointer; height:240px;border-radius:12px;border:1px solid var(--border2);flex-shrink:0;scroll-snap-align:start;object-fit:cover;">
+ <img src="Research/raw_district_sketch.jpg" onclick="openLightbox('Research/raw_district_sketch.jpg', false)" onerror="this.style.display='none'" style="cursor:pointer; height:240px;border-radius:12px;border:1px solid var(--border2);flex-shrink:0;scroll-snap-align:start;object-fit:cover;">
+ </div>
+ </div>
+ 
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+ <div>
+ <h4 style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);margin-bottom:12px;">Architectural Render</h4>
+ <img src="Research/render2.jpg" onclick="openLightbox('Research/render2.jpg', false)" onerror="this.style.display='none'" style="cursor:pointer; width:100%;border-radius:12px;border:1px solid var(--border2);object-fit:cover;height:240px;">
+ </div>
+ <div>
+ <h4 style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);margin-bottom:12px;">The Raw Collection</h4>
+ <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px;">
+ "Where Art Meets Use." Every apartment comes fully furnished with bespoke sculptural pieces. The lobby features permanent installations including a vintage Porsche 911, Dodge Charger, and kinetic furniture like the Vortex Spun Chair.
+ </p>
+ <ul style="font-size:13px;color:var(--text3);line-height:1.6;padding-left:16px;">
+ <li><strong>Honest Materials:</strong> Raw timber, exposed rebar, and embossed chrome.</li>
+ <li><strong>Kintsugi Lighting:</strong> Gold/brass lighting set into cracked concrete.</li>
+ <li><strong>Turnkey Luxury:</strong> Custom "Soft Landing" sofas and floating leather chairs.</li>
+ </ul>
+ </div>
+ </div>
+
+ <div style="background:var(--glass);border-radius:12px;padding:24px;border:1px solid var(--border);margin-bottom:32px;">
+ <h4 style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);margin-bottom:16px;">Verified Market Data (DXB Interact)</h4>
+ <p style="font-size:12px;color:var(--text2);margin-bottom:16px;">Live rental contracts from <strong>Azizi Aura Residences</strong> (the immediate neighboring plot, non-premium build) registered in Feb 2026. Imtiaz's superior build and Raw Stay management guarantees a premium above these baselines.</p>
+ <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;margin-bottom:16px;">
+ <div style="background:var(--dark3);padding:12px;border-radius:8px;border:1px solid var(--border2);">
+ <div style="color:var(--text);font-size:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Studio Baseline</div>
+ <div style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;">AED 55K</div>
+ <div style="font-size:11px;color:var(--text3);margin-top:4px;">391 sq.ft. (16th Flr)</div>
+ </div>
+ <div style="background:var(--dark3);padding:12px;border-radius:8px;border:1px solid var(--border2);">
+ <div style="color:var(--text);font-size:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">1-Bed Baseline</div>
+ <div style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;">AED 70K</div>
+ <div style="font-size:11px;color:var(--text3);margin-top:4px;">694 sq.ft. (15th Flr)</div>
+ </div>
+ <div style="background:var(--dark3);padding:12px;border-radius:8px;border:1px solid var(--border2);">
+ <div style="color:var(--text);font-size:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">2-Bed Baseline</div>
+ <div style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;">AED 110K</div>
+ <div style="font-size:11px;color:var(--text3);margin-top:4px;">Registered Contract</div>
+ </div>
+ </div>
+ <div style="display:flex;gap:16px;">
+ <img src="Research/azizi_data.jpg" onclick="openLightbox('Research/azizi_data.jpg', false)" onerror="this.style.display='none'" style="cursor:pointer; height:120px;border-radius:8px;border:1px solid var(--border2);object-fit:cover;">
+ <div style="flex:1;">
+ <div style="color:var(--gold);font-size:16px;margin-bottom:4px;">📈 The Raw District ROI Calculation</div>
+ <div style="font-size:12px;color:var(--text3);line-height:1.5;">At AED 649K entry for a Studio, capturing just the baseline AED 55K rent yields an <strong>8.4% gross ROI</strong>. With Imtiaz's turnkey 'Raw Stay' hospitality model and direct metro bridge premium, targeting AED 65K+ is highly probable, pushing gross yields past <strong>10%</strong>. Add the 40% post-handover leverage, and the cash-on-cash return is exceptional.</div>
+ </div>
+ </div>
+ </div>
+
+ <h4 style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--text);margin-bottom:16px;">SZR Competitor Pricing Gap</h4>
+ <p style="font-size:12px;color:var(--text2);margin-bottom:16px;">Comparative analysis against other recent Sheikh Zayed Road launches proves the aggressive underpricing of Raw District's entry point.</p>
+ <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+ <div style="background:var(--dark3);padding:16px;border-radius:8px;border:1px solid var(--border2);position:relative;">
+ <div style="position:absolute;top:16px;right:16px;font-size:20px;">🏢</div>
+ <div style="color:var(--text);font-size:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Sobha Central</div>
+ <div style="color:var(--red);font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;">Avg AED 2,960 / sq.ft.</div>
+ <div style="font-size:11px;color:var(--text3);margin-top:8px;">
+ 1-Bed starting at <strong>AED 1.45M</strong><br>
+ 2-Bed starting at <strong>AED 2.48M</strong>
+ </div>
+ </div>
+ <div style="background:var(--dark3);padding:16px;border-radius:8px;border:1px solid var(--border2);position:relative;">
+ <div style="position:absolute;top:16px;right:16px;font-size:20px;">🏢</div>
+ <div style="color:var(--text);font-size:12px;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Danube Shahrukhz</div>
+ <div style="color:var(--red);font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;">Avg AED 4,000 / sq.ft.</div>
+ <div style="font-size:11px;color:var(--text3);margin-top:8px;">
+ Premium commercial SZR tower.<br>
+ Trading up to AED 5,050 / sq.ft.
+ </div>
+ </div>
+ </div>
+ <div style="background:rgba(201,168,76,0.1);padding:16px;border-radius:8px;border:1px solid var(--border);">
+ <div style="color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;margin-bottom:4px;">The Imtiaz Arbitrage</div>
+ <div style="font-size:12px;color:var(--text2);line-height:1.5;">Raw District is launching from <strong>AED 649K</strong> (~AED 1,700 / sq.ft.). This represents a massive <strong>40% to 50% discount</strong> per square foot compared to direct SZR competitors like Sobha Central, locking in immediate, undeniable day-one equity before the shovel even hits the dirt.</div>
+ </div>
+</div>`,
+ priceUSD:176000, priceAED:649000,
+ grossYield:10.5, capitalGain5yr:45, annualRentalUSD:18480,
+ downPayment:20, paymentPlan:[{l:'On Booking',p:24,phase:'Now'},{l:'Construction',p:35,phase:'Quarterly'},{l:'Handover',p:5,phase:'Q1 2029'},{l:'Post Handover',p:40,phase:'3 Yrs (3.3%/Q)'}],
+ distress:false, hot:true,
+ usps:['Submit EOI Now','Launch: Mid June','3-Yr Post Handover','Direct Metro Bridge'],
+ hotUsps:['40% Post Handover','AED 649K Entry'],
+ why:[
+ {icon:'🌟',title:'Azizi Baseline Premium',desc:'The Azizi plot next door establishes baseline rental yields, but Imtiaz superior urban lifestyle build quality guarantees a rental premium.'},
+ {icon:'⏳',title:'Pre-Launch EOI Window',desc:'Over 500+ EOIs received in 10 days. Launch is mid-June. We need to lock the EOI immediately to secure Studios or 2BRs before allocation closes.'},
+ {icon:'📈',title:'Underpriced SZR Entry',desc:'Other recent SZR launches hit the market at much higher psf. AED 649K for an SZR address with metro access is instant built-in equity.'},
+ {icon:'🏨',title:'Raw Stay Management',desc:'Turnkey hospitality model. Imtiaz owns and operates the serviced apartments, ensuring premium yields over long-term lets.'},
+ ],
+ projValues:[176000,195000,215000,235000,255000,280000],
+ },
+ {
+ id:3, name:'Alef One Masdar City', developer:'Alef Group', location:'Masdar City, Abu Dhabi', locationShort:'Masdar City',
+ type:'offplan', emoji:'🌱', phase:'Phase 1',
+ image:'Research/alef_masdar.jpg',
+ priceUSD:390000, priceAED:1432000,
+ grossYield:8.5, capitalGain5yr:55, annualRentalUSD:33150,
+ downPayment:15, paymentPlan:[{l:'On Booking',p:15,phase:'Now'},{l:'Construction Milestones',p:40,phase:'Quarterly'},{l:'On Handover',p:45,phase:'Q1 2027'}],
+ distress:false, hot:true,
+ usps:['Sustainable City','Alef Group','Abu Dhabi Golden Visa','High Cap Gain'],
+ hotUsps:['Unique Asset Class','55% 5Yr Gain Est.'],
+ why:[
+ {icon:'🌍',title:'Sustainability Premium',desc:'Net-zero city. ESG-compliant assets command 15-20% rental premium. Future-proof investment.'},
+ {icon:'🏆',title:'Alef Pedigree',desc:'Alef Group is Abu Dhabi\'s fastest-growing developer. Seamless delivery record.'},
+ {icon:'📋',title:'Golden Visa Eligible',desc:'Investment qualifies for UAE 10-Year Golden Visa. Strategic for portfolio holders.'},
+ {icon:'🚀',title:'Masdar Expansion Phase',desc:'USD 1.5B infrastructure expansion underway. Capital appreciation play.'},
+ ],
+ projValues:[390000,420000,462000,510000,565000,605000],
+ },
+ {
+ id:4, name:'DAMAC Bay by Cavalli', developer:'DAMAC Properties', location:'Dubai Harbour', locationShort:'Dubai Harbour',
+ type:'ready', emoji:'⛵', phase:'Phase 1',
+ image:'Research/damac_bay.jpg',
+ priceUSD:750000, priceAED:2754000,
+ grossYield:8.1, capitalGain5yr:38, annualRentalUSD:60750,
+ downPayment:100, paymentPlan:[{l:'Full Payment',p:100,phase:'On Transfer'}],
+ distress:false, hot:false,
+ usps:['Ready to Rent','Marina Views','Short-Term Permit','Cavalli Branded'],
+ hotUsps:['Instant Rental Income','Premium Tenant Profile'],
+ why:[
+ {icon:'🎪',title:'Instant Cash Flow',desc:'Ready unit. List on Airbnb within 30 days. Start earning AED 250K+ per year immediately.'},
+ {icon:'⚓',title:'Marina & Yacht Views',desc:'Unobstructed marina views. Premium nightly rates AED 1,200–2,500 on short-term.'},
+ {icon:'👗',title:'Cavalli Brand Premium',desc:'Fashion-branded residences command 25-35% rental premium vs unbranded equivalents.'},
+ {icon:'✈️',title:'2 Min from Airport Route',desc:'Dubai Harbour proximity means HNW tenant pool. Concierge lifestyle demand.'},
+ ],
+ projValues:[750000,795000,842000,892000,945000,1005000],
+ },
+ {
+ id:5, name:'DISTRESS: Marina Gate I', developer:'Select Group', location:'Dubai Marina', locationShort:'Dubai Marina',
+ type:'distress', emoji:'🏙️', phase:'Phase 1',
+ image:'Research/marina_gate.jpg',
+ priceUSD:620000, priceAED:2277000,
+ grossYield:10.4, capitalGain5yr:32, annualRentalUSD:64480,
+ downPayment:100, paymentPlan:[{l:'Full Payment on Transfer',p:100,phase:'Now'}],
+ distress:true, hot:true,
+ usps:['18% Below Market','Ready to Rent','Urgent Seller','Marina Views'],
+ hotUsps:['Distress Deal','Instant Equity'],
+ why:[
+ {icon:'🚨',title:'18% Below Market Value',desc:'Seller motivated by overseas relocation. Comparable units traded at AED 2.77M last quarter. Instant equity day one.'},
+ {icon:'💵',title:'10.4% Gross Yield',desc:'Highest yield in the portfolio. Marina address commands AED 23K/month in rentals. Immediate income.'},
+ {icon:'📊',title:'Dubai Marina Never Dips',desc:'Marina transactional volume up 34% YoY. One of Dubai\'s most liquid assets.'},
+ {icon:'⚡',title:'72hr Window',desc:'Distress pricing available for 72 hours. First mover advantage critical.'},
+ ],
+ projValues:[620000,650000,680000,710000,745000,820000],
+ },
+ {
+ id:6, name:'Sobha Seahaven Tower B', developer:'Sobha Realty', location:'Dubai Harbour', locationShort:'Dubai Harbour',
+ type:'ready', emoji:'🌊', phase:'Phase 1',
+ image:'Research/sobha_seahaven.jpg',
+ priceUSD:895000, priceAED:3287000,
+ grossYield:7.8, capitalGain5yr:35, annualRentalUSD:69810,
+ downPayment:100, paymentPlan:[{l:'Full Payment on Transfer',p:100,phase:'Now'}],
+ distress:false, hot:false,
+ usps:['Sobha Built','Sea Views','HNWI Tenant Profile','Low Supply Area'],
+ hotUsps:['Trophy Asset','Instant Rental'],
+ why:[
+ {icon:'🏅',title:'Sobha Construction Quality',desc:'Zero-defect delivery record. Premium materials. Highest tenant retention rates in Dubai.'},
+ {icon:'🌊',title:'Sea + Ain Dubai Views',desc:'Both sea-facing and Ain Dubai views. Dual-attraction premium of 20-30% over single view.'},
+ {icon:'🎯',title:'HNWI Tenant Profile',desc:'Anchor tenants: tech executives, finance professionals. 24-month lease cycles reduce vacancy.'},
+ {icon:'📉',title:'Low Supply Constraint',desc:'Dubai Harbour has fixed supply. 3,200 total units ever. Scarcity drives value.'},
+ ],
+ projValues:[895000,940000,988000,1040000,1100000,1210000],
+ },
+ {
+ id:7, name:'DISTRESS: Downtown Studio', developer:'Emaar', location:'Downtown Dubai', locationShort:'Downtown',
+ type:'distress', emoji:'🌃', phase:'Phase 1',
+ image:'Research/downtown_studio.jpg',
+ priceUSD:265000, priceAED:973000,
+ grossYield:11.2, capitalGain5yr:28, annualRentalUSD:29680,
+ downPayment:100, paymentPlan:[{l:'Full Payment',p:100,phase:'Now'}],
+ distress:true, hot:true,
+ usps:['22% Below Market','Burj Khalifa View','Airbnb Permit','Emaar Built'],
+ hotUsps:['Best Distress Deal','Highest Yield'],
+ why:[
+ {icon:'🔥',title:'22% Below Market — Best Deal',desc:'Probate sale. Market comp AED 1.25M. You pay AED 973K. Immediate AED 277K equity.'},
+ {icon:'🗼',title:'Burj Khalifa View',desc:'Direct Burj Khalifa view commands AED 3,500+/night on short-term. One of Dubai\'s most booked views.'},
+ {icon:'📲',title:'11.2% — Portfolio\'s Top Yield',desc:'At AED 973K investment, annual rental of AED 109K. Self-funding asset from month one.'},
+ {icon:'🏗️',title:'Emaar Developer Premium',desc:'Emaar resale always commanded. Zero risk on quality. Institutional-grade build.'},
+ ],
+ projValues:[265000,285000,305000,325000,345000,340000],
+ },
+ {
+ id:8, name:'Imtiyaz Azure Gardens', developer:'Imtiyaz Developers', location:'Arjan, Dubai', locationShort:'Arjan',
+ type:'offplan', emoji:'🌺', phase:'Phase 1',
+ image:'Research/azure_gardens.jpg',
+ priceUSD:210000, priceAED:771000,
+ grossYield:10.1, capitalGain5yr:45, annualRentalUSD:21210,
+ downPayment:5, paymentPlan:[{l:'On Booking',p:5,phase:'Now'},{l:'Construction',p:55,phase:'Monthly'},{l:'On Handover',p:40,phase:'Q2 2027'}],
+ distress:false, hot:true,
+ usps:['5% Down — AED 38K','High ROI','Arjan Emerging','Garden District'],
+ hotUsps:['Lowest Entry','Pre-Launch Price'],
+ why:[
+ {icon:'🌱',title:'Arjan: Next JVC Story',desc:'Arjan 3 years behind JVC in the cycle. Buy low, hold 3 years, sell premium. Proven pattern.'},
+ {icon:'💸',title:'AED 38K Secures It',desc:'Lowest absolute entry in the portfolio. Perfect for portfolio diversification.'},
+ {icon:'🏡',title:'Garden District Premium',desc:'Landscaped communities hold value better than towers. Family tenant demographic = longer leases.'},
+ {icon:'📈',title:'10.1% Yield at Handover',desc:'Imtiyaz track record delivers 10%+ yield consistently across JVC portfolio.'},
+ ],
+ projValues:[210000,228000,252000,282000,315000,305000],
+ },
+];
+
+function formatAED(n){return'AED '+n.toLocaleString('en-US')}
+
+// ─── API ↔ FRONTEND FIELD NORMALIZER ──────────────────────────────────────────
+function normalizeProperty(p) {
+  return {
+    id:              p.id,
+    name:            p.name,
+    developer:       p.developer || '',
+    location:        p.location  || '',
+    locationShort:   p.location_short || p.locationShort || '',
+    type:            p.type || 'offplan',
+    emoji:           p.emoji || '🏢',
+    phase:           p.phase || 'Phase 1',
+    priceAED:        p.price_aed  !== undefined ? p.price_aed  : (p.priceAED  || 0),
+    priceUSD:        p.price_usd  !== undefined ? p.price_usd  : (p.priceUSD  || 0),
+    grossYield:      p.gross_yield !== undefined ? p.gross_yield : (p.grossYield || 0),
+    capitalGain5yr:  p.capital_gain_5yr !== undefined ? p.capital_gain_5yr : (p.capitalGain5yr || 0),
+    annualRentalUSD: p.annual_rental_usd !== undefined ? p.annual_rental_usd : (p.annualRentalUSD || 0),
+    downPayment:     p.down_payment !== undefined ? p.down_payment : (p.downPayment || 0),
+    distress:        Boolean(p.distress),
+    hot:             Boolean(p.hot),
+    image:           p.image   || null,
+    brochure:        p.brochure || null,
+    usps:            Array.isArray(p.usps)         ? p.usps         : [],
+    hotUsps:         Array.isArray(p.hot_usps)     ? p.hot_usps     : (p.hotUsps || []),
+    why:             Array.isArray(p.why)          ? p.why          : [],
+    paymentPlan:     Array.isArray(p.payment_plan) ? p.payment_plan : (p.paymentPlan || []),
+    projValues:      Array.isArray(p.proj_values)  ? p.proj_values  : (p.projValues || [0,0,0,0,0,0]),
+    unitOptions:     p.unit_options || p.unitOptions || null,
+    deep_dive_data:  p.deep_dive_data || null,
+    selectedOption:  p.selectedOption || 0,
+    deepDive:        p.deepDive || '',
+  };
+}
+
+// ─── PASSWORD GATE ─────────────────────────────────────────────────────────────
+async function checkPw() {
+  const pw = document.getElementById('pwInput').value;
+  try {
+    const r = await fetch('/api/auth/verify', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ slug: clientSlug, password: pw })
+    });
+    if (r.ok) {
+      sessionStorage.setItem('kc_authed_' + clientSlug, '1');
+      document.getElementById('pwGate').style.opacity='0';
+      document.getElementById('pwGate').style.transition='opacity 0.5s';
+      setTimeout(()=>document.getElementById('pwGate').style.display='none',500);
+      initPortal();
+    } else {
+      showPwError();
+    }
+  } catch {
+    showPwError();
+  }
+}
+
+function showPwError() {
+  const inp = document.getElementById('pwInput');
+  const err = document.getElementById('pwErr');
+  inp.classList.add('shake');
+  err.classList.add('show');
+  setTimeout(()=>inp.classList.remove('shake'),400);
+  setTimeout(()=>err.classList.remove('show'),3000);
+}
+
+function togglePwEye() {
+  const i = document.getElementById('pwInput');
+  i.type = i.type==='password' ? 'text' : 'password';
+}
+
+let currentAgent = null;
+let currentClient = null;
+
+// Auto-check on load
+if (sessionStorage.getItem('kc_authed_' + clientSlug)==='1') {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('pwGate').style.display='none';
+    initPortal();
+  });
+}
+
+// ─── INIT PORTAL ───────────────────────────────────────────────────────────────
+async function initPortal() {
+  // Log View
+  fetch('/api/track/view', { method: 'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({slug: clientSlug})}).catch(()=>{});
+
+  // Fetch client info
+  try {
+    const cRes = await fetch(`/api/client-info/${clientSlug}`);
+    if (cRes.ok) {
+      const client = await cRes.json();
+      currentClient = client;
+      if (client.agent) currentAgent = client.agent;
+      
+      // Load persistent state
+      if (client.portfolio_state && client.portfolio_state.length > 0) {
+        bundle = client.portfolio_state;
+      }
+      if (client.proposals_data && client.proposals_data.length > 0) {
+        generatedProposals = client.proposals_data;
+        renderProposalChips();
+      }
+      if (client.chat_history && client.chat_history.length > 0) {
+         // Load chat logs (optional feature to render them)
+      }
+      
+      document.title = `${client.name} — Dubai Real Estate Portfolio`;
+      
+      const pHeading = client.portfolio_heading || 'Client Portfolio';
+      const pSubheading = client.portfolio_subheading || `An exclusive, highly curated strategy designed specifically for ${client.name} — focusing on high-leverage distress deals, premium pre-launches, and maximum rental yields.`;
+      
+      document.getElementById('heroTitle').innerHTML = `${pHeading}<br><em>Dubai Real Estate</em>`;
+      document.getElementById('heroSub').innerText = pSubheading;
+      
+      if (client.video_url) {
+        const vc = document.getElementById('videoContainer');
+        vc.style.display = 'block';
+        vc.style.aspectRatio = '16/9';
+        if (client.video_url.includes('youtube.com') || client.video_url.includes('youtu.be')) {
+           let ytId = '';
+           if(client.video_url.includes('v=')) ytId = client.video_url.split('v=')[1].split('&')[0];
+           else if(client.video_url.includes('youtu.be/')) ytId = client.video_url.split('youtu.be/')[1].split('?')[0];
+           
+           if(ytId) {
+             const iframe = document.createElement('iframe');
+             iframe.src = 'https://www.youtube.com/embed/' + ytId + '?autoplay=1&mute=1&loop=1&playlist=' + ytId;
+             iframe.style.width = '100%';
+             iframe.style.height = '100%';
+             iframe.style.border = 'none';
+             iframe.allow = 'autoplay; encrypted-media';
+             const v = document.getElementById('heroVideo');
+             if(v) v.parentNode.replaceChild(iframe, v);
+           }
+        } else {
+           const v = document.getElementById('heroVideo');
+           if(v) {
+             v.src = client.video_url;
+             v.style.display = 'block';
+             v.style.aspectRatio = '16/9';
+             v.style.objectFit = 'cover';
+           }
+        }
+      }
+      
+      if (client.curated_picks_heading) {
+        document.getElementById('curatedPicksTag').innerText = client.curated_picks_heading;
+      }
+      
+      // Metrics
+      if (client.metric_1_label) document.getElementById('h_m1_l').innerText = client.metric_1_label;
+      if (client.metric_1_value) document.getElementById('h_m1_v').innerText = client.metric_1_value;
+      if (client.metric_2_label) document.getElementById('h_m2_l').innerText = client.metric_2_label;
+      if (client.metric_2_value) document.getElementById('h_m2_v').innerText = client.metric_2_value;
+      if (client.metric_3_label) document.getElementById('h_m3_l').innerText = client.metric_3_label;
+      if (client.metric_3_value) document.getElementById('h_m3_v').innerText = client.metric_3_value;
+
+      if (client.budget) {
+        BUDGET = client.budget;
+        const blabel = client.budget_label || 'Phase 1 Budget';
+        const bText = formatAED(BUDGET);
+        const bShort = (BUDGET >= 1000000) ? (BUDGET / 1000000) + 'M' : (BUDGET / 1000) + 'K';
+        
+        document.getElementById('h_budget_l').innerText = `AED ${blabel}`;
+        document.getElementById('heroBudget').innerText = bShort;
+        document.getElementById('budgetTotalLabel').innerText = bText;
+        document.getElementById('barBudgetLabel').innerText = blabel;
+        document.getElementById('budgetText').innerHTML = `<strong>${bText}</strong> remaining`;
+        document.getElementById('sectionBudget').innerText = `AED ${bShort}`;
+        document.getElementById('footerBudgetBig').innerText = bShort;
+        document.getElementById('footerBudgetLabel').innerText = `AED ${blabel}`;
+        document.getElementById('footerBudgetSmall').innerText = `AED ${bShort}`;
+      }
+
+      // Agent binding
+      if (client.agent) {
+        currentAgent = client.agent;
+        document.getElementById('agentName').innerText = client.agent.name;
+        document.getElementById('agentEmail').innerText = '✉ ' + client.agent.email;
+        document.getElementById('agentPhoneLink').innerText = '📞 +' + client.agent.whatsapp;
+        document.getElementById('agentPhoneLink').href = 'tel:+' + client.agent.whatsapp;
+        
+        const waUrl = `https://wa.me/${client.agent.whatsapp}?text=Hi%20${encodeURIComponent(client.agent.name)}%2C%20I%20am%20interested%20in%20the%20Dubai%20investment%20portfolio.`;
+        document.getElementById('agentWaLink').href = waUrl;
+        document.getElementById('fabWaLink').href = waUrl;
+        
+        if (client.agent.photo) {
+          document.getElementById('agentPhoto').style.backgroundImage = `url('${client.agent.photo}')`;
+          document.getElementById('agentPhoto').innerText = '';
+        } else {
+          document.getElementById('agentPhoto').style.backgroundImage = 'none';
+          document.getElementById('agentPhoto').innerText = '👔';
+          document.getElementById('agentPhoto').style.color = '#C9A84C';
+        }
+      }
+    }
+  } catch (err) { console.error(err); }
+
+  // Try to load properties from API
+  try {
+    const r = await fetch(`/api/properties?clientSlug=${clientSlug}`);
+    if (r.ok) {
+      const data = await r.json();
+      PROPERTIES.length = 0;
+      data.forEach(p => PROPERTIES.push(normalizeProperty(p)));
+      await Promise.all(PROPERTIES.map(async p => {
+        if (p.deep_dive_data && Object.keys(p.deep_dive_data).length > 0) {
+          try {
+            const dd = await fetch(`/api/properties/${p.id}/deepdive`);
+            if (dd.ok) { const {html} = await dd.json(); p.deepDive = html; }
+          } catch {}
+        }
+      }));
+    }
+  } catch { /* use hardcoded fallback */ }
+  renderProps('all');
+  renderCompareTable();
+  renderBundlePanel();
+  updateBudgetBar();
+  loadProposals();
+  renderProposalChips();
+}
+
+
+
+function updateUnitOption(id, optionIndex) {
+    const p = PROPERTIES.find(x => x.id === id);
+    if(!p || !p.unitOptions) return;
+    p.selectedOption = parseInt(optionIndex);
+    
+    p.priceAED = p.unitOptions[p.selectedOption].priceAED;
+    p.grossYield = p.unitOptions[p.selectedOption].yield;
+    
+    const activeBtn = document.querySelector('.phase-btn.active');
+    const filter = activeBtn ? (activeBtn.textContent.includes('Ready') ? 'ready' : (activeBtn.textContent.includes('All') ? 'all' : 'offplan')) : 'all';
+    renderProps(filter);
+    
+    if(currentModal && currentModal.id === id) {
+        document.getElementById('modalPrice').innerHTML = formatAED(p.priceAED);
+        const stats = document.querySelectorAll('.stat-card .val');
+        if(stats.length > 0) stats[0].textContent = p.grossYield + '%';
+    }
+    
+    updateBudgetBar();
+    renderBundlePanel();
+}
+
+function renderProps(filter='all'){
+ const grid=document.getElementById('propGrid');
+ grid.innerHTML='';
+ const filtered=PROPERTIES.filter(p=>filter==='all'||(filter==='ready'&&p.type==='ready')||(filter==='offplan'&&p.type==='offplan')||(filter==='distress'&&p.distress));
+ filtered.forEach(p=>{
+ const inBundle=bundle.find(b=>b.id===p.id);
+ const card=document.createElement('div');
+ card.className='prop-card'+(p.distress?' distress':'')+(inBundle?' selected':'');
+ card.id='card-'+p.id;
+ card.innerHTML=`
+ ${p.distress?'<div class="distress-tag">🔥 Distress Deal</div>':''}
+ <div class="prop-visual">
+ ${p.image ? `<img src="${p.image}" class="prop-img" onerror="this.style.display='none'">` : `<div class="prop-img-placeholder" style="background:${getBg(p.id)}">${p.emoji}</div>`}
+ <div class="prop-overlay">
+ <div class="prop-location">${p.locationShort}</div>
+ </div>
+ </div>
+ <div class="prop-body">
+ ${p.type==='offplan'?'<div class="phase-label">🏗️ Off-Plan Pre-Launch</div>':p.distress?'':'<div class="phase-label" style="background:rgba(46,204,113,0.1);border-color:rgba(46,204,113,0.3);color:var(--green)">✅ Ready to Rent</div>'}
+ <div class="prop-name">${p.name}</div>
+ <div class="prop-developer">${p.developer} · ${p.location}</div>
+ <div class="prop-usp-row">
+ ${p.hotUsps.map(u=>`<span class="usp-pill hot">${u}</span>`).join('')}
+ ${p.usps.slice(0,2).map(u=>`<span class="usp-pill">${u}</span>`).join('')}
+ </div>
+ <div class="prop-metrics">
+ <div class="metric"><div class="metric-val green">${p.grossYield}%</div><div class="metric-label">Gross Yield</div></div>
+ <div class="metric"><div class="metric-val gold">+${p.capitalGain5yr}%</div><div class="metric-label">5yr Cap Gain</div></div>
+ <div class="metric"><div class="metric-val blue">${p.downPayment}%</div><div class="metric-label">${p.type==='offplan'?'Down Pay':'Entry'}</div></div>
+ </div>
+ <div class="prop-price-row">
+   <div class="prop-price">${formatAED(p.unitOptions ? p.unitOptions[p.selectedOption || 0].priceAED : p.priceAED)}</div>
+   <div class="notax">0% Tax</div>
+   </div>
+   ${p.unitOptions ? `
+    <div style="margin-top:12px;">
+      <select style="width:100%; padding:8px 12px; background:var(--dark4); border:1px solid var(--border2); color:var(--text); border-radius:6px; font-family:'DM Sans', sans-serif; cursor:pointer; appearance:none;" onchange="updateUnitOption(${p.id}, this.value); event.stopPropagation();" onclick="event.stopPropagation();">
+        ${p.unitOptions.map((opt, idx) => `<option value="${idx}" ${(p.selectedOption || 0) === idx ? 'selected' : ''}>${opt.label}</option>`).join('')}
+      </select>
+    </div>
+   ` : ''}
+   <div class="card-actions">
+ <button class="btn-primary" style="flex:1" onclick="openModal(${p.id}); event.stopPropagation();">View Details</button>
+ <button class="btn-secondary ${inBundle?'added':''}" id="add-${p.id}" onclick="toggleBundle(${p.id}); event.stopPropagation();" style="flex:1; border: 1px solid var(--gold); background: ${inBundle?'rgba(201,168,76,0.15)':'transparent'}; color: ${inBundle?'var(--gold)':'var(--text2)'};">${inBundle?'✓ Added':'Add to Portfolio'}</button>
+ </div>
+ </div>
+ `;
+ card.onclick = () => openModal(p.id);
+ grid.appendChild(card);
+ });
+}
+
+function getBg(id){
+ const bgs=['linear-gradient(135deg,#0d2137,#1a3a5c)','linear-gradient(135deg,#1a1428,#2d2444)','linear-gradient(135deg,#0d2418,#1a4028)','linear-gradient(135deg,#1a1a2e,#16213e)','linear-gradient(135deg,#2d1b00,#4a3000)','linear-gradient(135deg,#001a2d,#003a5c)','linear-gradient(135deg,#1a0d2e,#2d1a4a)','linear-gradient(135deg,#1a2d00,#2d4a00)'];
+ return bgs[(id-1)%bgs.length];
+}
+
+function filterProps(f,btn){
+ document.querySelectorAll('.phase-btn').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+ renderProps(f);
+}
+
+function toggleBundle(id){
+ const p=PROPERTIES.find(x=>x.id===id);
+ const idx=bundle.findIndex(x=>x.id===id);
+ if(idx>-1){bundle.splice(idx,1)}else{bundle.push(p)}
+ updateBudgetBar();
+ renderBundlePanel();
+ syncClientState();
+ const card=document.getElementById('card-'+id);
+ if(card){
+ card.classList.toggle('selected');
+ const btn=document.getElementById('add-'+id);
+ if(btn){btn.innerHTML=bundle.find(x=>x.id===id)?'✓ Added':'Add to Portfolio';btn.style.background=bundle.find(x=>x.id===id)?'rgba(201,168,76,0.15)':'transparent';btn.style.color=bundle.find(x=>x.id===id)?'var(--gold)':'var(--text2)';}
+ }
+}
+
+function updateBudgetBar(){
+ const spent=bundle.reduce((s,p)=>s+p.priceAED,0);
+ const pct=Math.min(100,(spent/BUDGET)*100);
+ document.getElementById('budgetFill').style.width=pct+'%';
+ const rem=BUDGET-spent;
+ document.getElementById('budgetText').innerHTML=rem>=0?`<strong>${formatAED(rem)}</strong> remaining`:`<strong style="color:var(--red)">${formatAED(Math.abs(rem))} over budget</strong>`;
+ document.getElementById('bundleCount').textContent=bundle.length;
+}
+
+function renderBundlePanel(){
+ const el=document.getElementById('bundleItems');
+ const analysis=document.getElementById('bundleAnalysis');
+ if(bundle.length===0){
+  if(analysis) analysis.style.display='none';
+  el.innerHTML=`<div class="empty-bundle" id="emptyBundle">
+   <div class="icon">🏢</div>
+   <p>Add properties to see your<br>combined analysis & ROI</p>
+  </div>`;
+  return;
+ }
+ el.innerHTML=bundle.map(p=>`
+  <div class="bundle-item">
+   <div class="bi-icon">${p.emoji}</div>
+   <div class="bi-content">
+    <div class="bi-name">${p.name}</div>
+    <div class="bi-location">${p.locationShort}</div>
+    <div class="bi-metrics">
+     <div class="bi-metric">Yield: <strong>${p.grossYield}%</strong></div>
+     <div class="bi-metric">${formatAED(p.priceAED)}</div>
+    </div>
+   </div>
+   <button class="bi-remove" onclick="toggleBundle(${p.id})">&times;</button>
+  </div>
+ `).join('');
+ if(analysis) analysis.style.display='block';
+
+ const total=bundle.reduce((s,p)=>s+p.priceAED,0);
+ const weightedYield=bundle.reduce((s,p)=>s+(p.grossYield*(p.priceAED/total)),0);
+ const annualRental=bundle.reduce((s,p)=>s+(p.priceAED * p.grossYield / 100),0);
+ const fiveYrGain=bundle.reduce((s,p)=>s+(p.priceAED*(p.capitalGain5yr/100)),0);
+ const totalReturn=annualRental*5+fiveYrGain;
+ document.getElementById('baTotal').textContent=formatAED(total);
+ document.getElementById('baYield').textContent=weightedYield.toFixed(1)+'%';
+ document.getElementById('baRental').textContent=formatAED(Math.round(annualRental))+'/yr';
+ document.getElementById('baGain').textContent='+'+formatAED(Math.round(fiveYrGain));
+ document.getElementById('baTotalReturn').textContent='+'+formatAED(Math.round(totalReturn));
+ renderBundleChart();
+}
+
+function renderBundleChart(){
+ const ctx=document.getElementById('bundleChart').getContext('2d');
+ if(bundleChart){bundleChart.destroy();}
+ const colors=['#C9A84C','#4A9EFF','#2ECC71','#E8C97A','#9B59B6','#E74C3C','#1ABC9C','#F39C12'];
+ bundleChart=new Chart(ctx,{
+ type:'doughnut',
+ data:{
+ labels:bundle.map(p=>p.name.split(' ').slice(0,2).join(' ')),
+ datasets:[{data:bundle.map(p=>p.priceAED),backgroundColor:colors.slice(0,bundle.length),borderWidth:0,hoverOffset:4}]
+ },
+ options:{
+ responsive:true,maintainAspectRatio:false,cutout:'70%',
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+formatAED(c.raw)}}},
+ }
+ });
+}
+
+let projChartInst=null;
+function openModal(id){
+ const p=PROPERTIES.find(x=>x.id===id);
+ currentModal=p;
+ 
+ if(p.image) {
+ document.getElementById('modalHeroImg').innerHTML=`<img src="${p.image}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">`;
+ } else {
+ document.getElementById('modalHeroImg').innerHTML=`<span style="background:${getBg(p.id)};position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:120px">${p.emoji}</span>`;
+ }
+
+ document.getElementById('modalTag').textContent=p.location+' · '+p.developer;
+ document.getElementById('modalTitle').textContent=p.name;
+ document.getElementById('modalPrice').innerHTML=`${formatAED(p.priceAED)}`;
+ document.getElementById('modalAddBtn').textContent=bundle.find(x=>x.id===id)?'✓ In Portfolio':'Add to Portfolio';
+ document.getElementById('modalStats').innerHTML=`
+ <div class="stat-card"><div class="val green">${p.grossYield}%</div><div class="lbl">Gross Rental Yield</div></div>
+ <div class="stat-card"><div class="val gold">+${p.capitalGain5yr}%</div><div class="lbl">5-Year Capital Gain</div></div>
+ <div class="stat-card"><div class="val">${formatAED(p.priceAED * p.grossYield / 100)}</div><div class="lbl">Est. Annual Rental</div></div>
+ <div class="stat-card"><div class="val green">0%</div><div class="lbl">Tax on Returns</div></div>
+ `;
+ document.getElementById('modalPaymentPlan').innerHTML=`
+ <div class="modal-section-title">Payment Plan</div>
+ ${p.paymentPlan.map((pp,i)=>`
+ <div class="pp-item">
+ <div class="pp-circle">${i+1}</div>
+ <div class="pp-label">${pp.l} <span style="color:var(--text3);font-size:11px">(${pp.phase})</span></div>
+ <div style="text-align:right">
+ <div class="pp-pct">${pp.p}%</div>
+ <div class="pp-amt">${formatAED(Math.round(p.priceAED*(pp.p/100)))}</div>
+ </div>
+ </div>
+ `).join('')}
+ `;
+ document.getElementById('modalWhyGrid').innerHTML=p.why.map(w=>`
+ <div class="why-item"><div class="wi-icon">${w.icon}</div><div class="wi-title">${w.title}</div><div class="wi-desc">${w.desc}</div></div>
+ `).join('');
+ 
+ document.getElementById('modalDeepDive').innerHTML = p.deepDive || '';
+ 
+ const actionBtns = document.getElementById('modalActionBtns');
+ const existingBtn = document.getElementById('modalBrochureBtn');
+ if(existingBtn) existingBtn.remove();
+ 
+ if(p.brochure) {
+ const broBtn = document.createElement('a');
+ broBtn.id = 'modalBrochureBtn';
+ broBtn.href = p.brochure;
+ broBtn.target = '_blank';
+ broBtn.className = 'btn-secondary';
+ broBtn.style.textDecoration = 'none';
+ broBtn.style.display = 'flex';
+ broBtn.style.alignItems = 'center';
+ broBtn.style.padding = '14px 24px';
+ broBtn.innerHTML = '📄 View HD Brochure';
+ actionBtns.prepend(broBtn);
+ }
+ 
+ document.getElementById('modalOverlay').classList.add('open');
+
+ setTimeout(()=>{
+ const ctx=document.getElementById('projChart').getContext('2d');
+ if(projChartInst){projChartInst.destroy();}
+ const yrs=['Now','Yr 1','Yr 2','Yr 3','Yr 4','Yr 5'];
+ projChartInst=new Chart(ctx,{
+ type:'line',
+ data:{
+ labels:yrs,
+ datasets:[{label:'Value (AED)',data:p.projValues.map(v=>Math.round(v*3.67)),borderColor:'#C9A84C',backgroundColor:'rgba(201,168,76,0.1)',borderWidth:2,pointBackgroundColor:'#C9A84C',pointRadius:4,fill:true,tension:0.4}]
+ },
+ options:{
+ responsive:true,maintainAspectRatio:false,
+ plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'AED '+Number(c.raw).toLocaleString()}}},
+ scales:{
+ x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#6B6352',font:{size:11}}},
+ y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#6B6352',font:{size:11},callback:v=>v>=1000000?'AED '+(v/1000000).toFixed(1)+'M':'AED '+(v/1000).toFixed(0)+'K'}}
+ }
+ }
+ });
+ },100);
+}
+
+function closeModal(e){if(e.target===document.getElementById('modalOverlay'))closeModalDirect();}
+function closeModalDirect(){document.getElementById('modalOverlay').classList.remove('open');}
+function modalAddToBundle(){if(currentModal)toggleBundle(currentModal.id);openBundle();}
+function openBundle(){document.getElementById('bundlePanel').classList.add('open');}
+function closeBundle(){document.getElementById('bundlePanel').classList.remove('open');}
+
+function renderCompareTable(){
+ const tbody=document.getElementById('compareBody');
+ tbody.innerHTML=PROPERTIES.map(p=>{
+ const yieldWinner=p.grossYield>=10;
+ const gainWinner=p.capitalGain5yr>=45;
+ return`<tr>
+ <td style="font-weight:500">${p.emoji} ${p.name.split(' ').slice(0,3).join(' ')}</td>
+ <td><span class="phase-label" style="${p.distress?'background:rgba(231,76,60,0.1);border-color:rgba(231,76,60,0.3);color:var(--red)':p.type==='ready'?'background:rgba(46,204,113,0.1);border-color:rgba(46,204,113,0.3);color:var(--green)':''}">${p.distress?'🔥 Distress':p.type==='ready'?'✅ Ready':'🏗️ Off-Plan'}</span></td>
+ <td style="color:var(--text2);font-size:12px">${p.locationShort}</td>
+ <td style="font-family:'Cormorant Garamond',serif;font-size:18px">${formatAED(p.priceAED)}</td>
+ <td>
+ <div class="roi-bar-wrap">
+ <div class="roi-bar" style="width:${p.grossYield*8}px"></div>
+ <span class="${yieldWinner?'winner':''}">${p.grossYield}%${yieldWinner?' ★':''}</span>
+ </div>
+ </td>
+ <td class="${gainWinner?'winner':''}">+${p.capitalGain5yr}%${gainWinner?' ★':''}</td>
+ <td style="color:var(--text2);font-size:12px">${p.paymentPlan.length>1?p.paymentPlan[0].p+'% now, rest structured':'Full at transfer'}</td>
+ <td>${p.type==='ready'?'<span style="color:var(--green)">Immediate</span>':'<span style="color:var(--text3)">At handover</span>'}</td>
+ </tr>`;
+ }).join('');
+}
+
+// ── Toast Notification System ──────────────────────────────
+function toast(msg, type = 'info') {
+  const t = document.createElement('div');
+  t.style.position = 'fixed';
+  t.style.bottom = '32px';
+  t.style.left = '50%';
+  t.style.transform = 'translateX(-50%) translateY(100px)';
+  t.style.background = type === 'error' ? 'var(--red)' : (type === 'success' ? 'var(--green)' : 'var(--dark2)');
+  t.style.color = '#fff';
+  t.style.padding = '12px 24px';
+  t.style.borderRadius = '100px';
+  t.style.fontSize = '14px';
+  t.style.fontWeight = '500';
+  t.style.zIndex = '999999';
+  t.style.boxShadow = '0 8px 32px rgba(0,0,0,0.4)';
+  t.style.border = '1px solid rgba(255,255,255,0.1)';
+  t.style.opacity = '0';
+  t.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+  t.innerText = msg;
+  document.body.appendChild(t);
+  
+  // Animate in
+  setTimeout(() => {
+    t.style.transform = 'translateX(-50%) translateY(0)';
+    t.style.opacity = '1';
+  }, 10);
+  
+  // Animate out and remove
+  setTimeout(() => {
+    t.style.transform = 'translateX(-50%) translateY(100px)';
+    t.style.opacity = '0';
+    setTimeout(() => t.remove(), 400);
+  }, 3000);
+}
+
+// Startup: if already authenticated in this session, init immediately
+if (sessionStorage.getItem('kc_authed_' + clientSlug) !== '1') {
+  // Portal shown but gated — do NOT auto-init
+} else {
+  renderProps('all');
+  renderCompareTable();
+  renderBundlePanel();
+}
+
+// ── Backend Syncing
+function syncClientState() {
+  fetch(`/api/client-state/${clientSlug}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      portfolio: bundle,
+      proposals: generatedProposals
+    })
+  }).catch(() => {});
+}
+
+function openLightbox(src, isVideo) {
+ const container = document.getElementById('lightboxContainer');
+ if (isVideo) {
+ container.innerHTML = '<video src="'+src+'" controls autoplay muted class="lightbox-content" onclick="event.stopPropagation()"></video>';
+ } else {
+ container.innerHTML = '<img src="'+src+'" class="lightbox-content" onclick="event.stopPropagation()">';
+ }
+ document.getElementById('lightboxOverlay').classList.add('open');
+}
+function closeLightbox() {
+ document.getElementById('lightboxOverlay').classList.remove('open');
+ document.getElementById('lightboxContainer').innerHTML = ''; // Stop video playback
+}
+
+// ─── PROPOSALS STORE ───────────────────────────────────────────────────────────
+let generatedProposals = []; // { id, name, pdfUrl, date, blob? }
+
+function saveProposals() {
+  try {
+    sessionStorage.setItem('proposals_' + clientSlug, JSON.stringify(generatedProposals));
+    syncClientState();
+  } catch(e) {}
+}
+function loadProposals() {
+  try {
+    const raw = sessionStorage.getItem('proposals_' + clientSlug);
+    if (raw) generatedProposals = JSON.parse(raw);
+  } catch(e) {}
+}
+
+function renderProposalChips() {
+  const section = document.getElementById('proposalsSectionWrap');
+  const list = document.getElementById('proposalChipsList');
+  if (!section || !list) return;
+  if (generatedProposals.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+  // Show "View & Send Proposals" button
+  const vBtn = document.getElementById('viewProposalBtn');
+  if (vBtn) vBtn.style.display = 'block';
+  // Show proposals wrap
+  const wrap = document.getElementById('proposalsSectionWrap');
+  if (wrap) wrap.style.display = 'block';
+  list.innerHTML = generatedProposals.map(p => `
+    <div class="proposal-chip" id="pchip-${p.id}">
+      <div class="proposal-chip-info">
+        <div class="proposal-chip-name">📄 ${p.name}</div>
+        <div class="proposal-chip-date">${new Date(p.date).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</div>
+      </div>
+      <div class="proposal-chip-actions">
+        ${p.pdfUrl ? `<button class="proposal-chip-btn" onclick="window.open('${p.pdfUrl}','_blank')">View</button>` : ''}
+        <button class="proposal-chip-btn send" onclick="sendSingleProposal('${p.id}')">Send</button>
+        <button class="proposal-chip-btn danger" onclick="deleteProposal('${p.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function deleteProposal(id) {
+  generatedProposals = generatedProposals.filter(p => p.id !== id);
+  saveProposals();
+  renderProposalChips();
+}
+
+async function sendSingleProposal(id) {
+  const p = generatedProposals.find(x => x.id === id);
+  if (!p) return;
+  await dispatchProposalToBackend(p.pdfUrl, 'Client sent proposal: ' + p.name);
+}
+
+function openProposalDialog() {
+  if (generatedProposals.length === 0) {
+    toast('No proposals yet. Generate one first.', 'warning');
+    return;
+  }
+  const itemsEl = document.getElementById('proposalDialogItems');
+  itemsEl.innerHTML = `
+    <label class="proposal-dialog-item" style="background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.2);">
+      <input type="checkbox" id="dlg-all" onchange="toggleAllProposals(this)"> 
+      <span class="proposal-dialog-item-label" style="color:var(--gold);font-weight:600;">Select All Proposals</span>
+    </label>
+    ${generatedProposals.map(p => `
+      <label class="proposal-dialog-item">
+        <input type="checkbox" class="dlg-proposal-cb" value="${p.id}" checked>
+        <div class="proposal-dialog-item-label">${p.name}</div>
+        <div class="proposal-dialog-item-date">${new Date(p.date).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</div>
+      </label>`).join('')}
+  `;
+  document.getElementById('proposalDialogOverlay').classList.add('open');
+}
+
+function toggleAllProposals(el) {
+  document.querySelectorAll('.dlg-proposal-cb').forEach(cb => cb.checked = el.checked);
+}
+
+function closeProposalDialog() {
+  document.getElementById('proposalDialogOverlay').classList.remove('open');
+}
+
+async function sendSelectedProposals() {
+  const selected = [...document.querySelectorAll('.dlg-proposal-cb:checked')].map(cb => cb.value);
+  if (selected.length === 0) { toast('Please select at least one proposal.', 'warning'); return; }
+  closeProposalDialog();
+  const selectedProps = generatedProposals.filter(p => selected.includes(p.id));
+  toast('Sending ' + selected.length + ' proposal(s)…', 'info');
+  for (const p of selectedProps) {
+    await dispatchProposalToBackend(p.pdfUrl, 'Client sent proposal: ' + p.name);
+  }
+  toast('All proposals sent to your agent!', 'success');
+  document.getElementById('nextStepsOverlay').classList.add('open');
+}
+
+async function dispatchProposalToBackend(pdfUrl, message) {
+  try {
+    const chatSnapshot = chatHistory.slice(-20);
+    const res = await fetch('/api/proposals', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ clientSlug, message, pdfUrl, chatHistory: chatSnapshot })
+    });
+    return res.ok;
+  } catch(e) {
+    console.warn('Proposal dispatch error:', e);
+    return false;
+  }
+}
+
+// ─── PDF BUILD HELPERS ──────────────────────────────────────────────────────
+function buildProposalHTML() {
+  const clientName = clientSlug.replace(/-/g,' ').replace(/\b\w/g,ch=>ch.toUpperCase());
+  let html = `<div style="font-family:Helvetica,Arial,sans-serif;color:#111;background:#fff;padding:48px 40px;">
+    <div style="border-bottom:3px solid #C9A84C;padding-bottom:16px;margin-bottom:32px;">
+      <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:6px;">BITSS Prestige Realty — Confidential</div>
+      <h1 style="margin:0;font-size:30px;font-weight:700;color:#111;">Investment Proposal</h1>
+      <p style="margin:8px 0 0;color:#555;font-size:14px;">Prepared exclusively for <strong>${clientName}</strong></p>
+      <p style="margin:4px 0 0;color:#999;font-size:12px;">Generated: ${new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'})}</p>
+    </div>`;
+
+  const totalAED = bundle.reduce((s,p)=>(s+(p.priceAED||p.price_aed||0)),0);
+  const avgYield = bundle.length ? (bundle.reduce((s,p)=>(s+(p.grossYield||p.gross_yield||0)),0)/bundle.length).toFixed(1) : 0;
+
+  if (bundle.length > 0) {
+    html += `<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:32px;">
+      <div style="background:#f8f5ee;border-radius:8px;padding:16px;text-align:center;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#888;">Properties</div>
+        <div style="font-size:28px;font-weight:700;color:#C9A84C;margin-top:4px;">${bundle.length}</div>
+      </div>
+      <div style="background:#f8f5ee;border-radius:8px;padding:16px;text-align:center;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#888;">Total Value</div>
+        <div style="font-size:20px;font-weight:700;color:#111;margin-top:4px;">AED ${totalAED.toLocaleString()}</div>
+      </div>
+      <div style="background:#f8f5ee;border-radius:8px;padding:16px;text-align:center;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#888;">Avg. Yield</div>
+        <div style="font-size:28px;font-weight:700;color:#C9A84C;margin-top:4px;">${avgYield}%</div>
+      </div>
+    </div>`;
+  }
+
+  html += `<h2 style="font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#333;margin:0 0 16px;border-bottom:1px solid #eee;padding-bottom:8px;">Selected Properties</h2>`;
+
+  bundle.forEach((p, i) => {
+    const price   = (p.priceAED||p.price_aed||0).toLocaleString();
+    const yld     = p.grossYield||p.gross_yield||0;
+    const gain    = p.capitalGain5yr||p.capital_gain_5yr||0;
+    const dp      = p.downPayment||p.down_payment||0;
+    const loc     = p.location||p.locationShort||'';
+    const dev     = p.developer||'';
+    const type    = p.distress ? 'Distress Deal' : (p.type === 'ready' ? 'Ready to Move' : 'Off-Plan');
+    html += `<div style="margin-bottom:20px;padding:20px 24px;border:1px solid #e8e0cc;border-left:4px solid #C9A84C;border-radius:8px;background:#fffdf7;page-break-inside:avoid;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+        <div>
+          <span style="font-size:10px;background:#C9A84C;color:#fff;border-radius:4px;padding:2px 8px;text-transform:uppercase;letter-spacing:1px;">${type}</span>
+          <h3 style="margin:6px 0 2px;font-size:17px;color:#111;">${i+1}. ${p.name}</h3>
+          <div style="font-size:12px;color:#666;">${dev}${dev&&loc?' · ':''}${loc}</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:20px;font-weight:700;color:#111;">AED ${price}</div>
+          ${dp ? `<div style="font-size:11px;color:#888;margin-top:2px;">Only ${dp}% to start</div>` : ''}
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:12px;">
+        <div style="text-align:center;padding:8px 16px;background:#f5f0e8;border-radius:6px;">
+          <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;">Gross Yield</div>
+          <div style="font-size:18px;font-weight:700;color:#C9A84C;">${yld}%</div>
+        </div>
+        <div style="text-align:center;padding:8px 16px;background:#f5f0e8;border-radius:6px;">
+          <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;">5-Yr Cap. Gain</div>
+          <div style="font-size:18px;font-weight:700;color:#2ecc71;">+${gain}%</div>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  html += `<div style="margin-top:40px;padding:20px;background:#f8f5ee;border-radius:8px;border:1px solid #e8e0cc;">
+    <p style="margin:0;font-size:12px;color:#888;line-height:1.6;">This document is confidential and prepared exclusively for the named recipient. All figures are estimates based on current market data and are subject to change. Past performance does not guarantee future returns. Please contact your agent for further details.</p>
+  </div></div>`;
+  return html;
+}
+
+function buildJsPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+  const W = 210;
+  const M = 18;  
+  const CW = W - M * 2; 
+  let y = M;
+
+  const gold = [201, 168, 76];
+  const dark = [30, 30, 30];
+  const grey = [120, 120, 120];
+  const lightGrey = [230, 230, 230];
+  const green = [46, 170, 90];
+
+  const clientName = clientSlug.replace(/-/g,' ').replace(/\b\w/g,ch=>ch.toUpperCase());
+  const dateStr = new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'long',year:'numeric'});
+
+  // Header bar
+  doc.setFillColor(...gold);
+  doc.rect(0, 0, W, 3, 'F');
+  
+  y += 12; // Start below header
+
+  // Agency line
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...grey);
+  doc.text('BITSS PRESTIGE REALTY  —  CONFIDENTIAL INVESTMENT MEMORANDUM', M, y);
+  
+  y += 12; // Gap before Title
+
+  // Title
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(28);
+  doc.setTextColor(...dark);
+  doc.text('Investment Proposal', M, y);
+  
+  y += 10; // Gap before Sub
+  
+  // Sub
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(11);
+  doc.setTextColor(...grey);
+  doc.text('Prepared exclusively for: ' + clientName, M, y);
+  y += 6;
+  doc.setFontSize(9);
+  doc.text('Generated: ' + dateStr, M, y);
+  
+  y += 10; // Gap before Divider
+
+  // Gold divider
+  doc.setDrawColor(...gold);
+  doc.setLineWidth(0.8);
+  doc.line(M, y, W - M, y);
+  
+  y += 12; // Gap before Stats row
+
+  // Summary stats row
+  if (bundle.length > 0) {
+    const totalAED = bundle.reduce((s,p)=>(s+(p.priceAED||p.price_aed||0)),0);
+    const avgYield = (bundle.reduce((s,p)=>(s+(p.grossYield||p.gross_yield||0)),0)/bundle.length).toFixed(1);
+    const boxW = (CW - 10) / 3;
+    const stats = [
+      { label: 'PROPERTIES', val: String(bundle.length) },
+      { label: 'TOTAL VALUE', val: 'AED ' + totalAED.toLocaleString() },
+      { label: 'AVG. YIELD', val: avgYield + '%' }
+    ];
+    stats.forEach((s, i) => {
+      const bx = M + i * (boxW + 5);
+      doc.setFillColor(252, 250, 246); // Very light gold/beige
+      doc.roundedRect(bx, y, boxW, 22, 3, 3, 'F');
+      doc.setFont('helvetica', 'bold'); // Make label bolder
+      doc.setFontSize(7.5);
+      doc.setTextColor(150, 150, 150);
+      doc.text(s.label, bx + boxW/2, y + 8, { align: 'center' });
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(i === 1 ? 11 : 14); // Slightly smaller total value so it fits well
+      doc.setTextColor(...gold);
+      doc.text(s.val, bx + boxW/2, y + 16.5, { align: 'center' });
+    });
+    y += 32; // Gap before Section title
+  }
+
+  // Section title
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.setTextColor(100, 100, 100);
+  doc.text('SELECTED PROPERTIES', M, y);
+  y += 4;
+  doc.setDrawColor(...lightGrey);
+  doc.setLineWidth(0.3);
+  doc.line(M, y, W - M, y);
+  
+  y += 8; // Gap before Property cards
+
+  // Property cards
+  bundle.forEach((p, i) => {
+    const price   = (p.priceAED || p.price_aed || 0).toLocaleString();
+    const yld     = p.grossYield || p.gross_yield || 0;
+    const gain    = p.capitalGain5yr || p.capital_gain_5yr || 0;
+    const dp      = p.downPayment || p.down_payment || 0;
+    const loc     = p.location || p.locationShort || '';
+    const dev     = p.developer || '';
+    const cardH   = 48; // Slightly taller
+
+    // Page break check
+    if (y + cardH > 280) {
+      doc.addPage();
+      y = M;
+    }
+
+    // Card background
+    doc.setFillColor(255, 254, 252);
+    doc.roundedRect(M, y, CW, cardH, 3, 3, 'F');
+    // Gold left border
+    doc.setFillColor(...gold);
+    doc.rect(M, y, 3, cardH, 'F');
+
+    // Type badge
+    const typeLabel = p.distress ? 'DISTRESS DEAL' : (p.type === 'ready' ? 'READY TO MOVE' : 'OFF-PLAN');
+    doc.setFillColor(...gold);
+    doc.roundedRect(M + 8, y + 7, 30, 5.5, 1, 1, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(6.5);
+    doc.setTextColor(255, 255, 255);
+    doc.text(typeLabel, M + 23, y + 11.5, { align: 'center' });
+
+    // Property name
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.setTextColor(...dark);
+    doc.text((i+1) + '. ' + p.name, M + 8, y + 21);
+
+    // Developer & Location
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(...grey);
+    const subLine = [dev, loc].filter(Boolean).join('  ·  ');
+    doc.text(subLine, M + 8, y + 27);
+
+    // Price (right side)
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.setTextColor(...dark);
+    doc.text('AED ' + price, W - M - 5, y + 21, { align: 'right' });
+    if (dp) {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.setTextColor(...grey);
+      doc.text('Only ' + dp + '% to start', W - M - 5, y + 27, { align: 'right' });
+    }
+
+    // Stats boxes (yield + gain)
+    const sb = [
+      { label: 'GROSS YIELD', val: yld + '%', color: gold },
+      { label: '5-YR CAP. GAIN', val: '+' + gain + '%', color: green },
+    ];
+    sb.forEach((s, si) => {
+      const bx = M + 8 + si * 42;
+      doc.setFillColor(248, 246, 242);
+      doc.roundedRect(bx, y + 32, 38, 11, 2, 2, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7);
+      doc.setTextColor(160, 160, 160);
+      doc.text(s.label, bx + 19, y + 36.5, { align: 'center' });
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      doc.setTextColor(...s.color);
+      doc.text(s.val, bx + 19, y + 41.5, { align: 'center' });
+    });
+
+    y += cardH + 7;
+  });
+
+  // Disclaimer
+  if (y + 20 > 280) { doc.addPage(); y = M; }
+  y += 8;
+  doc.setFillColor(248, 245, 238);
+  doc.roundedRect(M, y, CW, 18, 3, 3, 'F');
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7.5);
+  doc.setTextColor(150, 150, 150);
+  const disc = 'This document is confidential and prepared exclusively for the named recipient. All figures are estimates based on current market data and are subject to change. Past performance does not guarantee future returns.';
+  const lines = doc.splitTextToSize(disc, CW - 8);
+  doc.text(lines, M + 4, y + 6.5);
+
+  // Footer
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...grey);
+  doc.text('BITSS Prestige Realty  |  Confidential', M, 292);
+  doc.text('Page 1', W - M, 292, { align: 'right' });
+  doc.setFillColor(...gold);
+  doc.rect(0, 295, W, 2, 'F');
+
+  return doc;
+}
+
+async function generatePDFBlob() {
+  const doc = buildJsPDF();
+  return doc.output('blob');
+}
+
+async function generateAndDownloadPDF() {
+  const doc = buildJsPDF();
+  doc.save('Investment_Proposal_' + clientSlug + '.pdf');
+}
+
+// ─── PDF & PROPOSAL REQUEST ─────────────────────────────────────────────────
+let aiRequestedProposal = false;
+
+function setPdfStep(msg) {
+  const el = document.getElementById('pdfLoadingStep');
+  if (el) el.textContent = msg;
+}
+
+async function requestProposal() {
+  if (bundle.length === 0) {
+    toast('Please add at least one property to your portfolio first.', 'warning');
+    return;
+  }
+  aiRequestedProposal = false;
+
+  // Show loading overlay
+  document.getElementById('pdfLoadingOverlay').classList.add('open');
+  setPdfStep('Building your investment document…');
+
+  let pdfBlob = null;
+  let pdfUrl = null;
+  const proposalId = Date.now().toString();
+  const proposalName = 'Proposal ' + (generatedProposals.length + 1) + ' — ' + bundle.map(p=>p.name.split(' ').slice(0,2).join(' ')).join(', ');
+
+  try {
+    // 1. Generate + download PDF
+    setPdfStep('Rendering proposal PDF…');
+    pdfBlob = await generatePDFBlob();
+
+    // Trigger download
+    const url = URL.createObjectURL(pdfBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Investment_Proposal_' + clientSlug + '.pdf';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+
+    // 2. Upload to server
+    setPdfStep('Uploading to server…');
+    const formData = new FormData();
+    formData.append('video', pdfBlob, 'proposal.pdf');
+    const upRes = await fetch('/api/upload', { method: 'POST', body: formData });
+    const upData = await upRes.json();
+    pdfUrl = upData.url || (upData.filename ? '/uploads/' + upData.filename : null);
+
+    // 3. Store locally
+    generatedProposals.push({ id: proposalId, name: proposalName, pdfUrl, date: new Date().toISOString() });
+    saveProposals();
+    renderProposalChips();
+
+    // 4. Auto-send to backend
+    setPdfStep('Notifying your agent…');
+    await dispatchProposalToBackend(pdfUrl, 'Client generated proposal: ' + proposalName);
+
+    document.getElementById('pdfLoadingOverlay').classList.remove('open');
+    toast('PDF generated and agent notified!', 'success');
+
+    // Update WA/email in nextSteps modal
+    if (currentAgent) {
+      const waNum = currentAgent.whatsapp.replace(/\+/g, '');
+      const waText = encodeURIComponent('Hi ' + currentAgent.name + ', I have reviewed the portfolio and would like to proceed. Please find my selected properties: ' + bundle.map(p=>p.name).join(', '));
+      document.getElementById('nsWa').href = 'https://wa.me/' + waNum + '?text=' + waText;
+      document.getElementById('nsEmail').href = 'mailto:' + (currentAgent.email||'') + '?subject=Proposal Request&body=' + encodeURIComponent('Hi ' + currentAgent.name + ', I would like a formal proposal for: ' + bundle.map(p=>p.name).join(', '));
+    }
+    document.getElementById('nextStepsOverlay').classList.add('open');
+
+  } catch(e) {
+    document.getElementById('pdfLoadingOverlay').classList.remove('open');
+    console.error('Proposal error:', e);
+    toast('PDF generation failed: ' + e.message, 'error');
+  }
+}
+
+
+async function proceedWithProposalRequest() {
+  // Called from AI flow
+  await requestProposal();
+}
+
+
+function closeNextSteps() {
+  document.getElementById('nextStepsOverlay').classList.remove('open');
+}
+
+async function trackProposalSent() {
+  try {
+    await fetch('/api/track/' + clientSlug, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ action: 'proposal_sent' })
+    });
+  } catch(e) {}
+  document.getElementById('nextStepsOverlay').classList.remove('open');
+  closeBundle();
+}
+
+// ─── CHIP QUICK ASKS & CLEAR CHAT ────────────────────────────────────────────
+function chipAsk(question) {
+  document.getElementById('aiInput').value = question;
+  // Hide chips after first use to keep the chat clean
+  const chips = document.getElementById('aiChipsWrap');
+  if (chips) chips.style.display = 'none';
+  sendAiMessage();
+}
+
+function clearAiChat() {
+  const body = document.getElementById('aiBody');
+  const typing = document.getElementById('aiTyping');
+  // Remove all children except typing indicator
+  [...body.children].forEach(el => {
+    if (el.id !== 'aiTyping') el.remove();
+  });
+  // Reset history
+  chatHistory = [];
+  // Re-add greeting
+  const greeting = document.createElement('div');
+  greeting.className = 'ai-msg ai';
+  greeting.id = 'aiGreeting';
+  greeting.textContent = 'Chat cleared. How can I help you with your portfolio?';
+  body.insertBefore(greeting, typing);
+  // Re-show chips
+  const chips = document.createElement('div');
+  chips.id = 'aiChipsWrap';
+  chips.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;padding:4px 0;align-self:flex-start;width:100%;';
+  const chipData = [
+    ['📈 Best yield?', 'What are the best properties for rental yield?'],
+    ['💰 Lowest entry?', 'Which property has the lowest entry point?'],
+    ['📋 Payment plans', 'Tell me about payment plans available'],
+    ['🔥 Distress deals', 'Which properties are distress deals?'],
+    ['📄 Send proposal', 'I want to send a formal proposal to my agent'],
+    ['🏛️ Tax benefits', 'What are the tax benefits of investing in Dubai?'],
+  ];
+  chipData.forEach(([label, question]) => {
+    const btn = document.createElement('button');
+    btn.className = 'ai-chip';
+    btn.textContent = label;
+    btn.onclick = () => chipAsk(question);
+    chips.appendChild(btn);
+  });
+  body.insertBefore(chips, typing);
+  body.scrollTop = body.scrollHeight;
+}
+
+// ─── AI CHATBOT ───────────────────────────────────────────────────────────────
+let chatHistory = [];
+
+function toggleAIChat() {
+  const panel = document.getElementById('aiChatPanel');
+  panel.classList.toggle('open');
+}
+
+async function sendAiMessage() {
+  const inp = document.getElementById('aiInput');
+  const text = inp.value.trim();
+  if(!text) return;
+  inp.value = '';
+
+  const body = document.getElementById('aiBody');
+  const typing = document.getElementById('aiTyping');
+  
+  const uMsg = document.createElement('div');
+  uMsg.className = 'ai-msg user';
+  uMsg.textContent = text;
+  body.insertBefore(uMsg, typing);
+  body.scrollTop = body.scrollHeight;
+
+  chatHistory.push({ role: 'user', text });
+
+  typing.style.display = 'flex';
+  body.scrollTop = body.scrollHeight;
+
+  try {
+    const r = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        message: text,
+        clientSlug,
+        propertiesContext: bundle.length > 0 ? bundle : PROPERTIES,
+        history: chatHistory.slice(0, -1)
+      })
+    });
+    
+    const data = await r.json();
+    typing.style.display = 'none';
+
+    const aMsg = document.createElement('div');
+    aMsg.className = 'ai-msg ai';
+    aMsg.innerHTML = data.reply.replace(/\n/g, '<br>');
+    body.insertBefore(aMsg, typing);
+    
+    chatHistory.push({ role: 'model', text: data.reply });
+
+    if (data.reply.toLowerCase().includes('proposal') || data.reply.toLowerCase().includes('finalize')) {
+      const btnWrapper = document.createElement('div');
+      btnWrapper.style.display = 'flex';
+      btnWrapper.style.flexDirection = 'column';
+      btnWrapper.style.gap = '8px';
+      btnWrapper.style.marginTop = '12px';
+
+      const callBtn = document.createElement('button');
+      callBtn.className = 'ai-action-btn call';
+      callBtn.innerHTML = '📞 Call Agent Directly';
+      callBtn.onclick = () => { if(currentAgent) { let w = currentAgent.whatsapp.replace(/\+/g, ''); window.open('tel:+' + w, '_self'); } };
+
+      const waBtn = document.createElement('button');
+      waBtn.className = 'ai-action-btn wa';
+      waBtn.innerHTML = '💬 Request via WhatsApp';
+      waBtn.onclick = () => {
+        if(currentAgent) {
+          const txt = encodeURIComponent('Hi ' + currentAgent.name + ', I would like to request a formal proposal based on the portfolio you shared.');
+          let w = currentAgent.whatsapp.replace(/\+/g, ''); window.open('https://wa.me/' + w + '?text=' + txt, '_blank');
+        }
+      };
+
+      const propBtn = document.createElement('button');
+      propBtn.className = 'ai-action-btn email';
+      propBtn.innerHTML = '📄 Send Formal Proposal Request';
+      propBtn.onclick = requestProposalFromAI;
+      
+      btnWrapper.appendChild(callBtn);
+      btnWrapper.appendChild(waBtn);
+      btnWrapper.appendChild(propBtn);
+      body.insertBefore(btnWrapper, typing);
+    }
+
+  } catch(e) {
+    typing.style.display = 'none';
+    const aMsg = document.createElement('div');
+    aMsg.className = 'ai-msg ai';
+    aMsg.style.color = 'var(--red)';
+    aMsg.textContent = 'Sorry, the AI is disconnected right now. Please message your agent directly.';
+    body.insertBefore(aMsg, typing);
+  }
+  body.scrollTop = body.scrollHeight;
+}
+
+async function requestProposalFromAI() {
+  if (bundle.length === 0) {
+    toast('Please add at least one property to your portfolio first.', 'warning');
+    return;
+  }
+  if (generatedProposals.length > 0) {
+    // Let user choose which proposals to send
+    openProposalDialog();
+    return;
+  }
+  // No proposals yet — generate one
+  aiRequestedProposal = true;
+  await requestProposal();
+}
+
+
+</script>
+
+<!-- WHATSAPP FAB -->
+
+<!-- PDF LOADING OVERLAY -->
+<div class="pdf-loading-overlay" id="pdfLoadingOverlay">
+  <div class="pdf-spinner"></div>
+  <div class="pdf-loading-text">Generating PDF…</div>
+  <div class="pdf-loading-sub" id="pdfLoadingStep">Preparing your proposal document</div>
+</div>
+
+<!-- PROPOSAL SELECT DIALOG -->
+<div class="proposal-dialog-overlay" id="proposalDialogOverlay">
+  <div class="proposal-dialog">
+    <div class="proposal-dialog-title">Send Proposals</div>
+    <div class="proposal-dialog-sub">Select which proposals to include with your request to the agent:</div>
+    <div id="proposalDialogItems"></div>
+    <div class="proposal-dialog-actions">
+      <button class="btn-cancel-dialog" onclick="closeProposalDialog()">Cancel</button>
+      <button class="btn-send-dialog" onclick="sendSelectedProposals()">📤 Send Selected</button>
+    </div>
+  </div>
+</div>
+
+<a href="#" id="fabWaLink" target="_blank" class="wa-fab" title="Chat on WhatsApp">
+ <div class="wa-fab-tooltip">Chat on WhatsApp</div>
+ <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="closeLightbox()">
+ <button class="lightbox-close" onclick="closeLightbox(); event.stopPropagation();">&times;</button>
+ <div id="lightboxContainer"></div>
+</div>
+<script>
+</script>
+</body>
+</html>
