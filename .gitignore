@@ -53,11 +53,11 @@ public/Research/node_modules/
 public/Research/package-lock.json
 _backup/
 
-# one-off fix scripts at root
+# one-off fix scripts at root (only root level)
 deep-fix*.js
-fix_*.js
-database.js
-admin.html
-portal.html
-server.js
-index.html
+/fix_client.js
+/database.js
+/admin.html
+/portal.html
+/server.js
+/index.html
