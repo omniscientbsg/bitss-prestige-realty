@@ -937,22 +937,8 @@ export default function ClientDashboard({ client, properties, initialProposals =
                       <a href={`/proposals/${p.id}`} target="_blank" className="bg-white/5 hover:bg-white/10 text-white p-2 rounded-lg transition-colors" title="View Proposal"><ExternalLink className="w-4 h-4"/></a>
                       <button
                         title="Download PDF"
-                        onClick={async () => {
-                          try {
-                            const res = await fetch(`/api/proposals/${p.id}/pdf`);
-                            if (!res.ok) throw new Error('PDF generation failed');
-                            const blob = await res.blob();
-                            const url = URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = `BITSS-Proposal-${p.id}.pdf`;
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-                            URL.revokeObjectURL(url);
-                          } catch(e) {
-                            alert('PDF generation takes ~30 seconds. Please try again.');
-                          }
+                        onClick={() => {
+                          window.open(`/proposals/${p.id}?print=1`, '_blank');
                         }}
                         className="bg-white/5 hover:bg-white/10 text-white p-2 rounded-lg transition-colors"
                       >
