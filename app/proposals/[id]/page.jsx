@@ -5,10 +5,11 @@ import PrintTrigger from "./PrintTrigger";
 export const dynamic = 'force-dynamic';
 
 export default async function ProposalPage({ params, searchParams }) {
-  const resolvedParams = await params;
-  const resolvedSearch = await searchParams;
-  const id = resolvedParams.id;
-  const shouldPrint = resolvedSearch?.print === "1";
+  try {
+    const resolvedParams = await params;
+    const resolvedSearch = await searchParams;
+    const id = resolvedParams.id;
+    const shouldPrint = resolvedSearch?.print === "1";
 
   let proposal = null;
   try {
@@ -157,4 +158,13 @@ export default async function ProposalPage({ params, searchParams }) {
       </div>
     </div>
   );
+  } catch (err) {
+    return (
+      <div className="p-12 text-red-500 font-mono whitespace-pre-wrap">
+        <h2>Server Component Crash</h2>
+        <p>{err.message}</p>
+        <p>{err.stack}</p>
+      </div>
+    );
+  }
 }
