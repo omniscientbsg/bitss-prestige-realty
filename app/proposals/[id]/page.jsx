@@ -42,37 +42,21 @@ export default async function ProposalPage({ params, searchParams }) {
 
   return (
     <div className="bg-white min-h-screen text-slate-900 font-sans">
-      {/* Auto-print trigger for ?print=1 */}
-      <PrintTrigger shouldPrint={shouldPrint} />
+      {/* PrintTrigger handles toolbar + auto-print (client component) */}
+      <PrintTrigger shouldPrint={shouldPrint} clientName={clientName} />
 
-      {/* Print + page styles */}
+      {/* Print + screen styles */}
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
           body { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: white !important; }
           .page-break { page-break-before: always; break-before: page; }
           .no-print { display: none !important; }
-          @page { margin: 0; size: A4 portrait; }
+          @page { margin: 16mm; size: A4 portrait; }
         }
         @media screen {
           .proposal-inner { max-width: 900px; margin: 0 auto; padding: 48px; }
         }
       `}} />
-
-      {/* Download bar (screen only) */}
-      <div className="no-print bg-slate-900 text-white px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-lg">
-        <div className="flex items-center gap-3">
-          <span className="text-amber-400 font-semibold tracking-widest text-xs uppercase">BITSS Prestige Realty</span>
-          <span className="text-slate-500">·</span>
-          <span className="text-slate-300 text-sm">Investment Proposal for {clientName}</span>
-        </div>
-        <button
-          onClick={() => window.print()}
-          className="bg-amber-500 hover:bg-amber-400 text-slate-900 font-semibold px-5 py-2 rounded-lg text-sm flex items-center gap-2 transition-all"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Save as PDF
-        </button>
-      </div>
 
       <div className="proposal-inner">
         {/* Cover Page */}
