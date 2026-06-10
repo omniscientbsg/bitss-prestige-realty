@@ -164,7 +164,7 @@ function buildDeepDiveHTML(data, uploadedGallery) {
 
 // ── Main Dashboard (Super Admin)
 app.get('/', (_req, res) => {
-  res.sendFile(path.join(__dirname, 'admin.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // ── Admin panel fallback

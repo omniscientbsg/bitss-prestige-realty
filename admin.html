@@ -153,6 +153,27 @@ textarea.field-input{resize:vertical;min-height:80px;line-height:1.5}
 /* PORTAL LINK */
 .portal-link{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--border2);border-radius:8px;padding:10px 16px;font-size:12px;color:var(--text2);text-decoration:none;transition:all 0.2s;margin-top:auto}
 .portal-link:hover{border-color:var(--border);color:var(--gold)}
+
+@media (max-width: 768px) {
+  .layout { flex-direction: column !important; }
+  .sidebar { width: 100% !important; height: auto !important; position: relative !important; padding: 20px !important; border-right: none !important; border-bottom: 1px solid var(--border) !important; }
+  .sidebar-nav { display: flex !important; overflow-x: auto !important; padding-bottom: 10px !important; }
+  .nav-item { white-space: nowrap !important; margin-bottom: 0 !important; margin-right: 10px !important; }
+  .main-content { margin-left: 0 !important; padding: 20px !important; }
+  .header { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
+  
+  /* Tables */
+  table { display: block !important; overflow-x: auto !important; white-space: nowrap !important; }
+  
+  /* Grid layouts */
+  .dashboard-grid { grid-template-columns: 1fr !important; }
+  .property-form { grid-template-columns: 1fr !important; }
+  .form-row { flex-direction: column !important; }
+  
+  /* Modals */
+  .modal-content { width: 95% !important; padding: 20px !important; }
+}
+
 </style>
 </head>
 <body>
