@@ -40,9 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# database (contains sensitive client data - do not commit)
+# database (contains sensitive client data - do not commit the JSON)
 database/data.json
-database/
 
 # uploaded files & media (large binaries)
 public/uploads/

@@ -4,61 +4,61 @@ import { db } from "@/lib/database";
 import { revalidatePath } from "next/cache";
 
 export async function addPropertyAction(data) {
-  db.insert(data);
+  await db.insert(data);
   revalidatePath('/admin');
   return { success: true };
 }
 
 export async function updatePropertyAction(id, data) {
-  db.update(id, data);
+  await db.update(id, data);
   revalidatePath('/admin');
   return { success: true };
 }
 
 export async function deletePropertyAction(id) {
-  db.delete(id);
+  await db.delete(id);
   revalidatePath('/admin');
   return { success: true };
 }
 
 export async function addClientAction(data) {
-  db.insertClient(data);
+  await db.insertClient(data);
   revalidatePath('/admin');
   return { success: true };
 }
 
 export async function updateClientAction(id, data) {
-  db.updateClient(id, data);
+  await db.updateClient(id, data);
   revalidatePath('/admin');
   return { success: true };
 }
 
 export async function deleteClientAction(id) {
-  db.deleteClient(id);
+  await db.deleteClient(id);
   revalidatePath('/admin');
   return { success: true };
 }
 
 export async function updateSettingsAction(data) {
-  db.updateSettings(data);
+  await db.updateSettings(data);
   revalidatePath('/admin');
   return { success: true };
 }
 
 export async function addAgentAction(data) {
-  db.insertAgent(data);
+  await db.insertAgent(data);
   revalidatePath('/admin');
   return { success: true };
 }
 
 export async function updateAgentAction(id, data) {
-  db.updateAgent(id, data);
+  await db.updateAgent(id, data);
   revalidatePath('/admin');
   return { success: true };
 }
 
 export async function deleteAgentAction(id) {
-  db.deleteAgent(id);
+  await db.deleteAgent(id);
   revalidatePath('/admin');
   return { success: true };
 }

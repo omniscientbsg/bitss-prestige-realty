@@ -1,9 +1,12 @@
 import { db } from "@/lib/database";
+import { formatProperty } from "@/lib/database";
 import Link from "next/link";
 import { ArrowRight, Star, Shield, Diamond, Building2 } from "lucide-react";
 
-export default function LandingPage() {
-  const properties = db.getAll().filter(p => p.hot || p.distress).slice(0, 3); // Get top 3 hot/distress properties
+export default async function LandingPage() {
+  const allProps = await db.getAll();
+  const properties = allProps.filter(p => p.hot || p.distress).slice(0, 3).map(formatProperty);
+  const allVisible = allProps.filter(p => !p.hidden).slice(0, 6).map(formatProperty);
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
@@ -33,7 +36,6 @@ export default function LandingPage() {
 
       {/* Hero Section */}
       <main className="flex-1 pt-32 pb-20 px-6 max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center gap-16 relative">
-        {/* Glow effect */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="flex-1 flex flex-col gap-8 z-10">
@@ -64,7 +66,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Floating Asset Cards (Preview) */}
+        {/* Floating Asset Cards */}
         <div className="flex-1 relative w-full max-w-md lg:max-w-none h-[600px] z-10 hidden md:block">
           {properties.map((prop, idx) => (
             <div 
@@ -93,7 +95,7 @@ export default function LandingPage() {
                   </div>
                   <div className="text-right">
                     <div className="text-xs text-platinum/50 uppercase tracking-wider">Entry Price</div>
-                    <div className="text-white font-medium">AED {prop.price_aed.toLocaleString()}</div>
+                    <div className="text-white font-medium">AED {prop.price_aed?.toLocaleString()}</div>
                   </div>
                 </div>
               </div>
@@ -112,7 +114,7 @@ export default function LandingPage() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {db.getAll().filter(p => !p.hidden).slice(0, 6).map(prop => (
+          {allVisible.map(prop => (
             <div key={prop.id} className="bg-dark2 border border-white/5 rounded-2xl overflow-hidden hover:border-gold/30 transition-all flex flex-col group cursor-pointer">
               <div className="h-64 relative bg-dark1 overflow-hidden">
                 {prop.image && <img src={prop.image} alt={prop.name} className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700" />}
@@ -128,7 +130,7 @@ export default function LandingPage() {
                 <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/5">
                   <div>
                     <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Entry Price</div>
-                    <div className="text-white font-medium text-lg">AED {prop.price_aed.toLocaleString()}</div>
+                    <div className="text-white font-medium text-lg">AED {prop.price_aed?.toLocaleString()}</div>
                   </div>
                   <div className="text-right">
                     <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Projected Yield</div>
@@ -163,7 +165,6 @@ export default function LandingPage() {
           <div className="flex-1 relative">
             <div className="aspect-square max-w-md mx-auto rounded-full bg-gradient-to-tr from-gold/20 to-transparent p-1">
               <div className="w-full h-full rounded-full bg-dark1 overflow-hidden border border-white/10 p-8 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
                 <div className="text-center">
                   <div className="w-24 h-24 mx-auto bg-dark2 rounded-full border border-gold/30 flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(201,168,76,0.2)]">
                     <Shield className="w-10 h-10 text-gold" />

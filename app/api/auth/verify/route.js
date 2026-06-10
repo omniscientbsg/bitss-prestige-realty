@@ -7,7 +7,7 @@ export async function POST(request) {
     const { password, slug: rawSlug } = await request.json();
     const slug = (rawSlug || '').replace(/\s+/g, '-').toLowerCase();
     
-    const client = db.getClientBySlug(slug);
+    const client = await db.getClientBySlug(slug);
     if (!client) {
       return NextResponse.json({ error: 'Client not found' }, { status: 404 });
     }

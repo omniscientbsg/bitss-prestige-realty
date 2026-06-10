@@ -9,7 +9,7 @@ export async function POST(request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    db.logActivity(slug, action, details);
+    await db.logActivity(slug, action, details);
 
     return NextResponse.json({ success: true });
   } catch (error) {

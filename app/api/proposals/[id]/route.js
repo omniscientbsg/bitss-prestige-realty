@@ -6,7 +6,7 @@ export async function DELETE(request, { params }) {
   const resolvedParams = await params;
   const id = resolvedParams.id;
   
-  const success = db.deleteProposal(id);
+  const success = await db.deleteProposal(id);
   if (success) {
     return NextResponse.json({ success: true });
   } else {

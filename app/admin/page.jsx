@@ -12,17 +12,28 @@ export default async function AdminPage() {
   }
 
   // Fetch all required data for the admin dashboard
-  const properties = db.getAll();
-  const clients = db.getAllClients();
-  const agents = db.getAllAgents();
-  const proposals = db.getAllProposals();
-  const analytics = db.getAnalytics();
-  const settings = db.getSettings();
+  const [properties, clients, agents, proposals, analytics, settings] = await Promise.all([
+    db.getAll(),
+    db.getAllClients(),
+    db.getAllAgents(),
+    db.getAllProposals(),
+    db.getAnalytics(),
+    db.getSettings(),
+  ]);
+
+  // Enrich clients with their chat + activity logs
+  const enrichedClients = await Promise.all(clients.map(async (c) => {
+    const [chat, activity] = await Promise.all([
+      db.getChatHistory(c.id),
+      db.getActivityLogs(c.id),
+    ]);
+    return { ...c, chat_history: chat, activity_logs: activity };
+  }));
 
   return (
     <AdminDashboard 
       initialProperties={properties}
-      initialClients={clients}
+      initialClients={enrichedClients}
       initialAgents={agents}
       initialProposals={proposals}
       analytics={analytics}

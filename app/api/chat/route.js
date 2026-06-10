@@ -2,11 +2,14 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/database";
 
 export async function POST(request) {
+  let clientContext;
   try {
-    const { messages, clientContext } = await request.json();
+    const body = await request.json();
+    const { messages } = body;
+    clientContext = body.clientContext;
     
     // Retrieve API key
-    const settings = db.getSettings();
+    const settings = await db.getSettings();
     const apiKey = settings.google_api_key;
     
     if (!apiKey) {
@@ -24,13 +27,17 @@ Be extremely concise, polite, and data-driven. Do NOT use markdown. Keep respons
       systemInstruction += `\n\nThe client's current portfolio/assigned properties include: ${propNames}.`;
     }
 
+    // Log the user's message BEFORE calling API
+    const userMsg = messages[messages.length - 1];
+    if (userMsg && userMsg.role === 'user') {
+      await db.logChat(clientContext.slug, 'user', userMsg.content);
+    }
+
     // Convert messages to Gemini format
     const geminiContents = messages.map(msg => ({
       role: msg.role === 'user' ? 'user' : 'model',
       parts: [{ text: msg.content }]
     }));
-
-    // Add system instruction as the first user message (a common pattern if system_instruction is not fully supported in simple REST, but v1beta supports it!)
     
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
       method: "POST",
@@ -47,29 +54,25 @@ Be extremely concise, polite, and data-driven. Do NOT use markdown. Keep respons
       })
     });
 
-    // Log the user's message
-    const userMsg = messages[messages.length - 1];
-    if (userMsg && userMsg.role === 'user') {
-      db.logChat(clientContext.slug, 'user', userMsg.content);
-    }
-
     const data = await response.json();
     
     if (data.error) {
       console.error("Gemini API Error:", data.error);
       const errMsg = data.error.message || "Failed to generate response.";
-      db.logChat(clientContext.slug, 'error', `System Error: ${errMsg}`);
+      await db.logChat(clientContext.slug, 'error', `System Error: ${errMsg}`);
       return NextResponse.json({ error: errMsg }, { status: 500 });
     }
 
     const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm sorry, I cannot assist with that right now.";
     
-    db.logChat(clientContext.slug, 'assistant', aiText);
+    await db.logChat(clientContext.slug, 'assistant', aiText);
 
     return NextResponse.json({ reply: aiText });
   } catch (error) {
     console.error("Chat API error:", error);
-    db.logChat(clientContext?.slug, 'error', `Internal Server Error: ${error.message}`);
+    if (clientContext?.slug) {
+      await db.logChat(clientContext.slug, 'error', `Internal Server Error: ${error.message}`);
+    }
     return NextResponse.json({ error: "Failed to process chat request." }, { status: 500 });
   }
 }

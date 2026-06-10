@@ -6,12 +6,19 @@ export const dynamic = 'force-dynamic';
 export default async function ProposalPage({ params }) {
   const resolvedParams = await params;
   const id = resolvedParams.id;
-  const proposal = db.getAllProposals().find(p => p.id == id);
+  const allProposals = await db.getAllProposals();
+  const proposal = allProposals.find(p => p.id == id);
   if (!proposal) return notFound();
 
-  const client = db.getClientById(proposal.client_id);
-  const properties = proposal.property_ids.map(pid => formatProperty(db.getById(pid)));
-  const agent = client?.agent_id ? db.getAgentById(client.agent_id) : db.getAllAgents()[0];
+  const [client, allAgents] = await Promise.all([
+    proposal.client_id ? db.getClientById(proposal.client_id) : null,
+    db.getAllAgents(),
+  ]);
+
+  const propertyIds = Array.isArray(proposal.property_ids) ? proposal.property_ids : [];
+  const rawProps = await Promise.all(propertyIds.map(pid => db.getById(pid)));
+  const properties = rawProps.filter(Boolean).map(formatProperty);
+  const agent = client?.agent_id ? await db.getAgentById(client.agent_id) : allAgents[0] || null;
 
   return (
     <div className="bg-white min-h-screen text-slate-900 font-sans p-12 max-w-5xl mx-auto">

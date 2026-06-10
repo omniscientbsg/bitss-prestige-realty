@@ -9,7 +9,7 @@ export default async function ClientPortalPage({ params }) {
   
   // Clean slug like the original code
   const cleanSlug = decodeURIComponent(slug).toLowerCase().replace(/\s+/g, '-');
-  const client = db.getClientBySlug(cleanSlug);
+  const client = await db.getClientBySlug(cleanSlug);
 
   if (!client) {
     notFound();
@@ -23,13 +23,14 @@ export default async function ClientPortalPage({ params }) {
   }
 
   // Fetch properties assigned to this client
-  const allProperties = db.getAll();
+  const allProperties = await db.getAll();
   const assignedProperties = client.assigned_properties 
     ? client.assigned_properties.map(id => allProperties.find(p => p.id === id)).filter(Boolean).map(formatProperty)
     : [];
 
-  const clientProposals = db.getAllProposals().filter(p => p.client_id === client.id);
-  const agent = client.agent_id ? db.getAgentById(client.agent_id) : null;
+  const allProposals = await db.getAllProposals();
+  const clientProposals = allProposals.filter(p => p.client_id === client.id);
+  const agent = client.agent_id ? await db.getAgentById(client.agent_id) : null;
 
   return (
     <ClientDashboard 
