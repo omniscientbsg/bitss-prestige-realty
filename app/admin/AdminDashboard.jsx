@@ -221,8 +221,13 @@ export default function AdminDashboard({
     
     const assigned_properties = JSON.parse(formData.get("assigned_properties_json") || "[]").map(id => Number(id));
 
+    const name = formData.get("name");
+    const slugInput = formData.get("slug");
+    const slug = slugInput ? slugInput.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
     const data = {
-      name: formData.get("name"),
+      name: name,
+      slug: slug,
       password: formData.get("password"),
       budget: Number(formData.get("budget")),
       budget_label: formData.get("budget_label") || "Phase 1 Budget",
@@ -826,13 +831,19 @@ export default function AdminDashboard({
               <button onClick={() => setIsClientModalOpen(false)} className="text-platinum/50 hover:text-white"><X className="w-5 h-5"/></button>
             </div>
             <form onSubmit={handleClientSubmit} className="p-6 space-y-4">
-              <div>
-                <label className="block text-xs text-platinum/50 uppercase mb-1">Client Full Name</label>
-                <input name="name" defaultValue={currentClient?.name} required className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">Client Full Name *</label>
+                  <input name="name" defaultValue={currentClient?.name} required className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
+                </div>
+                <div>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">Portal Slug (Optional)</label>
+                  <input name="slug" defaultValue={currentClient?.slug} placeholder="e.g. prateek-khanna" className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
+                </div>
               </div>
 
               <div>
-                <label className="block text-xs text-platinum/50 uppercase mb-1">Access Password</label>
+                <label className="block text-xs text-platinum/50 uppercase mb-1">Access Password *</label>
                 <input name="password" type="text" defaultValue={currentClient?.password} required className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
               </div>
 
