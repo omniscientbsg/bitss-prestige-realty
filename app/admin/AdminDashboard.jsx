@@ -203,7 +203,8 @@ export default function AdminDashboard({
       payment_plan: formData.get("payment_plan"),
       proj_values: formData.get("proj_values"),
       unit_options: formData.get("unit_options"),
-      deep_dive_data: formData.get("deep_dive_data")
+      deep_dive_data: formData.get("deep_dive_data"),
+      our_offer: formData.get("our_offer")
     };
 
     if (currentProp) {
@@ -242,7 +243,8 @@ export default function AdminDashboard({
       metric_2_label: formData.get("metric_2_label"),
       metric_2_value: formData.get("metric_2_value"),
       metric_3_label: formData.get("metric_3_label"),
-      metric_3_value: formData.get("metric_3_value")
+      metric_3_value: formData.get("metric_3_value"),
+      brief_text: formData.get("brief_text") || "Confidential Investment Brief · 2025"
     };
 
     if (currentClient) {
@@ -702,10 +704,14 @@ export default function AdminDashboard({
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-4 border-t border-white/5 pt-4">
+              <div className="grid grid-cols-5 gap-4 border-t border-white/5 pt-4">
                 <div>
                   <label className="block text-xs text-platinum/50 uppercase mb-1">Price (AED) *</label>
                   <input type="number" name="price_aed" defaultValue={currentProp?.price_aed} required className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
+                </div>
+                <div>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">Our Offer (Optional)</label>
+                  <input type="text" name="our_offer" defaultValue={currentProp?.our_offer} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" placeholder="e.g. AED 599,000" />
                 </div>
                 <div>
                   <label className="block text-xs text-platinum/50 uppercase mb-1">Price (USD)</label>
@@ -858,7 +864,7 @@ export default function AdminDashboard({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs text-platinum/50 uppercase mb-1">Portfolio Main Heading</label>
                   <input name="portfolio_heading" defaultValue={currentClient?.portfolio_heading} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" placeholder="e.g. Exclusive Portfolio Review" />
@@ -866,6 +872,10 @@ export default function AdminDashboard({
                 <div>
                   <label className="block text-xs text-platinum/50 uppercase mb-1">Portfolio Subheading</label>
                   <input name="portfolio_subheading" defaultValue={currentClient?.portfolio_subheading} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" placeholder="e.g. Prepared for..." />
+                </div>
+                <div>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">Investment Brief Tag</label>
+                  <input name="brief_text" defaultValue={currentClient?.brief_text || "Confidential Investment Brief · 2025"} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
                 </div>
               </div>
 

@@ -151,7 +151,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
           <div className="relative z-10 flex flex-col items-center w-full max-w-5xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-gold/10 border border-gold/20 rounded-full px-5 py-2 text-xs tracking-widest uppercase text-gold mb-8 shadow-[0_0_20px_rgba(201,168,76,0.1)]">
               <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse"></span>
-              Confidential Investment Brief · 2025
+              {client.brief_text || "Confidential Investment Brief · 2025"}
             </div>
             
             <h1 className="font-heading text-5xl sm:text-7xl lg:text-8xl font-light leading-none tracking-tight mb-6">
@@ -302,7 +302,16 @@ export default function ClientDashboard({ client, properties, initialProposals =
                   <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/5 mb-4">
                     <div>
                       <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Entry Price</div>
-                      <div className="text-white font-medium text-lg">AED {p.price_aed.toLocaleString("en-US")}</div>
+                      <div className="flex flex-col gap-1">
+                        <span className={p.our_offer ? "text-platinum/50 line-through text-sm" : "text-white font-medium text-lg"}>
+                          AED {p.price_aed.toLocaleString("en-US")}
+                        </span>
+                        {p.our_offer && (
+                          <span className="text-gold font-bold text-sm bg-gold/10 px-2 py-0.5 rounded border border-gold/20 inline-block w-fit">
+                            Our Offer: {p.our_offer}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <div className="text-right">
                       <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Projected Yield</div>
@@ -505,7 +514,16 @@ export default function ClientDashboard({ client, properties, initialProposals =
                 </div>
                 <div className="bg-dark3 rounded-xl p-4 border border-white/5">
                   <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Entry Price</div>
-                  <div className="text-gold font-medium">AED {(selectedProperty.price_aed || 0).toLocaleString("en-US")}</div>
+                  <div className="flex flex-col gap-1">
+                    <span className={selectedProperty.our_offer ? "text-platinum/50 line-through text-sm" : "text-gold font-medium"}>
+                      AED {(selectedProperty.price_aed || 0).toLocaleString("en-US")}
+                    </span>
+                    {selectedProperty.our_offer && (
+                      <span className="text-gold font-bold text-sm bg-gold/10 px-2 py-0.5 rounded border border-gold/20 inline-block w-fit">
+                        Our Offer: {selectedProperty.our_offer}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="bg-dark3 rounded-xl p-4 border border-white/5">
                   <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Capital Apprec.</div>
