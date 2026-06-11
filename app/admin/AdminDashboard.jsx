@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { 
   Building2, Users, FileText, Settings, LayoutDashboard, 
   Plus, Edit2, Trash2, LogOut, ExternalLink, Link as LinkIcon, X, CheckCircle, MessageSquare, Download
@@ -94,6 +95,7 @@ export default function AdminDashboard({
   analytics, 
   settings 
 }) {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("overview");
 
   // Modals state
@@ -148,6 +150,7 @@ export default function AdminDashboard({
     const res = await fetch(`/api/proposals/${id}`, { method: "DELETE" });
     if(res.ok) {
       setProposals(proposals.filter(p => p.id !== id));
+      router.refresh();
     }
   };
 
@@ -214,6 +217,7 @@ export default function AdminDashboard({
     }
     setIsPropModalOpen(false);
     setCurrentProp(null);
+    router.refresh();
   };
 
   const handleClientSubmit = async (e) => {
@@ -254,6 +258,7 @@ export default function AdminDashboard({
     }
     setIsClientModalOpen(false);
     setCurrentClient(null);
+    router.refresh();
   };
 
   const handleSettingsSubmit = async (e) => {
@@ -447,7 +452,7 @@ export default function AdminDashboard({
                         <h3 className="font-heading text-xl text-white">{prop.name}</h3>
                         <div className="flex gap-2 text-platinum/40">
                           <button onClick={() => { setCurrentProp(prop); setIsPropModalOpen(true); }} className="hover:text-gold transition-colors"><Edit2 className="w-4 h-4" /></button>
-                          <button onClick={() => deletePropertyAction(prop.id)} className="hover:text-red-400 transition-colors"><Trash2 className="w-4 h-4" /></button>
+                          <button onClick={async () => { await deletePropertyAction(prop.id); router.refresh(); }} className="hover:text-red-400 transition-colors"><Trash2 className="w-4 h-4" /></button>
                         </div>
                       </div>
                       <p className="text-xs text-platinum/50 mb-4">{prop.location}</p>
@@ -500,7 +505,7 @@ export default function AdminDashboard({
                         </a>
                         <button onClick={() => { setCurrentClient(client); setIsChatHistoryOpen(true); }} className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-gold/20 text-gold transition-all" title="View Chat History"><MessageSquare className="w-4 h-4" /></button>
                         <button onClick={() => { setCurrentClient(client); setIsClientModalOpen(true); }} className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 text-platinum transition-all"><Edit2 className="w-4 h-4" /></button>
-                        <button onClick={() => deleteClientAction(client.id)} className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-red-500/20 text-red-400 transition-all"><Trash2 className="w-4 h-4" /></button>
+                        <button onClick={async () => { await deleteClientAction(client.id); router.refresh(); }} className="p-2 bg-white/5 border border-white/10 rounded-lg hover:bg-red-500/20 text-red-400 transition-all"><Trash2 className="w-4 h-4" /></button>
                       </div>
                     </div>
 
@@ -577,6 +582,7 @@ export default function AdminDashboard({
                               if(confirm('Delete agent?')) {
                                 await deleteAgentAction(a.id);
                                 setAgents(agents.filter(x => x.id !== a.id));
+                                router.refresh();
                               }
                             }}
                             className="p-2 text-red-400/50 hover:text-red-400 bg-red-400/5 hover:bg-red-400/10 rounded-lg transition-all"

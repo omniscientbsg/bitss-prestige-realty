@@ -3,6 +3,8 @@ import { db } from '@/lib/database';
 import AdminDashboard from './AdminDashboard';
 import AdminLogin from './AdminLogin';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminPage() {
   const cookieStore = await cookies();
   const isLoggedIn = cookieStore.get('adminLoggedIn')?.value === 'true';
