@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ['puppeteer', 'puppeteer-core'],
+  serverExternalPackages: ['puppeteer-core', '@sparticuz/chromium'],
   images: {
     unoptimized: true,
   },

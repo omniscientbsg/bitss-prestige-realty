@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
+import chromium from '@sparticuz/chromium';
 import { db } from '../../../../../lib/database';
 
 export async function GET(request, { params }) {
@@ -8,21 +9,15 @@ export async function GET(request, { params }) {
   
   // Use the live URL on production, localhost in dev
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
-    (process.env.NODE_ENV === 'production' ? 'https://bitss-prestige-realty.onrender.com' : 'http://localhost:3000');
+    (process.env.NODE_ENV === 'production' ? 'https://bitss-prestige-realty.vercel.app' : 'http://localhost:3000');
   const url = `${baseUrl}/proposals/${id}`;
 
   try {
-    const browser = await puppeteer.launch({ 
-      headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-gpu',
-        '--no-first-run',
-        '--no-zygote',
-        '--single-process',
-      ]
+    const browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
     });
     const page = await browser.newPage();
     
