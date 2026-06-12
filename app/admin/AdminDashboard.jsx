@@ -210,10 +210,16 @@ export default function AdminDashboard({
       our_offer: formData.get("our_offer")
     };
 
+    let res;
     if (currentProp) {
-      await updatePropertyAction(currentProp.id, data);
+      res = await updatePropertyAction(currentProp.id, data);
     } else {
-      await addPropertyAction(data);
+      res = await addPropertyAction(data);
+    }
+    
+    if (!res.success) {
+      alert("Failed to save property: " + res.error);
+      return;
     }
     setIsPropModalOpen(false);
     setCurrentProp(null);
@@ -251,10 +257,16 @@ export default function AdminDashboard({
       brief_text: formData.get("brief_text") || "Confidential Investment Brief · 2025"
     };
 
+    let res;
     if (currentClient) {
-      await updateClientAction(currentClient.id, data);
+      res = await updateClientAction(currentClient.id, data);
     } else {
-      await addClientAction(data);
+      res = await addClientAction(data);
+    }
+    
+    if (!res.success) {
+      alert("Failed to save client: " + res.error);
+      return;
     }
     setIsClientModalOpen(false);
     setCurrentClient(null);
@@ -264,7 +276,11 @@ export default function AdminDashboard({
   const handleSettingsSubmit = async (e) => {
     e.preventDefault();
     const apiKey = new FormData(e.target).get("google_api_key");
-    await updateSettingsAction({ google_api_key: apiKey });
+    const res = await updateSettingsAction({ google_api_key: apiKey });
+    if (!res.success) {
+      alert("Failed to save settings: " + res.error);
+      return;
+    }
     alert("Settings saved successfully!");
   };
 
@@ -1047,15 +1063,21 @@ export default function AdminDashboard({
               e.preventDefault();
               const formData = new FormData(e.target);
               const data = Object.fromEntries(formData.entries());
+              
+              let res;
               if (currentAgent) {
-                await updateAgentAction(currentAgent.id, data);
-                setAgents(agents.map(a => a.id === currentAgent.id ? {...currentAgent, ...data} : a));
+                res = await updateAgentAction(currentAgent.id, data);
               } else {
-                await addAgentAction(data);
-                // Simple refresh for now
-                window.location.reload(); 
+                res = await addAgentAction(data);
               }
+
+              if (!res.success) {
+                alert("Failed to save agent: " + res.error);
+                return;
+              }
+
               setIsAgentModalOpen(false);
+              router.refresh();
             }} className="p-6 space-y-6">
               <div className="grid grid-cols-2 gap-6">
                 <div>
