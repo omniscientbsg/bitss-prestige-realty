@@ -739,7 +739,7 @@ export default function AdminDashboard({
                   <input type="text" name="our_offer" defaultValue={currentProp?.our_offer} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" placeholder="e.g. AED 599,000" />
                 </div>
                 <div>
-                  <label className="block text-xs text-platinum/50 uppercase mb-1">Price (USD)</label>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">Alt Price (AED)</label>
                   <input type="number" name="price_usd" defaultValue={currentProp?.price_usd} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
                 </div>
                 <div>
@@ -762,7 +762,7 @@ export default function AdminDashboard({
                   <input type="number" step="0.1" name="capital_appreciation" defaultValue={currentProp?.capital_appreciation || currentProp?.capital_gain_5yr} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
                 </div>
                 <div>
-                  <label className="block text-xs text-platinum/50 uppercase mb-1">Annual Rental (USD)</label>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">Annual Rental (AED)</label>
                   <input type="number" name="annual_rental_usd" defaultValue={currentProp?.annual_rental_usd} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
                 </div>
               </div>

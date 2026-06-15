@@ -22,12 +22,15 @@ export function FileUploadInput({ name, defaultValue, label, onChange }) {
     try {
       const res = await fetch("/api/upload", { method: "POST", body: formData });
       const data = await res.json();
-      if (data.url) {
+      if (res.ok && data.url) {
         setUrl(data.url);
         if(onChange) onChange(data.url);
+      } else {
+        alert("Upload Failed: " + (data.error || "Unknown error"));
       }
     } catch (err) {
       console.error(err);
+      alert("Network Error during upload: " + err.message);
     }
     setUploading(false);
   };
