@@ -246,7 +246,7 @@ export default function AdminDashboard({
       budget: Number(formData.get("budget")),
       budget_label: formData.get("budget_label") || "Phase 1 Budget",
       assigned_properties: assigned_properties,
-      agent_id: Number(formData.get("agent_id")),
+      agent_id: formData.get("agent_id") ? Number(formData.get("agent_id")) : null,
       portfolio_heading: formData.get("portfolio_heading"),
       portfolio_subheading: formData.get("portfolio_subheading"),
       phase_heading: formData.get("phase_heading"),
@@ -935,7 +935,8 @@ export default function AdminDashboard({
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs text-platinum/50 uppercase mb-1">Assigned Agent</label>
-                  <select name="agent_id" defaultValue={currentClient?.agent_id || (agents.length > 0 ? agents[0].id : '')} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none ">
+                  <select name="agent_id" defaultValue={currentClient?.agent_id || ''} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none ">
+                    <option value="" className="text-black bg-white">No Agent</option>
                     {agents.map(a => <option key={a.id} value={a.id} className="text-black bg-white">{a.name}</option>)}
                   </select>
                 </div>
