@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
-const BUCKET = "uploads";
+const BUCKET = "Uploads";
 
 export async function POST(request) {
   try {
