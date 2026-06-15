@@ -10,6 +10,16 @@ function formatAED(val) {
   return `AED ${Math.round(n / 1000)}K`;
 }
 
+// Intelligently format offer inputs (which can be text or numbers)
+function formatOffer(val) {
+  if (!val) return "";
+  const num = Number(String(val).replace(/[^0-9.]/g, ''));
+  if (num && num >= 1000 && !String(val).toLowerCase().includes('m') && !String(val).toLowerCase().includes('k')) {
+    return formatAED(num);
+  }
+  return val;
+}
+
 
 export default function ClientDashboard({ client, properties, initialProposals = [], agent }) {
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -320,7 +330,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
                         {p.our_offer && (
                           <div className="text-[#20bd5a] font-bold text-base flex items-center gap-1.5 mt-0.5">
                             <span className="text-[9px] uppercase tracking-widest text-[#20bd5a]/80 border border-[#20bd5a]/30 px-1 rounded-sm bg-[#20bd5a]/10">Offer</span>
-                            {p.our_offer}
+                            {formatOffer(p.our_offer)}
                           </div>
                         )}
                       </div>
