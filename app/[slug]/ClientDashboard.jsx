@@ -2,6 +2,15 @@
 import { useState, useEffect } from "react";
 import { Diamond, LogOut, MessageSquare, Send, X, ExternalLink, CalendarDays, PlayCircle } from "lucide-react";
 
+// Format price as AED M or K for client-facing display
+function formatAED(val) {
+  if (!val) return "AED 0";
+  const n = Number(val);
+  if (n >= 1_000_000) return `AED ${(n / 1_000_000).toFixed(2).replace(/\.?0+$/, "")}M`;
+  return `AED ${Math.round(n / 1000)}K`;
+}
+
+
 export default function ClientDashboard({ client, properties, initialProposals = [], agent }) {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [chatOpen, setChatOpen] = useState(false);
@@ -290,33 +299,43 @@ export default function ClientDashboard({ client, properties, initialProposals =
                     {p.image ? (
                       <img src={p.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 cursor-zoom-in" onClick={(e) => { e.stopPropagation(); setPreviewImage(p.image); }} />
                     ) : null}
-                    <div className="absolute top-4 right-4 flex gap-2">
-                    {p.hot && <span className="bg-red-500/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">HOT</span>}
-                    {p.distress && <span className="bg-orange-500/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">DISTRESS</span>}
-                  </div>
+                    <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
+                      {p.hot && <span className="bg-red-500/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">HOT</span>}
+                      {p.distress && <span className="bg-orange-500/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">DISTRESS</span>}
+                      {p.below_market > 0 && <span className="bg-purple-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">{p.below_market}% Below Market</span>}
+                      {p.status && <span className="bg-blue-600/90 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">{p.status}</span>}
+                    </div>
                 </div>
                 <div className="p-6 flex-1 flex flex-col">
                   <h3 className="font-heading text-2xl text-white mb-2 group-hover:text-gold transition-colors">{p.name}</h3>
                   <p className="text-sm text-platinum/60 mb-6 flex-1">{p.location}</p>
                   
-                  <div className="grid grid-cols-2 gap-4 pt-6 border-t border-white/5 mb-4">
+                  <div className="grid grid-cols-3 gap-3 pt-6 border-t border-white/5 mb-3">
                     <div>
                       <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Entry Price</div>
                       <div className="flex flex-col gap-1">
-                        <span className={p.our_offer ? "text-platinum/50 line-through text-sm" : "text-white font-medium text-lg"}>
-                          AED {p.price_aed.toLocaleString("en-US")}
+                        <span className={p.our_offer ? "text-platinum/50 line-through text-sm" : "text-white font-medium text-base"}>
+                          {formatAED(p.price_aed)}
                         </span>
                         {p.our_offer && (
-                          <span className="text-gold font-bold text-sm bg-gold/10 px-2 py-0.5 rounded border border-gold/20 inline-block w-fit">
+                          <span className="text-gold font-bold text-xs bg-gold/10 px-2 py-0.5 rounded border border-gold/20 inline-block w-fit">
                             Our Offer: {p.our_offer}
                           </span>
                         )}
                       </div>
                     </div>
+                    <div>
+                      <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Capital Gain (5yr)</div>
+                      <div className="text-white font-medium text-base">{p.capital_appreciation || p.capital_gain_5yr || 0}%</div>
+                    </div>
                     <div className="text-right">
                       <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Projected Yield</div>
-                      <div className="text-gold font-semibold text-lg">{p.gross_yield}%</div>
+                      <div className="text-gold font-semibold text-base">{p.gross_yield}%</div>
                     </div>
+                  </div>
+                  <div className="flex gap-3 text-xs text-platinum/50 mb-4 flex-wrap">
+                    {p.handover && <span>🗓 {p.handover}</span>}
+                    {p.payment_plan_ratio && <span>📋 {p.payment_plan_ratio}</span>}
                   </div>
                   
                   <div className="flex gap-2 mt-auto">
@@ -497,9 +516,11 @@ export default function ClientDashboard({ client, properties, initialProposals =
               {selectedProperty.image && <img src={selectedProperty.image} alt={selectedProperty.name} className="w-full h-full object-cover cursor-zoom-in" onClick={() => setPreviewImage(selectedProperty.image)} />}
               <div className="absolute inset-0 bg-gradient-to-t from-dark2 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 right-6">
-                <div className="flex items-center gap-3 mb-2">
+                <div className="flex items-center gap-3 mb-2 flex-wrap">
                   {selectedProperty.hot && <span className="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded">HOT</span>}
                   {selectedProperty.distress && <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded">DISTRESS</span>}
+                  {selectedProperty.below_market > 0 && <span className="bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded">{selectedProperty.below_market}% Below Market</span>}
+                  {selectedProperty.status && <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">{selectedProperty.status}</span>}
                 </div>
                 <h2 className="font-heading text-4xl text-white mb-2">{selectedProperty.name}</h2>
                 <p className="text-platinum/80 flex items-center gap-2"><CalendarDays className="w-4 h-4" /> {selectedProperty.handover}</p>
@@ -507,7 +528,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
             </div>
 
             <div className="p-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-4">
                 <div className="bg-dark3 rounded-xl p-4 border border-white/5">
                   <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Developer</div>
                   <div className="text-white font-medium">{selectedProperty.developer}</div>
@@ -516,24 +537,30 @@ export default function ClientDashboard({ client, properties, initialProposals =
                   <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Entry Price</div>
                   <div className="flex flex-col gap-1">
                     <span className={selectedProperty.our_offer ? "text-platinum/50 line-through text-sm" : "text-gold font-medium"}>
-                      AED {(selectedProperty.price_aed || 0).toLocaleString("en-US")}
+                      {formatAED(selectedProperty.price_aed || 0)}
                     </span>
                     {selectedProperty.our_offer && (
-                      <span className="text-gold font-bold text-sm bg-gold/10 px-2 py-0.5 rounded border border-gold/20 inline-block w-fit">
+                      <span className="text-gold font-bold text-xs bg-gold/10 px-2 py-0.5 rounded border border-gold/20 inline-block w-fit">
                         Our Offer: {selectedProperty.our_offer}
                       </span>
                     )}
                   </div>
                 </div>
                 <div className="bg-dark3 rounded-xl p-4 border border-white/5">
-                  <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Capital Apprec.</div>
-                  <div className="text-white font-medium">{selectedProperty.capital_appreciation}% Est.</div>
+                  <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Capital Gain (5yr)</div>
+                  <div className="text-white font-medium">{selectedProperty.capital_appreciation}%</div>
                 </div>
                 <div className="bg-dark3 rounded-xl p-4 border border-white/5">
                   <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Gross Yield</div>
                   <div className="text-white font-medium">{selectedProperty.gross_yield}% Projected</div>
                 </div>
               </div>
+              {selectedProperty.payment_plan_ratio && (
+                <div className="mb-8 flex items-center gap-2">
+                  <span className="text-xs text-platinum/40 uppercase tracking-widest">Payment Plan:</span>
+                  <span className="bg-gold/10 text-gold text-sm font-bold px-3 py-1 rounded border border-gold/20">{selectedProperty.payment_plan_ratio}</span>
+                </div>
+              )}
 
               {/* USPs */}
               {(selectedProperty.usps?.length > 0 || selectedProperty.hot_usps?.length > 0) && (
@@ -552,12 +579,18 @@ export default function ClientDashboard({ client, properties, initialProposals =
                   <h3 className="font-heading text-xl text-white mb-4">Unit Availability</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {selectedProperty.unit_options.map((opt, i) => (
-                      <div key={i} className="bg-dark3 border border-white/5 rounded-xl p-4 flex flex-col justify-between hover:border-gold/30 transition-colors">
-                        <div className="text-white font-medium mb-2">{opt.label}</div>
-                        <div className="flex justify-between items-end">
-                          <div className="text-gold font-semibold text-lg">AED {(opt.priceAED || opt.price_aed || 0).toLocaleString("en-US")}</div>
+                      <div key={i} className="bg-dark3 border border-white/5 rounded-xl p-4 flex flex-col gap-2 hover:border-gold/30 transition-colors">
+                        <div className="text-white font-medium">{opt.label}</div>
+                        <div className="flex justify-between items-center">
+                          <div className="text-gold font-semibold text-lg">{formatAED(opt.priceAED || opt.price_aed || 0)}</div>
                           <div className="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded font-medium">{opt.yield}% Yield</div>
                         </div>
+                        {(opt.size_sqft > 0 || opt.plot_size_sqft > 0) && (
+                          <div className="flex gap-3 text-xs text-platinum/50 border-t border-white/5 pt-2 mt-1 flex-wrap">
+                            {opt.size_sqft > 0 && <span>📐 {opt.size_sqft.toLocaleString()} sqft</span>}
+                            {opt.plot_size_sqft > 0 && <span>🌿 Plot: {opt.plot_size_sqft.toLocaleString()} sqft</span>}
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>

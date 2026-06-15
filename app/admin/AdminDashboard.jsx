@@ -207,7 +207,10 @@ export default function AdminDashboard({
       proj_values: formData.get("proj_values"),
       unit_options: formData.get("unit_options"),
       deep_dive_data: formData.get("deep_dive_data"),
-      our_offer: formData.get("our_offer")
+      our_offer: formData.get("our_offer"),
+      payment_plan_ratio: formData.get("payment_plan_ratio") || null,
+      status: formData.get("status") || null,
+      below_market: formData.get("below_market") ? Number(formData.get("below_market")) : null
     };
 
     let res;
@@ -764,6 +767,32 @@ export default function AdminDashboard({
                 </div>
               </div>
 
+              <div className="grid grid-cols-4 gap-4 border-t border-white/5 pt-4">
+                <div>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">Status</label>
+                  <select name="status" defaultValue={currentProp?.status || ""} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none">
+                    <option value="">— Select Status —</option>
+                    <option value="Ready">Ready</option>
+                    <option value="Pre-Launch">Pre-Launch</option>
+                    <option value="Under Construction">Under Construction</option>
+                    <option value="Ready to Rent">Ready to Rent</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">Payment Plan Ratio</label>
+                  <input type="text" name="payment_plan_ratio" defaultValue={currentProp?.payment_plan_ratio} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" placeholder="e.g. 60/40" />
+                </div>
+                <div>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">% Below Market (Optional)</label>
+                  <input type="number" name="below_market" defaultValue={currentProp?.below_market} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" placeholder="e.g. 10" />
+                </div>
+                <div>
+                  <label className="block text-xs text-platinum/50 uppercase mb-1">Sort Order</label>
+                  <input type="number" name="sort_order" defaultValue={currentProp?.sort_order || 0} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none" />
+                </div>
+              </div>
+
+
               <div className="border-t border-white/5 pt-4">
                 <label className="block text-xs text-platinum/50 uppercase mb-1">Investment Rationale / Reason</label>
                 <textarea name="reason" defaultValue={currentProp?.reason} rows={2} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none"></textarea>
@@ -820,7 +849,9 @@ export default function AdminDashboard({
                     fields={[
                       { key: "label", label: "Unit Type", type: "text", placeholder: "Studio" },
                       { key: "price_aed", label: "Price (AED)", type: "number", placeholder: "649000" },
-                      { key: "yield", label: "Yield (%)", type: "number", placeholder: "10.5" }
+                      { key: "yield", label: "Yield (%)", type: "number", placeholder: "10.5" },
+                      { key: "size_sqft", label: "Size (sqft)", type: "number", placeholder: "450" },
+                      { key: "plot_size_sqft", label: "Plot Size sqft (Villa/TH)", type: "number", placeholder: "2000" }
                     ]}
                   />
                 </div>
