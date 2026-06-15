@@ -771,11 +771,11 @@ export default function AdminDashboard({
                 <div>
                   <label className="block text-xs text-platinum/50 uppercase mb-1">Status</label>
                   <select name="status" defaultValue={currentProp?.status || ""} className="w-full bg-dark3 border border-white/10 rounded-lg p-3 text-white focus:border-gold/50 focus:outline-none">
-                    <option value="">— Select Status —</option>
-                    <option value="Ready">Ready</option>
-                    <option value="Pre-Launch">Pre-Launch</option>
-                    <option value="Under Construction">Under Construction</option>
-                    <option value="Ready to Rent">Ready to Rent</option>
+                    <option value="" className="text-black bg-white">— Select Status —</option>
+                    <option value="Ready" className="text-black bg-white">Ready</option>
+                    <option value="Pre-Launch" className="text-black bg-white">Pre-Launch</option>
+                    <option value="Under Construction" className="text-black bg-white">Under Construction</option>
+                    <option value="Ready to Rent" className="text-black bg-white">Ready to Rent</option>
                   </select>
                 </div>
                 <div>
