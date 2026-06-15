@@ -1096,6 +1096,12 @@ export default function AdminDashboard({
               const formData = new FormData(e.target);
               const data = Object.fromEntries(formData.entries());
               
+              // Map image to photo for the DB
+              if (data.image !== undefined) {
+                data.photo = data.image;
+                delete data.image;
+              }
+              
               let res;
               if (currentAgent) {
                 res = await updateAgentAction(currentAgent.id, data);
