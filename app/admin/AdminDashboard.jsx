@@ -1101,6 +1101,9 @@ export default function AdminDashboard({
                 data.photo = data.image;
                 delete data.image;
               }
+              // These columns don't exist in the database schema yet
+              delete data.title;
+              delete data.rera;
               
               let res;
               if (currentAgent) {
