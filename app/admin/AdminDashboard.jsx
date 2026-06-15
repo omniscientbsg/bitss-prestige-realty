@@ -1117,7 +1117,7 @@ export default function AdminDashboard({
                 </div>
                 <div>
                   <label className="block text-sm text-platinum/60 mb-2">Title</label>
-                  <input name="title" defaultValue={currentAgent?.title} className="w-full bg-dark3 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold/50" required />
+                  <input name="title" defaultValue={currentAgent?.title} className="w-full bg-dark3 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold/50" />
                 </div>
                 <div>
                   <label className="block text-sm text-platinum/60 mb-2">Email</label>
