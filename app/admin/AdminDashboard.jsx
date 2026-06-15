@@ -574,8 +574,8 @@ export default function AdminDashboard({
                     {agents.map(a => (
                       <tr key={a.id} className="hover:bg-white/[0.02] transition-colors group">
                         <td className="p-4 flex items-center gap-3">
-                          {a.image ? (
-                            <img src={a.image} className="w-10 h-10 rounded-full object-cover" alt="" />
+                          {a.photo ? (
+                            <img src={a.photo} className="w-10 h-10 rounded-full object-cover" alt="" />
                           ) : (
                             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white font-bold">{a.name.charAt(0)}</div>
                           )}
@@ -1101,9 +1101,6 @@ export default function AdminDashboard({
                 data.photo = data.image;
                 delete data.image;
               }
-              // These columns don't exist in the database schema yet
-              delete data.title;
-              delete data.rera;
               
               let res;
               if (currentAgent) {
@@ -1146,7 +1143,7 @@ export default function AdminDashboard({
                   <input name="rera" defaultValue={currentAgent?.rera} className="w-full bg-dark3 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold/50" />
                 </div>
                 <div>
-                  <FileUploadInput name="image" defaultValue={currentAgent?.image} label="Image URL" />
+                  <FileUploadInput name="image" defaultValue={currentAgent?.photo} label="Image URL" />
                 </div>
               </div>
               <div className="pt-6 border-t border-white/5 flex justify-end gap-3">
