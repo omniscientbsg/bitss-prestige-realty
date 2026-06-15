@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Diamond, LogOut, MessageSquare, Send, X, ExternalLink, CalendarDays, PlayCircle, CreditCard } from "lucide-react";
+import { Diamond, LogOut, MessageSquare, Send, X, ExternalLink, CalendarDays, PlayCircle, CreditCard, PieChart } from "lucide-react";
 
 // Format price as AED M or K for client-facing display
 function formatAED(val) {
@@ -324,12 +324,12 @@ export default function ClientDashboard({ client, properties, initialProposals =
                     <div>
                       <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Entry Price</div>
                       <div className="flex flex-col gap-0.5">
-                        <span className={p.our_offer ? "text-red-400/80 line-through text-xs" : "text-white font-medium text-base"}>
+                        <span className={p.our_offer ? "text-red-400/80 line-through text-[11px]" : "text-white font-medium text-[15px]"}>
                           {formatAED(p.price_aed)}
                         </span>
                         {p.our_offer && (
-                          <div className="text-[#20bd5a] font-bold text-base flex items-center gap-1.5 mt-0.5">
-                            <span className="text-[9px] uppercase tracking-widest text-[#20bd5a]/80 border border-[#20bd5a]/30 px-1 rounded-sm bg-[#20bd5a]/10">Offer</span>
+                          <div className="text-[#20bd5a] font-bold text-[14px] flex items-center gap-1 mt-0.5 whitespace-nowrap">
+                            <span className="text-[8px] uppercase tracking-wider text-[#20bd5a]/80 border border-[#20bd5a]/30 px-1 rounded-sm bg-[#20bd5a]/10 leading-relaxed">Offer</span>
                             {formatOffer(p.our_offer)}
                           </div>
                         )}
@@ -337,17 +337,17 @@ export default function ClientDashboard({ client, properties, initialProposals =
                     </div>
                     <div>
                       <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Capital Gain (5yr)</div>
-                      <div className="text-white font-medium text-base">{p.capital_appreciation || p.capital_gain_5yr || 0}%</div>
+                      <div className="text-white font-medium text-[15px]">{p.capital_appreciation || p.capital_gain_5yr || 0}%</div>
                     </div>
                     <div className="text-right">
                       <div className="text-xs text-platinum/40 uppercase tracking-widest mb-1">Projected Yield</div>
-                      <div className="text-gold font-semibold text-base">{p.gross_yield}%</div>
+                      <div className="text-gold font-semibold text-[15px]">{p.gross_yield}%</div>
                     </div>
                   </div>
-                  <div className="flex gap-4 text-xs text-platinum/50 mb-4 flex-wrap items-center">
-                    {p.handover && <span className="flex items-center gap-1.5"><CalendarDays className="w-3.5 h-3.5 text-platinum/40" /> {p.handover}</span>}
+                  <div className="flex gap-3 text-xs text-platinum/50 mb-4 flex-wrap items-center">
+                    {p.handover && <span className="flex items-center gap-1.5 whitespace-nowrap"><CalendarDays className="w-3.5 h-3.5 text-platinum/40" /> {p.handover}</span>}
                     {(p.handover && p.payment_plan_ratio) && <span className="w-1 h-1 rounded-full bg-platinum/20" />}
-                    {p.payment_plan_ratio && <span className="flex items-center gap-1.5"><CreditCard className="w-3.5 h-3.5 text-platinum/40" /> {p.payment_plan_ratio}</span>}
+                    {p.payment_plan_ratio && <span className="flex items-center gap-1.5 whitespace-nowrap"><PieChart className="w-3.5 h-3.5 text-platinum/40" /> {p.payment_plan_ratio}</span>}
                   </div>
                   
                   <div className="flex gap-2 mt-auto">
