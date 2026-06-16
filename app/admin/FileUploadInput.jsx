@@ -104,12 +104,26 @@ export function FileUploadInput({ name, defaultValue, label, onChange }) {
             value={url} 
             onChange={handleTextChange} 
             placeholder="URL or click Upload..." 
-            className="flex-1 min-w-0 bg-dark3 border border-white/10 rounded-lg p-2.5 text-white text-sm focus:border-gold/50 focus:outline-none" 
+            className="flex-1 min-w-0 bg-dark3 border border-white/10 rounded-lg p-2.5 text-white text-sm focus:border-gold/50 focus:outline-none disabled:opacity-50" 
+            disabled={uploading}
           />
-          <label className="flex-shrink-0 bg-dark3 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white hover:bg-white/5 cursor-pointer whitespace-nowrap transition-colors">
-            {uploading ? "..." : "Upload"}
-            <input type="file" className="hidden" onChange={handleFileChange} />
+          <label className={`flex-shrink-0 bg-dark3 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white ${uploading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5 cursor-pointer'} whitespace-nowrap transition-colors`}>
+            {uploading ? "Uploading..." : "Upload"}
+            <input type="file" className="hidden" onChange={handleFileChange} disabled={uploading} />
           </label>
+        </div>
+      )}
+      
+      {/* Uploading Process Dialog Overlay */}
+      {uploading && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div className="flex flex-col items-center gap-4 bg-dark2 border border-white/10 rounded-2xl p-8 max-w-sm w-full mx-4 text-center shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+            <div className="w-12 h-12 border-4 border-gold/30 border-t-gold rounded-full animate-spin"></div>
+            <h3 className="text-white font-heading text-xl">Uploading File</h3>
+            <p className="text-platinum/50 text-sm leading-relaxed">
+              Please wait while your file is securely uploaded. Do not close or refresh this window.
+            </p>
+          </div>
         </div>
       )}
     </div>
