@@ -5,43 +5,37 @@ const BUCKET = "Uploads";
 
 export async function POST(request) {
   try {
-    const formData = await request.formData();
-    const file = formData.get("file");
+    const { filename, contentType } = await request.json();
 
-    if (!file) {
-      return NextResponse.json({ error: "No file received." }, { status: 400 });
+    if (!filename) {
+      return NextResponse.json({ error: "No filename received." }, { status: 400 });
     }
-
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
 
     // Create unique filename
-    const ext = file.name.split('.').pop();
-    const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
-    const filename = `${Date.now()}-${safeName}`;
+    const safeName = filename.replace(/[^a-zA-Z0-9.-]/g, "_");
+    const uniqueFilename = `${Date.now()}-${safeName}`;
 
-    // Upload to Supabase Storage
+    // Generate signed upload URL to bypass Vercel limits
     const { data, error } = await supabase.storage
       .from(BUCKET)
-      .upload(filename, buffer, {
-        contentType: file.type || "application/octet-stream",
-        upsert: false,
-      });
+      .createSignedUploadUrl(uniqueFilename);
 
-    if (error) {
-      console.error("Supabase Storage upload error:", error);
-      return NextResponse.json({ error: "Upload to storage failed: " + error.message }, { status: 500 });
-    }
+    if (error) throw error;
 
-    // Get the public URL
-    const { data: urlData } = supabase.storage.from(BUCKET).getPublicUrl(filename);
-    const publicUrl = urlData.publicUrl;
+    // Get the public URL that will be active once the client finishes uploading
+    const { data: publicData } = supabase.storage
+      .from(BUCKET)
+      .getPublicUrl(uniqueFilename);
 
-    console.log(`File uploaded to Supabase Storage: ${publicUrl}`);
-
-    return NextResponse.json({ url: publicUrl, success: true });
+    return NextResponse.json({ 
+      signedUrl: data.signedUrl,
+      publicUrl: publicData.publicUrl 
+    });
   } catch (error) {
     console.error("Upload error:", error);
-    return NextResponse.json({ error: "File upload failed." }, { status: 500 });
+    return NextResponse.json(
+      { error: "Upload failed: " + error.message },
+      { status: 500 }
+    );
   }
 }

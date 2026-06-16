@@ -20,13 +20,33 @@ export function FileUploadInput({ name, defaultValue, label, onChange }) {
     formData.append("file", file);
     
     try {
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
+      // 1. Request signed URL from our API
+      const res = await fetch("/api/upload", { 
+        method: "POST", 
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ filename: file.name, contentType: file.type || "application/octet-stream" }) 
+      });
       const data = await res.json();
-      if (res.ok && data.url) {
-        setUrl(data.url);
-        if(onChange) onChange(data.url);
+      
+      if (!res.ok || !data.signedUrl) {
+        alert("Failed to get upload URL: " + (data.error || "Unknown error"));
+        setUploading(false);
+        return;
+      }
+
+      // 2. Upload file directly to Supabase via signed URL (bypasses Vercel limits)
+      const uploadRes = await fetch(data.signedUrl, {
+        method: "PUT",
+        headers: { "Content-Type": file.type || "application/octet-stream" },
+        body: file
+      });
+
+      if (uploadRes.ok) {
+        setUrl(data.publicUrl);
+        if(onChange) onChange(data.publicUrl);
       } else {
-        alert("Upload Failed: " + (data.error || "Unknown error"));
+        const errorText = await uploadRes.text();
+        alert("Upload directly to storage failed: " + errorText);
       }
     } catch (err) {
       console.error(err);
