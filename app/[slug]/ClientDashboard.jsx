@@ -567,12 +567,20 @@ export default function ClientDashboard({ client, properties, initialProposals =
                   <div className="text-white font-medium">{selectedProperty.gross_yield}% Projected</div>
                 </div>
               </div>
-              {selectedProperty.payment_plan_ratio && (
-                <div className="mb-8 flex items-center gap-2">
-                  <span className="text-xs text-platinum/40 uppercase tracking-widest">Payment Plan:</span>
-                  <span className="bg-gold/10 text-gold text-sm font-bold px-3 py-1 rounded border border-gold/20">{selectedProperty.payment_plan_ratio}</span>
-                </div>
-              )}
+              <div className="mb-8 flex flex-wrap items-center gap-6">
+                {selectedProperty.payment_plan_ratio && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-platinum/40 uppercase tracking-widest">Payment Plan:</span>
+                    <span className="bg-gold/10 text-gold text-sm font-bold px-3 py-1 rounded border border-gold/20">{selectedProperty.payment_plan_ratio}</span>
+                  </div>
+                )}
+                
+                {selectedProperty.brochure && (
+                  <a href={selectedProperty.brochure} target="_blank" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white text-sm font-medium px-4 py-2 rounded transition-colors border border-white/10">
+                    <ExternalLink className="w-4 h-4" /> View Project Brochure
+                  </a>
+                )}
+              </div>
 
               {/* USPs */}
               {(selectedProperty.usps?.length > 0 || selectedProperty.hot_usps?.length > 0) && (
