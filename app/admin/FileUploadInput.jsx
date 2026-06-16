@@ -65,7 +65,7 @@ export function FileUploadInput({ name, defaultValue, label, onChange }) {
     if(onChange) onChange("");
   };
 
-  const isVideo = url && (url.toLowerCase().endsWith('.mp4') || url.toLowerCase().endsWith('.webm') || url.toLowerCase().endsWith('.ogg'));
+  const isVideo = url && (url.toLowerCase().endsWith('.mp4') || url.toLowerCase().endsWith('.webm') || url.toLowerCase().endsWith('.ogg') || url.toLowerCase().endsWith('.mov') || url.toLowerCase().endsWith('.quicktime'));
 
   return (
     <div className="flex flex-col gap-2 w-full">

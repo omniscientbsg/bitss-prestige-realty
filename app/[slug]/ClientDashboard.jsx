@@ -2,6 +2,19 @@
 import { useState, useEffect } from "react";
 import { Diamond, LogOut, MessageSquare, Send, X, ExternalLink, CalendarDays, PlayCircle, CreditCard, PieChart } from "lucide-react";
 
+// Helper for media URLs (handles both relative local paths and absolute Supabase URLs)
+const getMediaUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:')) return url;
+  return '/' + url.replace(/^\//, '');
+};
+
+const isVideoFile = (url) => {
+  if (!url) return false;
+  const lower = url.toLowerCase();
+  return lower.endsWith('.mp4') || lower.endsWith('.webm') || lower.endsWith('.ogg') || lower.endsWith('.mov') || lower.endsWith('.quicktime');
+};
+
 // Format price as AED M or K for client-facing display
 function formatAED(val) {
   if (!val) return "AED 0";
@@ -674,7 +687,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
                       </div>
                       {selectedProperty.deep_dive_data.feature_image && (
                         <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                          <img src={'/' + selectedProperty.deep_dive_data.feature_image.replace(/^\//, '')} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 cursor-zoom-in" alt="Feature" onClick={() => setPreviewImage('/' + selectedProperty.deep_dive_data.feature_image.replace(/^\//, ''))} />
+                          <img src={getMediaUrl(selectedProperty.deep_dive_data.feature_image)} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700 cursor-zoom-in" alt="Feature" onClick={() => setPreviewImage(getMediaUrl(selectedProperty.deep_dive_data.feature_image))} />
                         </div>
                       )}
                     </div>
@@ -687,7 +700,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
                         <h3 className="font-heading text-xl text-white">{selectedProperty.deep_dive_data.gallery_title || "Gallery"}</h3>
                         <div className="flex gap-4">
                           {selectedProperty.deep_dive_data.video_url && (
-                            <button onClick={() => setPreviewImage(selectedProperty.deep_dive_data.video_url)} className="text-gold text-sm flex items-center gap-2 hover:underline">
+                            <button onClick={() => setPreviewImage(getMediaUrl(selectedProperty.deep_dive_data.video_url))} className="text-gold text-sm flex items-center gap-2 hover:underline">
                               <PlayCircle className="w-4 h-4"/> Watch Video
                             </button>
                           )}
@@ -701,16 +714,16 @@ export default function ClientDashboard({ client, properties, initialProposals =
                       {selectedProperty.deep_dive_data.gallery_images?.length > 0 && (
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                           {selectedProperty.deep_dive_data.gallery_images.map((img, i) => {
-                            const isVideo = img.toLowerCase().endsWith('.mp4') || img.toLowerCase().endsWith('.webm') || img.toLowerCase().endsWith('.ogg');
+                            const isVideo = isVideoFile(img);
                             return (
-                              <div key={i} className="relative w-full h-32 rounded-xl overflow-hidden border border-white/10 hover:scale-105 transition-transform cursor-zoom-in" onClick={() => setPreviewImage('/' + img.replace(/^\//, ''))}>
+                              <div key={i} className="relative w-full h-32 rounded-xl overflow-hidden border border-white/10 hover:scale-105 transition-transform cursor-zoom-in" onClick={() => setPreviewImage(getMediaUrl(img))}>
                                 {isVideo ? (
                                   <>
-                                    <video src={'/' + img.replace(/^\//, '')} className="w-full h-full object-cover" />
+                                    <video src={getMediaUrl(img)} className="w-full h-full object-cover" />
                                     <div className="absolute inset-0 flex items-center justify-center bg-black/40"><PlayCircle className="w-8 h-8 text-white/80" /></div>
                                   </>
                                 ) : (
-                                  <img src={'/' + img.replace(/^\//, '')} className="w-full h-full object-cover" alt="Gallery" />
+                                  <img src={getMediaUrl(img)} className="w-full h-full object-cover" alt="Gallery" />
                                 )}
                               </div>
                             );
@@ -740,7 +753,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
                       {selectedProperty.deep_dive_data.roi_text && (
                         <div className="flex flex-col sm:flex-row gap-6 items-start relative z-10">
                           {selectedProperty.deep_dive_data.market_image && (
-                            <img src={'/' + selectedProperty.deep_dive_data.market_image.replace(/^\//, '')} className="w-32 h-32 rounded-xl object-cover border border-white/10 flex-shrink-0 shadow-lg cursor-zoom-in" alt="Market" onClick={() => setPreviewImage('/' + selectedProperty.deep_dive_data.market_image.replace(/^\//, ''))} />
+                            <img src={getMediaUrl(selectedProperty.deep_dive_data.market_image)} className="w-32 h-32 rounded-xl object-cover border border-white/10 flex-shrink-0 shadow-lg cursor-zoom-in" alt="Market" onClick={() => setPreviewImage(getMediaUrl(selectedProperty.deep_dive_data.market_image))} />
                           )}
                           <div>
                             <div className="text-gold font-medium mb-2 flex items-center gap-2">
@@ -1106,7 +1119,7 @@ export default function ClientDashboard({ client, properties, initialProposals =
           <button className="absolute top-4 right-4 text-white hover:text-gold transition-colors z-50">
             <X className="w-8 h-8" />
           </button>
-          {(previewImage.toLowerCase().endsWith('.mp4') || previewImage.toLowerCase().endsWith('.webm') || previewImage.toLowerCase().endsWith('.ogg')) ? (
+          {isVideoFile(previewImage) ? (
             <video src={previewImage} autoPlay controls className="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain select-none" onClick={e => e.stopPropagation()} />
           ) : (
             <img src={previewImage} className="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain select-none cursor-default" onClick={e => e.stopPropagation()} />
