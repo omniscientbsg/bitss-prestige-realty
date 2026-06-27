@@ -75,8 +75,12 @@ export default function ClientDashboard({ client, properties, initialProposals =
     }).catch(e => console.error(e));
   };
 
-  const handleLogout = () => {
-    document.cookie = "clientSlug=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (e) {
+      console.error('Logout error:', e);
+    }
     window.location.reload();
   };
 
